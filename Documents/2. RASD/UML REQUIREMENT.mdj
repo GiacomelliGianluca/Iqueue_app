@@ -2552,7 +2552,7 @@
 											"top": 538,
 											"width": 391,
 											"height": 13,
-											"text": "+Buy_advertisement(ids: String, idadv: String)",
+											"text": "+Generate_advertisement(ids: String, idadv: String)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -15987,7 +15987,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGHe1+j9eGqEV4="
 							},
-							"name": "Buy_advertisement",
+							"name": "Generate_advertisement",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
