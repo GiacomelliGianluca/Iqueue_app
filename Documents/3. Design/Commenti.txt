@@ -1,7 +1,5 @@
 Ho fatto un' interfaccia sola per shop
 
-Io in Bookiing management metterei solo booking
-
 Sposterai enter e leave queue prima
 
 QR management non è da girare??
