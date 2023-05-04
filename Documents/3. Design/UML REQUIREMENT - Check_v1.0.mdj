@@ -276,7 +276,7 @@
 											"top": 174,
 											"width": 841.9658203125,
 											"height": 13,
-											"text": "+XBook(Ids: String, t: TimeSlot, Idc: String)",
+											"text": "+?Book(Ids: String, t: TimeSlot, Idc: String)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -13885,7 +13885,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGHe0ChEayKnoM="
 							},
-							"name": "XBook",
+							"name": "?Book",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
