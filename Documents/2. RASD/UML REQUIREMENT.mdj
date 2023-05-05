@@ -206,7 +206,7 @@
 											"top": 144,
 											"width": 833.294921875,
 											"height": 13,
-											"text": "+Shop_registration(Idso: String, Shop_name: String, Shop_location: Coordinates, Time_opening: time, Time_closing: time, Day_open: Date[1..*])",
+											"text": "+Shop_registration(idso: String, Shop_name: String, Shop_location: Coordinates, Time_opening: time, Time_closing: time, Day_open: Date[1..*])",
 											"horizontalAlignment": 0
 										},
 										{
@@ -254,12 +254,13 @@
 											"model": {
 												"$ref": "AAAAAAGHhI9oTkWutP8="
 											},
+											"visible": false,
 											"font": "Arial;13;0",
 											"left": 381,
 											"top": 159,
 											"width": 833.294921875,
 											"height": 13,
-											"text": "+Book(Ids: String, t: TimeSlot, Idc: String)",
+											"text": "+Book(ids: String, t: TimeSlot, Idc: String)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -273,7 +274,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 381,
-											"top": 174,
+											"top": 159,
 											"width": 833.294921875,
 											"height": 13,
 											"text": "+User_registration(Name: String, Surname: String, Birthday: Date, Email: String, Password: String)",
@@ -308,10 +309,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 381,
-											"top": 189,
+											"top": 174,
 											"width": 833.294921875,
 											"height": 13,
-											"text": "+QRcode_generation(idqr: string, Idc: String, Idso: String, Ids: String, ts: TimeSlot): QR",
+											"text": "+QRcode_generation(idqr: string, idc: String, idso: String, ids: String, ts: TimeSlot): QR",
 											"horizontalAlignment": 0
 										},
 										{
@@ -325,10 +326,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 381,
-											"top": 204,
+											"top": 189,
 											"width": 833.294921875,
 											"height": 13,
-											"text": "+Sent_notification(Idso: String)",
+											"text": "+Sent_notification(idso: String)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -342,7 +343,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 381,
-											"top": 219,
+											"top": 204,
 											"width": 833.294921875,
 											"height": 13,
 											"text": "+Remove_cust_from_queue(qr: QR)",
@@ -377,10 +378,27 @@
 											},
 											"font": "Arial;13;0",
 											"left": 381,
-											"top": 234,
+											"top": 219,
 											"width": 833.294921875,
 											"height": 13,
 											"text": "+Show_shop(Category: String, Location: Coordinates)",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGH692GNRuD7lU=",
+											"_parent": {
+												"$ref": "AAAAAAGHe0ChEqyTYs8="
+											},
+											"model": {
+												"$ref": "AAAAAAGH692GIhuAT7k="
+											},
+											"font": "Arial;13;0",
+											"left": 381,
+											"top": 234,
+											"width": 833.294921875,
+											"height": 13,
+											"text": "+Show_shop_max_dist(Location: Coordinates, max_dist: Integer)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -397,7 +415,7 @@
 											"top": 249,
 											"width": 833.294921875,
 											"height": 13,
-											"text": "+Generate_rewards(QRScan_ok: Boolean, Idc: String, Points: Integer)",
+											"text": "+Generate_rewards(QRScan_ok: Boolean, idc: String, Points: Integer)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -414,7 +432,7 @@
 											"top": 264,
 											"width": 833.294921875,
 											"height": 13,
-											"text": "+Compute_waiting_time(idc: String, Queue_number: integer): Time",
+											"text": "+Compute_waiting_time(idc: String, ids: String, Queue_number: integer): Time",
 											"horizontalAlignment": 0
 										},
 										{
@@ -465,7 +483,7 @@
 											"top": 309,
 											"width": 833.294921875,
 											"height": 13,
-											"text": "+Delete_Shop_product_discount(Idso: String, Idp: String, v: Real)",
+											"text": "+Delete_Shop_product_discount(idso: String, idp: String, v: Real)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -482,7 +500,7 @@
 											"top": 324,
 											"width": 833.294921875,
 											"height": 13,
-											"text": "+Insert_Product(Ids: String, Idp: String, ProductName: String, ProductPrice: Real, quantity: Integer)",
+											"text": "+Insert_Product(ids: String, idp: String, ProductName: String, ProductPrice: Real, quantity: Integer)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -499,7 +517,7 @@
 											"top": 339,
 											"width": 833.294921875,
 											"height": 13,
-											"text": "+Delete_Product(Ids: String, Idp: String, Product_name: String)",
+											"text": "+Delete_Product(ids: String, idp: String, Product_name: String)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -516,7 +534,7 @@
 											"top": 354,
 											"width": 833.294921875,
 											"height": 13,
-											"text": "+Insert_Shop_product_discount(Idso: String, Idp: String, v: Real)",
+											"text": "+Insert_Shop_product_discount(idso: String, idp: String, v: Real)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1571,7 +1589,7 @@
 											"top": 784,
 											"width": 457.8056640625,
 											"height": 13,
-											"text": "+Guide_to_shop(Location_shop: Coordinates)",
+											"text": "+Guide_to_shop(cust_pos: Coordinates, shop_pos: Coordinates)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2184,7 +2202,7 @@
 											"top": 748,
 											"width": 407,
 											"height": 13,
-											"text": "+Select_timeSlot(ids: String, TS: TimeSlot)",
+											"text": "+Select_timeSlot(ids: String, TS: TimeSlot): QR",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2269,7 +2287,7 @@
 											"top": 823,
 											"width": 407,
 											"height": 13,
-											"text": "+Remove_from_wishlist(Idp: String)",
+											"text": "+Remove_from_wishlist(idp: String)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2571,7 +2589,7 @@
 											"top": 574,
 											"width": 391,
 											"height": 13,
-											"text": "+Insert_product_discount(Idp: string, v: Real): string",
+											"text": "+Insert_product_discount(idp: string, v: Real): string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2728,7 +2746,7 @@
 											"top": 649,
 											"width": 391,
 											"height": 13,
-											"text": "+Count_product(Ids: String, Idp: String)",
+											"text": "+Count_product(ids: String, idp: String)",
 											"horizontalAlignment": 0
 										}
 									],
@@ -10201,7 +10219,7 @@
 											"font": "Arial;13;1",
 											"left": 805,
 											"top": 903,
-											"width": 116.20654296875,
+											"width": 117.8759765625,
 											"height": 13,
 											"text": "Queue_specific"
 										},
@@ -10236,7 +10254,7 @@
 									"font": "Arial;13;0",
 									"left": 800,
 									"top": 896,
-									"width": 126.20654296875,
+									"width": 127.8759765625,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGHsnxi1XGR4hQ="
@@ -10273,7 +10291,7 @@
 											"font": "Arial;13;0",
 											"left": 805,
 											"top": 926,
-											"width": 116.20654296875,
+											"width": 117.8759765625,
 											"height": 13,
 											"text": "+QRcode: QR",
 											"horizontalAlignment": 0
@@ -10290,16 +10308,16 @@
 											"font": "Arial;13;0",
 											"left": 805,
 											"top": 941,
-											"width": 116.20654296875,
+											"width": 117.8759765625,
 											"height": 13,
-											"text": "+Waiting_time: Real",
+											"text": "+Waiting_time: Time",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 800,
 									"top": 921,
-									"width": 126.20654296875,
+									"width": 127.8759765625,
 									"height": 38
 								},
 								{
@@ -10314,7 +10332,7 @@
 									"font": "Arial;13;0",
 									"left": 800,
 									"top": 959,
-									"width": 126.20654296875,
+									"width": 127.8759765625,
 									"height": 10
 								},
 								{
@@ -10354,7 +10372,7 @@
 							"containerChangeable": true,
 							"left": 800,
 							"top": 896,
-							"width": 126.20654296875,
+							"width": 127.8759765625,
 							"height": 73,
 							"nameCompartment": {
 								"$ref": "AAAAAAGHsnxi1XGQIbo="
@@ -13997,7 +14015,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHftywNSFlPFA="
 									},
-									"name": "Idso",
+									"name": "idso",
 									"type": "String"
 								},
 								{
@@ -14155,7 +14173,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHhI9oTkWutP8="
 									},
-									"name": "Ids",
+									"name": "ids",
 									"type": "String"
 								},
 								{
@@ -14268,7 +14286,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHnhcZoLUmd/Q="
 									},
-									"name": "Idc",
+									"name": "idc",
 									"type": "String"
 								},
 								{
@@ -14277,7 +14295,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHnhcZoLUmd/Q="
 									},
-									"name": "Idso",
+									"name": "idso",
 									"type": "String"
 								},
 								{
@@ -14286,7 +14304,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHnhcZoLUmd/Q="
 									},
-									"name": "Ids",
+									"name": "ids",
 									"type": "String"
 								},
 								{
@@ -14327,7 +14345,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHnhkDgLu7oZM="
 									},
-									"name": "Idso",
+									"name": "idso",
 									"type": "String"
 								}
 							]
@@ -14442,6 +14460,36 @@
 						},
 						{
 							"_type": "UMLOperation",
+							"_id": "AAAAAAGH692GIhuAT7k=",
+							"_parent": {
+								"$ref": "AAAAAAGHe0ChEayKnoM="
+							},
+							"name": "Show_shop_max_dist",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGH692Pbx03NNs=",
+									"_parent": {
+										"$ref": "AAAAAAGH692GIhuAT7k="
+									},
+									"name": "Location",
+									"type": {
+										"$ref": "AAAAAAGHiMTWFHyDbhE="
+									}
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGH692Pbx04/Ko=",
+									"_parent": {
+										"$ref": "AAAAAAGH692GIhuAT7k="
+									},
+									"name": "max_dist",
+									"type": "Integer"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
 							"_id": "AAAAAAGHstj4DgHsdbo=",
 							"_parent": {
 								"$ref": "AAAAAAGHe0ChEayKnoM="
@@ -14463,7 +14511,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHstj4DgHsdbo="
 									},
-									"name": "Idc",
+									"name": "idc",
 									"type": "String"
 								},
 								{
@@ -14500,8 +14548,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGHsugTqGQwwLg="
 									},
-									"name": "Queue_number",
-									"type": "integer"
+									"name": "ids",
+									"type": "String"
 								},
 								{
 									"_type": "UMLParameter",
@@ -14513,6 +14561,15 @@
 										"$ref": "AAAAAAGHfvLVcDBsf1Q="
 									},
 									"direction": "return"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGH6zRf08SoRVI=",
+									"_parent": {
+										"$ref": "AAAAAAGHsugTqGQwwLg="
+									},
+									"name": "Queue_number",
+									"type": "integer"
 								}
 							]
 						},
@@ -14570,7 +14627,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHs3HxEVQfb8Y="
 									},
-									"name": "Idso",
+									"name": "idso",
 									"type": "String"
 								},
 								{
@@ -14579,7 +14636,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHs3HxEVQfb8Y="
 									},
-									"name": "Idp",
+									"name": "idp",
 									"type": "String"
 								},
 								{
@@ -14607,7 +14664,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHs5a8RFDulo4="
 									},
-									"name": "Ids",
+									"name": "ids",
 									"type": "String"
 								},
 								{
@@ -14616,7 +14673,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHs5a8RFDulo4="
 									},
-									"name": "Idp",
+									"name": "idp",
 									"type": "String"
 								},
 								{
@@ -14662,7 +14719,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHs5tFA6jA0WA="
 									},
-									"name": "Ids",
+									"name": "ids",
 									"type": "String"
 								},
 								{
@@ -14671,7 +14728,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHs5tFA6jA0WA="
 									},
-									"name": "Idp",
+									"name": "idp",
 									"type": "String"
 								},
 								{
@@ -14699,7 +14756,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHfvDEvS5BqlY="
 									},
-									"name": "Idso",
+									"name": "idso",
 									"type": "String"
 								},
 								{
@@ -14708,7 +14765,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHfvDEvS5BqlY="
 									},
-									"name": "Idp",
+									"name": "idp",
 									"type": "String"
 								},
 								{
@@ -15415,7 +15472,18 @@
 									"_parent": {
 										"$ref": "AAAAAAGHssM1JbJ7KJs="
 									},
-									"name": "Location_shop",
+									"name": "cust_pos",
+									"type": {
+										"$ref": "AAAAAAGHiMTWFHyDbhE="
+									}
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGH62ROA2OJP54=",
+									"_parent": {
+										"$ref": "AAAAAAGHssM1JbJ7KJs="
+									},
+									"name": "shop_pos",
 									"type": {
 										"$ref": "AAAAAAGHiMTWFHyDbhE="
 									}
@@ -15881,6 +15949,17 @@
 									"type": {
 										"$ref": "AAAAAAGHhHujOiYJ8nU="
 									}
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGH6yy+5xymmg0=",
+									"_parent": {
+										"$ref": "AAAAAAGHnhSQkFD/pyc="
+									},
+									"type": {
+										"$ref": "AAAAAAGHw0jec+km6tg="
+									},
+									"direction": "return"
 								}
 							]
 						},
@@ -15983,7 +16062,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHs38uDPgaGvo="
 									},
-									"name": "Idp",
+									"name": "idp",
 									"type": "String"
 								}
 							]
@@ -16251,7 +16330,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHniWQHyNsT1c="
 									},
-									"name": "Idp",
+									"name": "idp",
 									"type": "string"
 								},
 								{
@@ -16536,7 +16615,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHs6QcOwL9JCU="
 									},
-									"name": "Ids",
+									"name": "ids",
 									"type": "String"
 								},
 								{
@@ -16545,7 +16624,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHs6QcOwL9JCU="
 									},
-									"name": "Idp",
+									"name": "idp",
 									"type": "String"
 								}
 							]
@@ -17950,7 +18029,9 @@
 								"$ref": "AAAAAAGHsnxi1HGKOy0="
 							},
 							"name": "Waiting_time",
-							"type": "Real"
+							"type": {
+								"$ref": "AAAAAAGHfvLVcDBsf1Q="
+							}
 						}
 					]
 				},
