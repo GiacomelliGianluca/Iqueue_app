@@ -255,7 +255,7 @@
 															"top": 47,
 															"width": 102.44091796875,
 															"height": 13,
-															"text": "iq: IQueue"
+															"text": "iq: Iqueue"
 														},
 														{
 															"_type": "LabelView",
@@ -1132,7 +1132,7 @@
 								"$ref": "AAAAAAGH1sSFCIZoWmI="
 							},
 							"name": "Role2",
-							"type": "IQueue"
+							"type": "Iqueue"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -1392,7 +1392,7 @@
 															"top": 47,
 															"width": 102.44091796875,
 															"height": 13,
-															"text": "iq: IQueue"
+															"text": "iq: Iqueue"
 														},
 														{
 															"_type": "LabelView",
@@ -3337,7 +3337,7 @@
 								"$ref": "AAAAAAGH1vFFXYiHVF4="
 							},
 							"name": "Role2",
-							"type": "IQueue"
+							"type": "Iqueue"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3606,7 +3606,7 @@
 															"top": 47,
 															"width": 73.55908203125,
 															"height": 13,
-															"text": "iq: IQueue"
+															"text": "iq: Iqueue"
 														},
 														{
 															"_type": "LabelView",
@@ -3998,7 +3998,7 @@
 								"$ref": "AAAAAAGH18LHto3QCUQ="
 							},
 							"name": "Role2",
-							"type": "IQueue"
+							"type": "Iqueue"
 						}
 					]
 				},
@@ -4235,7 +4235,7 @@
 															"top": 47,
 															"width": 82.947265625,
 															"height": 13,
-															"text": "iq: IQueue"
+															"text": "iq: Iqueue"
 														},
 														{
 															"_type": "LabelView",
@@ -6615,7 +6615,7 @@
 								"$ref": "AAAAAAGH1+9EkpGW9kY="
 							},
 							"name": "Role2",
-							"type": "IQueue"
+							"type": "Iqueue"
 						}
 					]
 				},
@@ -6855,7 +6855,7 @@
 															"top": 47,
 															"width": 73.55908203125,
 															"height": 13,
-															"text": "iq: IQueue"
+															"text": "iq: Iqueue"
 														},
 														{
 															"_type": "LabelView",
@@ -7608,7 +7608,7 @@
 								"$ref": "AAAAAAGH2BDsOpbG1q0="
 							},
 							"name": "Role2",
-							"type": "IQueue"
+							"type": "Iqueue"
 						}
 					]
 				},
@@ -7725,7 +7725,7 @@
 															"top": 47,
 															"width": 73.55908203125,
 															"height": 13,
-															"text": "iq: IQueue"
+															"text": "iq: Iqueue"
 														},
 														{
 															"_type": "LabelView",
@@ -8715,7 +8715,7 @@
 								"$ref": "AAAAAAGH2BV+7peNRRQ="
 							},
 							"name": "Role2",
-							"type": "IQueue"
+							"type": "Iqueue"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -8958,7 +8958,7 @@
 															"top": 47,
 															"width": 82.947265625,
 															"height": 13,
-															"text": "iq: IQueue"
+															"text": "iq: Iqueue"
 														},
 														{
 															"_type": "LabelView",
@@ -9711,7 +9711,7 @@
 								"$ref": "AAAAAAGH2BWrzJeck50="
 							},
 							"name": "Role2",
-							"type": "IQueue"
+							"type": "Iqueue"
 						}
 					]
 				}
@@ -9830,7 +9830,7 @@
 													"top": 47,
 													"width": 82.947265625,
 													"height": 13,
-													"text": "iq: IQueue"
+													"text": "iq: Iqueue"
 												},
 												{
 													"_type": "LabelView",
@@ -11081,7 +11081,7 @@
 						"$ref": "AAAAAAGH1qUJ0oMvKTY="
 					},
 					"name": "Role3",
-					"type": "IQueue"
+					"type": "Iqueue"
 				},
 				{
 					"_type": "UMLAttribute",
@@ -11340,7 +11340,7 @@
 													"top": 47,
 													"width": 79.33544921875,
 													"height": 13,
-													"text": "iq: IQueue"
+													"text": "iq: Iqueue"
 												},
 												{
 													"_type": "LabelView",
@@ -12606,7 +12606,7 @@
 						"$ref": "AAAAAAGH18dQ0I3gRGk="
 					},
 					"name": "Role3",
-					"type": "IQueue"
+					"type": "Iqueue"
 				},
 				{
 					"_type": "UMLAttribute",
@@ -12859,7 +12859,7 @@
 													"top": 47,
 													"width": 82.947265625,
 													"height": 13,
-													"text": "iq: IQueue"
+													"text": "iq: Iqueue"
 												},
 												{
 													"_type": "LabelView",
@@ -13739,7 +13739,7 @@
 						"$ref": "AAAAAAGH195eWI/eDHU="
 					},
 					"name": "Role2",
-					"type": "IQueue"
+					"type": "Iqueue"
 				}
 			]
 		},
@@ -13975,7 +13975,7 @@
 													"top": 47,
 													"width": 82.947265625,
 													"height": 13,
-													"text": "iq: IQueue"
+													"text": "iq: Iqueue"
 												},
 												{
 													"_type": "LabelView",
@@ -14855,7 +14855,7 @@
 						"$ref": "AAAAAAGH2AFZ+ZXCrxQ="
 					},
 					"name": "Role2",
-					"type": "IQueue"
+					"type": "Iqueue"
 				}
 			]
 		},
@@ -15091,7 +15091,7 @@
 													"top": 47,
 													"width": 82.947265625,
 													"height": 13,
-													"text": "iq: IQueue"
+													"text": "iq: Iqueue"
 												},
 												{
 													"_type": "LabelView",
@@ -15846,7 +15846,7 @@
 						"$ref": "AAAAAAGH2CUFv5loUm0="
 					},
 					"name": "Role2",
-					"type": "IQueue"
+					"type": "Iqueue"
 				}
 			]
 		},
@@ -16079,7 +16079,7 @@
 													"top": 47,
 													"width": 102.44091796875,
 													"height": 13,
-													"text": "iq: IQueue"
+													"text": "iq: Iqueue"
 												},
 												{
 													"_type": "LabelView",
@@ -16964,7 +16964,7 @@
 						"$ref": "AAAAAAGH69jg9uOsifc="
 					},
 					"name": "Role2",
-					"type": "IQueue"
+					"type": "Iqueue"
 				},
 				{
 					"_type": "UMLAttribute",
