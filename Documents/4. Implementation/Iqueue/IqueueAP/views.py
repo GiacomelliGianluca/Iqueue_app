@@ -1,0 +1,65 @@
+from typing import Any
+
+from django.shortcuts import render, redirect
+
+# Create your views here.
+
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
+from Iqueue.forms import RegistrationForm, LogIn
+from IqueueAP.models import Account
+
+
+def success(request):
+    return render(request, 'registrationSuccessful.html')
+
+
+def selectRole(request):
+    return render(request, 'SelectRole.html')
+
+
+def registration_view(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            # Proccess the data
+
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            account_id = form.cleaned_data['account_id']
+            password = form.cleaned_data['password']
+            email = form.cleaned_data['email']
+            birthday = form.cleaned_data['birthday']
+
+            account = Account(name=first_name, surname=last_name, account_id=account_id, password=password, email=email, birthday=birthday)
+
+            account.save()
+
+            return redirect('success')
+    else:
+        form = RegistrationForm()
+
+    return render(request, 'formRegistration.html', {'form': form})
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LogIn(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+
+            try:
+                account = Account.objects.get(email=email, password=password)
+                return render(request, 'SelectRole.html')
+            except Account.DoesNotExist:
+                error = 'Credenziali non valide'
+                form.add_error(None, error)
+        else:
+            error = 'Dati del modulo non validi'
+    else:
+        form = LogIn()
+        error = None
+
+    return render(request, 'login.html', {'form': form, 'error': error})
