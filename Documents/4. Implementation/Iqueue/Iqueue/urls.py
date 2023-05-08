@@ -19,13 +19,20 @@ from django.urls import path
 from IqueueAP.views import registration_view, login_view
 from IqueueAP.views import success
 from IqueueAP.views import selectRole
-
+from IqueueAP.views import account_view
+from IqueueAP.views import ShopOwner_view
+from IqueueAP.views import Shop_view
+from IqueueAP.views import SuccessShopRegistration
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('registration/', registration_view, name='registration'),
     path('registration/success/', success, name='success'),
     path('registration/SelectRole/', selectRole, name='selectRole'),
     path('login/', login_view, name='login_View'),
+    path('account/', account_view, name='account_view'),
+    path('login/ShopOwner/', ShopOwner_view, name='ShopOwner_view'),
+    path('login/ShopOwner/Shop/', Shop_view, name='Shop_view'),
+    path('login/ShopOwner/Shop/Shoplist/',SuccessShopRegistration, name='SuccessShopRegistration')
 ]
 
 

@@ -1,0 +1,21 @@
+<html>
+<head>
+  <title>Shop list</title>
+</head>
+<script>
+  setTimeout(function() {
+    window.location.href = '/login/ShopOwner/Shop/Shoplist';
+  }, 3000);
+</script>
+<body>
+  <h1>
+    <p>
+    The shops are:
+    {% for shop in shop %}
+        <li> {{ shop.name }} </li>
+    {% endfor %}
+    </p>
+  </h1>
+  
+</body>
+</html>

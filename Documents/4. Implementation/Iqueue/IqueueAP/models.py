@@ -33,13 +33,13 @@ class Coordinates(models.Model):
 
 class Shop(models.Model):
     name = models.CharField(max_length=100)
-    location = models.ForeignKey(Coordinates, on_delete=models.CASCADE)
+    location = models.CharField(max_length=100)
     max_numb_clients = models.IntegerField()
     id_shop = models.CharField(max_length=50)
     address = models.CharField(max_length=200)
-    queue = models.IntegerField()
-    rating = models.FloatField()
-    number_of_ratings = models.IntegerField()
+    
+    
+ 
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -48,10 +48,5 @@ class Product(models.Model):
     id_product = models.CharField(max_length=50)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
 
-
-class TimeSlot(models.Model):
-    start = models.TimeField()
-    end = models.TimeField()
-    available = models.BooleanField()
 
 

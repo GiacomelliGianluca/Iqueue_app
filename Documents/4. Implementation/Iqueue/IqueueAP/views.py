@@ -9,7 +9,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from Iqueue.forms import RegistrationForm, LogIn
 from IqueueAP.models import Account
-
+from Iqueue.forms import ShopForm
+from IqueueAP.models import Shop
 
 def success(request):
     return render(request, 'registrationSuccessful.html')
@@ -63,3 +64,37 @@ def login_view(request):
         error = None
 
     return render(request, 'login.html', {'form': form, 'error': error})
+
+def account_view(request):
+    account = Account.objects.all()
+    return render(request, 'account_list.html', {'account': account}) 
+
+def ShopOwner_view(request):
+    return render(request, 'ShopOwner.html')
+
+def Shop_view(request):
+    if request.method == 'POST':
+        form = ShopForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            location = form.cleaned_data['location']
+            max_numb_clients = form.cleaned_data['max_numb_clients']
+            id_shop = form.cleaned_data['id_shop']
+            address = form.cleaned_data['address']
+    
+            
+            shop = Shop(name=name, location=location, max_numb_clients=max_numb_clients, id_shop=id_shop, address=address)
+
+            shop.save()
+            
+            return redirect('SuccessShopRegistration')
+    else:
+        form = ShopForm()
+
+
+    return render(request, 'ShopRegistration.html', {'form': form})
+
+
+def SuccessShopRegistration(request):
+    shop = Shop.objects.all()
+    return render(request, 'ShopList.html', {'shop': shop})
