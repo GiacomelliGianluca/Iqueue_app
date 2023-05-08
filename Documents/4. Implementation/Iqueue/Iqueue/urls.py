@@ -31,8 +31,11 @@ urlpatterns = [
     path('login/', login_view, name='login_View'),
     path('account/', account_view, name='account_view'),
     path('login/ShopOwner/', ShopOwner_view, name='ShopOwner_view'),
+    path('registration/SelectRole/ShopOwner/', ShopOwner_view, name='ShopOwner_view'),
+    path('registration/SelectRole/ShopOwner/Shop', Shop_view, name='Shop_view'),
     path('login/ShopOwner/Shop/', Shop_view, name='Shop_view'),
-    path('login/ShopOwner/Shop/Shoplist/',SuccessShopRegistration, name='SuccessShopRegistration')
+    path('login/ShopOwner/Shop/Shoplist/',SuccessShopRegistration, name='SuccessShopRegistration'),
+    path('registration/SelectRole/ShopOwner/Shop/Shoplist',SuccessShopRegistration, name='SuccessShopRegistration')
 ]
 
 
