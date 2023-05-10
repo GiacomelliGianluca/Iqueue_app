@@ -20,3 +20,4 @@ class ShopForm(forms.Form):
     max_numb_clients = forms.IntegerField(label='max_numb_clients')
     id_shop = forms.CharField(label='id_shop')
     address = forms.CharField(label='address')
+    category = forms.CharField(label='category')

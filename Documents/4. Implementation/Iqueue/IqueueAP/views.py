@@ -81,9 +81,9 @@ def Shop_view(request):
             max_numb_clients = form.cleaned_data['max_numb_clients']
             id_shop = form.cleaned_data['id_shop']
             address = form.cleaned_data['address']
-    
+            category = form.cleaned_data['category']
             
-            shop = Shop(name=name, location=location, max_numb_clients=max_numb_clients, id_shop=id_shop, address=address)
+            shop = Shop(name=name, location=location, max_numb_clients=max_numb_clients, id_shop=id_shop, address=address, category=category)
 
             shop.save()
             
@@ -98,3 +98,12 @@ def Shop_view(request):
 def SuccessShopRegistration(request):
     shop = Shop.objects.all()
     return render(request, 'ShopList.html', {'shop': shop})
+
+def Customer_view(request):
+    return render(request, 'Customer.html')
+
+def Customer_bakery_view(request):
+    
+    shop = Shop.objects.filter(category='bakery').values()
+    return render(request, 'bakery.html', {'shop': shop})
+

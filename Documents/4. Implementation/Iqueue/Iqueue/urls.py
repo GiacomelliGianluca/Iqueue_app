@@ -23,6 +23,8 @@ from IqueueAP.views import account_view
 from IqueueAP.views import ShopOwner_view
 from IqueueAP.views import Shop_view
 from IqueueAP.views import SuccessShopRegistration
+from IqueueAP.views import Customer_view
+from IqueueAP.views import Customer_bakery_view
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('registration/', registration_view, name='registration'),
@@ -35,7 +37,11 @@ urlpatterns = [
     path('registration/SelectRole/ShopOwner/Shop', Shop_view, name='Shop_view'),
     path('login/ShopOwner/Shop/', Shop_view, name='Shop_view'),
     path('login/ShopOwner/Shop/Shoplist/',SuccessShopRegistration, name='SuccessShopRegistration'),
-    path('registration/SelectRole/ShopOwner/Shop/Shoplist',SuccessShopRegistration, name='SuccessShopRegistration')
+    path('registration/SelectRole/ShopOwner/Shop/Shoplist',SuccessShopRegistration, name='SuccessShopRegistration'),
+    path('login/Customer/', Customer_view, name='Customer_view'),
+    path('registration/SelectRole/Customer', Customer_view, name='Customer_view'),
+    path('login/Customer/bakery', Customer_bakery_view, name='Customer_bakery_view'),
+    path('registration/SelectRole/Customer/bakery', Customer_bakery_view, name='Customer_bakery_view'),
 ]
 
 

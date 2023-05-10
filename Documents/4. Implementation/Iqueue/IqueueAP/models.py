@@ -37,7 +37,7 @@ class Shop(models.Model):
     max_numb_clients = models.IntegerField()
     id_shop = models.CharField(max_length=50)
     address = models.CharField(max_length=200)
-    
+    category = models.CharField(max_length=100, default='0000000')
     
  
 
