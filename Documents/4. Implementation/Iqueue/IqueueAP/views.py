@@ -12,6 +12,10 @@ from IqueueAP.models import Account
 from Iqueue.forms import ShopForm
 from IqueueAP.models import Shop
 
+
+def InitialLoading(request):
+    return render(request, 'LoadingIqueue.html')
+
 def success(request):
     return render(request, 'registrationSuccessful.html')
 
@@ -28,7 +32,6 @@ def registration_view(request):
 
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
-            account_id = form.cleaned_data['account_id']
             password = form.cleaned_data['password']
             email = form.cleaned_data['email']
             birthday = form.cleaned_data['birthday']
@@ -58,7 +61,7 @@ def login_view(request):
                 error = 'Credenziali non valide'
                 form.add_error(None, error)
         else:
-            error = 'Dati del modulo non validi'
+            error = 'Inserted data are not valid'
     else:
         form = LogIn()
         error = None
@@ -106,4 +109,7 @@ def Customer_bakery_view(request):
     
     shop = Shop.objects.filter(category='bakery').values()
     return render(request, 'bakery.html', {'shop': shop})
+
+
+
 

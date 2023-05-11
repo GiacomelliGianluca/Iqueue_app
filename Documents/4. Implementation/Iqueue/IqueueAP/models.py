@@ -5,7 +5,6 @@ from django.db import models
 class Account(models.Model):
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
-    account_id = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
     email = models.EmailField(max_length=150)
     birthday = models.DateField()
@@ -14,11 +13,7 @@ class Account(models.Model):
         self.email = email
         self.password = password
 
-class TimeSlot(models.Model):
-    start = models.TimeField()
-    end = models.TimeField()
-    available = models.BooleanField()
-
+#Definire coordinate per l'utente
 
 class QR(models.Model):
     QRid = models.CharField(max_length=50)
@@ -35,9 +30,12 @@ class Shop(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     max_numb_clients = models.IntegerField()
+    queue = models.IntegerField(default=0)
     id_shop = models.CharField(max_length=50)
     address = models.CharField(max_length=200)
-    category = models.CharField(max_length=100, default='0000000')
+    rating = models.FloatField(default=0)
+    numb_of_ratings= models.IntegerField(default=0)
+    category = models.CharField(max_length=100, default='Others') #Se non compilato messo in others
     
  
 
@@ -48,5 +46,9 @@ class Product(models.Model):
     id_product = models.CharField(max_length=50)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
 
-
+class TimeSlot(models.Model):
+    start = models.TimeField()
+    end = models.TimeField()
+    available = models.BooleanField()
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE,blank=True, null=True)
 

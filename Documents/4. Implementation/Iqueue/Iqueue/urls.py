@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from IqueueAP.views import InitialLoading
 from IqueueAP.views import registration_view, login_view
 from IqueueAP.views import success
 from IqueueAP.views import selectRole
@@ -25,12 +26,13 @@ from IqueueAP.views import Shop_view
 from IqueueAP.views import SuccessShopRegistration
 from IqueueAP.views import Customer_view
 from IqueueAP.views import Customer_bakery_view
+
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path('', InitialLoading, name='InitialLoading'),
+    path('login/', login_view, name='login_View'),
     path('registration/', registration_view, name='registration'),
     path('registration/success/', success, name='success'),
     path('registration/SelectRole/', selectRole, name='selectRole'),
-    path('login/', login_view, name='login_View'),
     path('account/', account_view, name='account_view'),
     path('login/ShopOwner/', ShopOwner_view, name='ShopOwner_view'),
     path('registration/SelectRole/ShopOwner/', ShopOwner_view, name='ShopOwner_view'),
@@ -42,6 +44,8 @@ urlpatterns = [
     path('registration/SelectRole/Customer', Customer_view, name='Customer_view'),
     path('login/Customer/bakery', Customer_bakery_view, name='Customer_bakery_view'),
     path('registration/SelectRole/Customer/bakery', Customer_bakery_view, name='Customer_bakery_view'),
+    path("admin/", admin.site.urls)
+
 ]
 
 

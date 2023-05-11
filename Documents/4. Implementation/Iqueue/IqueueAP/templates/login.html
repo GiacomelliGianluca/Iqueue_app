@@ -1,14 +1,20 @@
 <form method="post" action="/login/">
   {% csrf_token %}
-  <label for="email">Email</label>
+  <p>--- Welcome to Iqueue ---</p>
+  <label for="email">e-mail</label>
   <input type="text" name="email" id="email">
   <br>
   <label for="password">Password:</label>
   <input type="password" name="password" id="password">
   <br>
-  <input type="submit" value="Accedi">
-</form>
+  <input type="submit"  value="Sign In">
+  {% if error %}
+    <p class="error">{{ error }}</p>
+  {% endif %}
 
-{% if error %}
-  <p class="error">{{ error }}</p>
-{% endif %}
+  <p>Don't have an account yet?</p>
+  <button onclick="window.location.href='registration'">Register</button>
+
+<!--Sistemare Registration-->
+ </form>
+
