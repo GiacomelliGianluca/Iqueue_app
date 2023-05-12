@@ -32,22 +32,17 @@ urlpatterns = [
     path('login/', login_view, name='login_View'),
     path('registration/', registration_view, name='registration'),
     path('registration/success/', success, name='success'),
-    path('registration/SelectRole/', selectRole, name='selectRole'),
+    path('login/SelectRole/', selectRole, name='selectRole'),
     path('account/', account_view, name='account_view'),
-    path('login/ShopOwner/', ShopOwner_view, name='ShopOwner_view'),
-    path('registration/SelectRole/ShopOwner/', ShopOwner_view, name='ShopOwner_view'),
-    path('registration/SelectRole/ShopOwner/Shop', Shop_view, name='Shop_view'),
-    path('login/ShopOwner/Shop/', Shop_view, name='Shop_view'),
-    path('login/ShopOwner/Shop/Shoplist/',SuccessShopRegistration, name='SuccessShopRegistration'),
-    path('registration/SelectRole/ShopOwner/Shop/Shoplist',SuccessShopRegistration, name='SuccessShopRegistration'),
-    path('login/Customer/', Customer_view, name='Customer_view'),
-    path('registration/SelectRole/Customer', Customer_view, name='Customer_view'),
-    path('login/Customer/bakery', Customer_bakery_view, name='Customer_bakery_view'),
-    path('registration/SelectRole/Customer/bakery', Customer_bakery_view, name='Customer_bakery_view'),
+    path('ShopOwner/', ShopOwner_view, name='ShopOwner_view'),
+    path('ShopOwner/Shop/', Shop_view, name='Shop_view'),
+    path('ShopOwner/Shop/Shoplist/',SuccessShopRegistration, name='SuccessShopRegistration'),
+    path('Customer/', Customer_view, name='Customer_view'),
+    path('Customer/bakery/', Customer_bakery_view, name='Customer_bakery_view'),
     path("admin/", admin.site.urls)
-
 ]
 
+#Io farei che dopo la registration, si riparte sempre dal login
 
 
 

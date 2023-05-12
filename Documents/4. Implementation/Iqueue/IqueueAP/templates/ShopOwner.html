@@ -1,7 +1,29 @@
 <html>
 <head>
   <title>Shop Owner</title>
+  
+  <script type="text/javascript">
+    function Redirect(url) {
+       location.replace("http://127.0.0.1:8000/"+url);
+    }
+ </script>
+
+  <style>
+
+    .anybutton {
+      top:75%;
+      left:75%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 183, 255); 
+      }
+    
+     </style>
+
 </head>
+
 <body>
   <h1>Select what info to insert</h1>
   <button onclick="window.location.href='Shop'">Shop </button>
@@ -11,5 +33,8 @@
   <button onclick="window.location.href='Special offer'">Special Offer</button>
   <br>
   <button onclick="window.location.href='Advertisement'">Advertisement</button>
+
+  <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
+
 </body>
 </html>

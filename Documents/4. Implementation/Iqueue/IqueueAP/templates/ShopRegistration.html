@@ -1,32 +1,63 @@
-<form method="post" action="/login/ShopOwner/Shop/">
-    {% csrf_token %}
-  <label for="name">Name:</label>
-  <input type="text" name="name" id="name">
-  <br>
-  <label for="address">Address:</label>
-  <input type="text" name="address" id="address">
-  <br>
-  <label for="max_numb_clients">max_numb_clients:</label>
-  <input type="text" name="max_numb_clients" id="max_numb_clients">
-  <br>
-  <label for="location">location:</label>
-  <input type="text" name="location" id="location">
-  <br>
-  <label for="id_shop">id_shop:</label>
-  <input type="text" name="id_shop" id="id_shop">
-  <br>
-  <input type="radio" id="category" name="category" value="bakery">
-  <label for="bakery"> Bakery</label><br>
-  <input type="radio" id="category" name="category" value="clothes">
-  <label for="clothes"> Clothes</label><br>
-  <input type="radio" id="category" name="category" value="perfumery">
-  <label for="perfumery"> Perfumery</label>
-  <br>
-  <input type="radio" id="category" name="category" value="hair_saloon">
-  <label for="perfumery"> Hair Saloon</label>
-  <br>
-  <input type="radio" id="category" name="category" value="others">
-  <label for="perfumery"> Other</label>
-  <br>
-  <input type="submit" value="Registra">
-</form>
+<html>
+<head>
+  <title>Shop Owner</title>
+
+  <script type="text/javascript">
+    function Redirect(url) {
+       location.replace("http://127.0.0.1:8000/"+url);
+    }
+ </script>
+
+  <style>
+
+    .anybutton {
+      top:75%;
+      left:75%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 183, 255); 
+      }
+    
+     </style>
+
+</head>
+
+
+<body>
+  <form method="post" action="/login/ShopOwner/Shop/">
+      {% csrf_token %}
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name">
+    <br>
+    <label for="address">Address:</label>
+    <input type="text" name="address" id="address">
+    <br>
+    <label for="max_numb_clients">max_numb_clients:</label>
+    <input type="text" name="max_numb_clients" id="max_numb_clients">
+    <br>
+    <label for="location">location:</label>
+    <input type="text" name="location" id="location">
+    <br>
+    <label for="ids">id_shop:</label>
+    <input type="text" name="id_shop" id="id_shop">
+    <br>
+    <input type="radio" id="category" name="category" value="bakery">
+    <label for="bakery"> Bakery</label><br>
+    <input type="radio" id="category" name="category" value="clothes">
+    <label for="clothes"> Clothes</label><br>
+    <input type="radio" id="category" name="category" value="perfumery">
+    <label for="perfumery"> Perfumery</label>
+    <br>
+    <input type="radio" id="category" name="category" value="hair_saloon">
+    <label for="perfumery"> Hair Saloon</label>
+    <br>
+    <input type="radio" id="category" name="category" value="others">
+    <label for="perfumery"> Other</label>
+    <br>
+    <input type="submit" value="Registra">
+  </form>
+
+  <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
+</body>

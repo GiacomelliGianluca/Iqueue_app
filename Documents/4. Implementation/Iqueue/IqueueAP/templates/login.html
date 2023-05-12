@@ -1,20 +1,30 @@
-<form method="post" action="/login/">
-  {% csrf_token %}
-  <p>--- Welcome to Iqueue ---</p>
-  <label for="email">e-mail</label>
-  <input type="text" name="email" id="email">
-  <br>
-  <label for="password">Password:</label>
-  <input type="password" name="password" id="password">
-  <br>
-  <input type="submit"  value="Sign In">
-  {% if error %}
-    <p class="error">{{ error }}</p>
-  {% endif %}
+<html>
+   <head>
+      <script type="text/javascript">
+         function Redirect() {
+            location.replace("http://127.0.0.1:8000/registration/");
+         }
+      </script>
+   </head>
+  <body>
+    <form method="post" action="/login/">
+      <p>--- Welcome to Iqueue ---</p>
 
-  <p>Don't have an account yet?</p>
-  <button onclick="window.location.href='registration'">Register</button>
+      {% csrf_token %}
+      <label for="email">e-mail</label>
+      <input type="text" name="email" id="email">
+      <br>
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password">
+      <br>
+      <input type="submit"  value="Sign In">
+      {% if error %}
+        <p class="error">{{ error }}</p>
+      {% endif %}
+    </form>
 
-<!--Sistemare Registration-->
- </form>
-
+    <p>Don't have an account yet?</p>
+    <button onclick="Redirect();">Registration</button>
+  </body>
+</html>
+ 

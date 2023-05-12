@@ -36,7 +36,7 @@ def registration_view(request):
             email = form.cleaned_data['email']
             birthday = form.cleaned_data['birthday']
 
-            account = Account(name=first_name, surname=last_name, account_id=account_id, password=password, email=email, birthday=birthday)
+            account = Account(name=first_name, surname=last_name, password=password, email=email, birthday=birthday)
 
             account.save()
 
@@ -49,23 +49,26 @@ def registration_view(request):
 
 def login_view(request):
     if request.method == 'POST':
-        form = LogIn(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
+        #if 'LogIn' in request.POST:
+            form = LogIn(request.POST)
+            if form.is_valid():
+                email = form.cleaned_data['email']
+                password = form.cleaned_data['password']
 
-            try:
-                account = Account.objects.get(email=email, password=password)
-                return render(request, 'SelectRole.html')
-            except Account.DoesNotExist:
-                error = 'Credenziali non valide'
-                form.add_error(None, error)
-        else:
-            error = 'Inserted data are not valid'
+                try:
+                    account = Account.objects.get(email=email, password=password)  #Il fatto che account non è visto da pylance è un problema
+                    return render(request, 'SelectRole.html')
+                except Account.DoesNotExist:
+                    error = 'Credenziali non valide'
+                    form.add_error(None, error)
+            else:
+                error = 'Inserted data are not valid'
     else:
         form = LogIn()
         error = None
-
+        #if 'RegistrationForm_fromLogIN' in request.POST:
+        #    return redirect('registration_view') 
+        
     return render(request, 'login.html', {'form': form, 'error': error})
 
 def account_view(request):
@@ -82,11 +85,11 @@ def Shop_view(request):
             name = form.cleaned_data['name']
             location = form.cleaned_data['location']
             max_numb_clients = form.cleaned_data['max_numb_clients']
-            id_shop = form.cleaned_data['id_shop']
+            ids = form.cleaned_data['ids']
             address = form.cleaned_data['address']
             category = form.cleaned_data['category']
             
-            shop = Shop(name=name, location=location, max_numb_clients=max_numb_clients, id_shop=id_shop, address=address, category=category)
+            shop = Shop(name=name, location=location, max_numb_clients=max_numb_clients, ids=ids, address=address, category=category)
 
             shop.save()
             

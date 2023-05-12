@@ -1,6 +1,26 @@
 <html>
 <head>
   <title>bakery list</title>
+
+  <script type="text/javascript">
+    function Redirect(url) {
+       location.replace("http://127.0.0.1:8000/"+url);
+    }
+ </script>
+
+  <style>
+
+    .anybutton {
+      top:75%;
+      left:75%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 183, 255); 
+      }
+    
+     </style>
 </head>
 
 <!--Vedere se fare un solo file html-->
@@ -34,5 +54,7 @@
      <br>
     </p>
   </h1>
+  <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
+
 </body>
 </html>
