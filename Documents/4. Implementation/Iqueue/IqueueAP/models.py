@@ -4,6 +4,11 @@ from django.core.validators import MinLengthValidator
 
 #Realizziamo tutti gli ID di lunghezza 8
 
+class Coordinates(models.Model):
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+
+
 class Account(models.Model): #La classe account corrisponde a user di UML
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
@@ -15,29 +20,42 @@ class Account(models.Model): #La classe account corrisponde a user di UML
         self.email = email
         self.password = password
 
-#Vedere come fare
-#class customer(Account):  #Da verificare che poi i campi sono inherited correttamente
-#    idc = models.CharField(default='BBBBBBBB',max_length=8, validators=[MinLengthValidator(8)])
 
 
+# #Vedere se i campi "inherited" servono tutti/ha senso inglobarli tutti (Io ho fatto così per definizione subclass)
+# class Customer(models.Model):
+#     name = models.OneToOneField(Account, on_delete = models.CASCADE)
+#     surname = models.OneToOneField(Account, on_delete = models.CASCADE)
+#     password = models.OneToOneField(Account, on_delete = models.CASCADE)
+#     email = models.OneToOneField(Account, on_delete = models.CASCADE)
+#     birthday = models.OneToOneField(Account, on_delete = models.CASCADE)
+#     idc = models.CharField(default='CCCCCCCC',max_length=8, validators=[MinLengthValidator(8)])
+#     lat = Coordinates.latitude                                                                       #latitude
+#     lon = Coordinates.longitude                                                                      #longitude
+#     reward = models.IntegerField(default=0)
+    
 
-class QR(models.Model):   #Vedere se mettere campi come gli altri
-    QRid = models.CharField(max_length=50)
-    ids = models.CharField(max_length=50)
-    idso = models.CharField(max_length=50)
-    idc = models.CharField(max_length=50)
+# class Shop_owner(models.Model):
+#     name = models.OneToOneField(Account, on_delete = models.CASCADE)
+#     surname = models.OneToOneField(Account, on_delete = models.CASCADE)
+#     password = models.OneToOneField(Account, on_delete = models.CASCADE)
+#     email = models.OneToOneField(Account, on_delete = models.CASCADE)
+#     birthday = models.OneToOneField(Account, on_delete = models.CASCADE)  
+#     idso = models.CharField(default='OOOOOOOO',max_length=8, validators=[MinLengthValidator(8)])
+#     lat = Coordinates.latitude                                                                       #latitude
+#     lon = Coordinates.longitude                                                                      #longitude
+#     reward = models.IntegerField(default=0)
+#     on_delete = models.CASCADE
 
 
-class Coordinates(models.Model):
-    latitude = models.FloatField()
-    longitude = models.FloatField()
 
 class Shop(models.Model):
     name = models.CharField(max_length=100)
-    location = models.CharField(max_length=100)
+    lat = Coordinates.latitude                                                                       #latitude
+    lon = Coordinates.longitude                                                                      #longitude
     max_numb_clients = models.IntegerField()
     queue = models.IntegerField(default=0)
-    ids = models.CharField(default='AAAAAAAA',max_length=8, validators=[MinLengthValidator(8)])
+    ids = models.CharField(default='SSSSSSSS',max_length=8, validators=[MinLengthValidator(8)])
     address = models.CharField(max_length=200)
     rating = models.FloatField(default=0)
     numb_of_ratings= models.IntegerField(default=0)
@@ -57,4 +75,11 @@ class TimeSlot(models.Model):
     end = models.TimeField()
     available = models.BooleanField()
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE,blank=True, null=True)
+
+# class QR(models.Model):   #Vedere se mettere campi come gli altri
+#     QRid = models.CharField(max_length=50)
+#     ids = Shop.ids
+#     idso = Shop_owner.idso
+#     idc = Customer.idc
+
 

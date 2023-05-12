@@ -33,12 +33,14 @@ urlpatterns = [
     path('registration/', registration_view, name='registration'),
     path('registration/success/', success, name='success'),
     path('login/SelectRole/', selectRole, name='selectRole'),
-    path('account/', account_view, name='account_view'),
+    path('account/', account_view, name='account_view'), #Serve??
     path('ShopOwner/', ShopOwner_view, name='ShopOwner_view'),
     path('ShopOwner/Shop/', Shop_view, name='Shop_view'),
     path('ShopOwner/Shop/Shoplist/',SuccessShopRegistration, name='SuccessShopRegistration'),
     path('Customer/', Customer_view, name='Customer_view'),
     path('Customer/bakery/', Customer_bakery_view, name='Customer_bakery_view'),
+    path('login/ShopOwner/Shop/', SuccessShopRegistration, name='SuccessShopRegistration'),  #Da sistemare
+    path('login/ShopOwner/Shop/Shoplist', SuccessShopRegistration, name='SuccessShopRegistration'),  #Da sistemare
     path("admin/", admin.site.urls)
 ]
 
