@@ -26,7 +26,7 @@
 
 
 <body>
-  <form method="post" action="/login/ShopOwner/Shop/">
+  <form method="post" action="/ShopOwner/Shop/Shoplist/">
       {% csrf_token %}
     <label for="name">Name:</label>
     <input type="text" name="name" id="name">
@@ -37,8 +37,11 @@
     <label for="max_numb_clients">max_numb_clients:</label>
     <input type="text" name="max_numb_clients" id="max_numb_clients">
     <br>
-    <label for="location">location:</label>
-    <input type="text" name="location" id="location">
+    <label for="latitude">location: latitude </label>
+    <input type="text" name="latitude" id="latitude">
+    <br>
+    <label for="longitude">location: longitude </label>
+    <input type="text" name="longitude" id="longitude">
     <br>
     <label for="ids">id_shop:</label>
     <input type="text" name="id_shop" id="id_shop">

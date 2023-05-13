@@ -8,9 +8,6 @@ class RegistrationForm(forms.Form):
     email = forms.EmailField(label='email')
     birthday = forms.DateField()
 
-class RegistrationForm_fromLogIN(forms.Form):
-    check = forms.BooleanField()  #campo che dovrebbe essere inutile (è definito solo per non far dar problemi alla classe)
-
 
 class LogIn(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput, label='password')
@@ -19,7 +16,8 @@ class LogIn(forms.Form):
 
 class ShopForm(forms.Form):
     name = forms.CharField(label='name')
-    location = forms.CharField(label='location')
+    lat = forms.CharField(label='latitude')
+    lon = forms.CharField(label='longitude')
     max_numb_clients = forms.IntegerField(label='max_numb_clients')
     ids = forms.CharField(label='ids')
     address = forms.CharField(label='address')

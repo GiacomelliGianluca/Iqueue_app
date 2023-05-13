@@ -39,8 +39,6 @@ urlpatterns = [
     path('ShopOwner/Shop/Shoplist/',SuccessShopRegistration, name='SuccessShopRegistration'),
     path('Customer/', Customer_view, name='Customer_view'),
     path('Customer/bakery/', Customer_bakery_view, name='Customer_bakery_view'),
-    path('login/ShopOwner/Shop/', SuccessShopRegistration, name='SuccessShopRegistration'),  #Da sistemare
-    path('login/ShopOwner/Shop/Shoplist', SuccessShopRegistration, name='SuccessShopRegistration'),  #Da sistemare
     path("admin/", admin.site.urls)
 ]
 

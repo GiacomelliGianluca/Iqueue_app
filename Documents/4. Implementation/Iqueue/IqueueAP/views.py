@@ -7,10 +7,8 @@ from django.shortcuts import render, redirect
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-from Iqueue.forms import RegistrationForm, LogIn
-from IqueueAP.models import Account
-from Iqueue.forms import ShopForm
-from IqueueAP.models import Shop
+from Iqueue.forms import RegistrationForm, LogIn, ShopForm
+from IqueueAP.models import Account, Shop
 
 
 def InitialLoading(request):
@@ -83,20 +81,18 @@ def Shop_view(request):
         form = ShopForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
-            location = form.cleaned_data['location']
+            lat = form.cleaned_data['lat']
+            lon = form.cleaned_data['lon']
             max_numb_clients = form.cleaned_data['max_numb_clients']
             ids = form.cleaned_data['ids']
             address = form.cleaned_data['address']
             category = form.cleaned_data['category']
             
-            shop = Shop(name=name, location=location, max_numb_clients=max_numb_clients, ids=ids, address=address, category=category)
-
+            shop = Shop(name=name, lat=lat, lon=lon, max_numb_clients=max_numb_clients, ids=ids, address=address, category=category)
             shop.save()
-            
-            return redirect('SuccessShopRegistration')
+      
     else:
         form = ShopForm()
-
 
     return render(request, 'ShopRegistration.html', {'form': form})
 

@@ -48,7 +48,6 @@ class Account(models.Model): #La classe account corrisponde a user di UML
 #     on_delete = models.CASCADE
 
 
-
 class Shop(models.Model):
     name = models.CharField(max_length=100)
     lat = Coordinates.latitude                                                                       #latitude
@@ -60,8 +59,7 @@ class Shop(models.Model):
     rating = models.FloatField(default=0)
     numb_of_ratings= models.IntegerField(default=0)
     category = models.CharField(max_length=100, default='Others') #Se non compilato messo in others
-    
- 
+
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
