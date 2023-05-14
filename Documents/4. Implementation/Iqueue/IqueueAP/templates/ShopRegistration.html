@@ -26,7 +26,7 @@
 
 
 <body>
-  <form method="post" action="/ShopOwner/Shop/Shoplist/">
+  <form method="post">
       {% csrf_token %}
     <label for="name">Name:</label>
     <input type="text" name="name" id="name">
@@ -37,29 +37,26 @@
     <label for="max_numb_clients">max_numb_clients:</label>
     <input type="text" name="max_numb_clients" id="max_numb_clients">
     <br>
-    <label for="latitude">location: latitude </label>
-    <input type="text" name="latitude" id="latitude">
+    <label for="lat">location: latitude </label>
+    <input type="number" name="lat" id="lat">
     <br>
-    <label for="longitude">location: longitude </label>
-    <input type="text" name="longitude" id="longitude">
+    <label for="lon">location: longitude </label>
+    <input type="number" name="lon" id="lon">
     <br>
     <label for="ids">id_shop:</label>
-    <input type="text" name="id_shop" id="id_shop">
+    <input type="text" name="ids" id="ids">
     <br>
+    <label for="bakery"> Bakery</label>
     <input type="radio" id="category" name="category" value="bakery">
-    <label for="bakery"> Bakery</label><br>
+    <label for="clothes"> Clothes</label>
     <input type="radio" id="category" name="category" value="clothes">
-    <label for="clothes"> Clothes</label><br>
-    <input type="radio" id="category" name="category" value="perfumery">
     <label for="perfumery"> Perfumery</label>
-    <br>
+    <input type="radio" id="category" name="category" value="perfumery">
+    <label for="hair_saloon"> Hair Saloon</label>
     <input type="radio" id="category" name="category" value="hair_saloon">
-    <label for="perfumery"> Hair Saloon</label>
-    <br>
+    <label for="others"> Other</label>
     <input type="radio" id="category" name="category" value="others">
-    <label for="perfumery"> Other</label>
-    <br>
-    <input type="submit" value="Registra">
+    <input type="submit" value="Record">
   </form>
 
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />

@@ -4,11 +4,10 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 
-from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from Iqueue.forms import RegistrationForm, LogIn, ShopForm
-from IqueueAP.models import Account, Shop
+from IqueueAP.models import Account, Shop, Product, TimeSlot
 
 
 def InitialLoading(request):
@@ -54,7 +53,7 @@ def login_view(request):
                 password = form.cleaned_data['password']
 
                 try:
-                    account = Account.objects.get(email=email, password=password)  #Il fatto che account non è visto da pylance è un problema
+                    account = Account.objects.get(email=email, password=password)  
                     return render(request, 'SelectRole.html')
                 except Account.DoesNotExist:
                     error = 'Credenziali non valide'
@@ -87,10 +86,12 @@ def Shop_view(request):
             ids = form.cleaned_data['ids']
             address = form.cleaned_data['address']
             category = form.cleaned_data['category']
-            
-            shop = Shop(name=name, lat=lat, lon=lon, max_numb_clients=max_numb_clients, ids=ids, address=address, category=category)
+            shop = Shop(name=name, lat=lat, lon=lon, max_numb_clients=max_numb_clients, ids=ids, address=address, rating=0, numb_of_ratings=0, category=category)
+
             shop.save()
-      
+
+            return redirect('SuccessShopRegistration')
+
     else:
         form = ShopForm()
 

@@ -14,11 +14,20 @@ class LogIn(forms.Form):
     email = forms.EmailField(label='email')
  
 
+
+CATEGORY_CHOICES = (
+        ('bakery', 'Bakery'),
+        ('clothes', 'Clothes'),
+        ('perfumery', 'Perfumery'),
+        ('hair_saloon', 'Hair Saloon'),
+        ('others', 'Other'),
+    )
+
 class ShopForm(forms.Form):
     name = forms.CharField(label='name')
-    lat = forms.CharField(label='latitude')
-    lon = forms.CharField(label='longitude')
+    lat = forms.FloatField(label='lat')
+    lon = forms.FloatField(label='lon')
     max_numb_clients = forms.IntegerField(label='max_numb_clients')
     ids = forms.CharField(label='ids')
     address = forms.CharField(label='address')
-    category = forms.CharField(label='category')
+    category = forms.ChoiceField(choices=CATEGORY_CHOICES, label='category')

@@ -4,9 +4,6 @@ from django.core.validators import MinLengthValidator
 
 #Realizziamo tutti gli ID di lunghezza 8
 
-class Coordinates(models.Model):
-    latitude = models.FloatField()
-    longitude = models.FloatField()
 
 
 class Account(models.Model): #La classe account corrisponde a user di UML
@@ -30,8 +27,8 @@ class Account(models.Model): #La classe account corrisponde a user di UML
 #     email = models.OneToOneField(Account, on_delete = models.CASCADE)
 #     birthday = models.OneToOneField(Account, on_delete = models.CASCADE)
 #     idc = models.CharField(default='CCCCCCCC',max_length=8, validators=[MinLengthValidator(8)])
-#     lat = Coordinates.latitude                                                                       #latitude
-#     lon = Coordinates.longitude                                                                      #longitude
+#     lat = models.FloatField(default=0)                                                                      #latitude
+#     lon = models.FloatField(default=0)                                                                      #longitude
 #     reward = models.IntegerField(default=0)
     
 
@@ -42,16 +39,14 @@ class Account(models.Model): #La classe account corrisponde a user di UML
 #     email = models.OneToOneField(Account, on_delete = models.CASCADE)
 #     birthday = models.OneToOneField(Account, on_delete = models.CASCADE)  
 #     idso = models.CharField(default='OOOOOOOO',max_length=8, validators=[MinLengthValidator(8)])
-#     lat = Coordinates.latitude                                                                       #latitude
-#     lon = Coordinates.longitude                                                                      #longitude
 #     reward = models.IntegerField(default=0)
 #     on_delete = models.CASCADE
 
 
 class Shop(models.Model):
     name = models.CharField(max_length=100)
-    lat = Coordinates.latitude                                                                       #latitude
-    lon = Coordinates.longitude                                                                      #longitude
+    lat = models.FloatField(default=0)                                                                      #latitude
+    lon = models.FloatField(default=0)                                                                      #longitude
     max_numb_clients = models.IntegerField()
     queue = models.IntegerField(default=0)
     ids = models.CharField(default='SSSSSSSS',max_length=8, validators=[MinLengthValidator(8)])
