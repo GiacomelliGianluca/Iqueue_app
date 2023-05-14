@@ -111,5 +111,10 @@ def Customer_bakery_view(request):
     return render(request, 'bakery.html', {'shop': shop})
 
 
+def Customer_category_view(request):
+    
+    shop = Shop.objects.filter(category='bakery').values()
+    return render(request, 'category_selection.html', {'shop': shop})
+
 
 
