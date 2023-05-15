@@ -1,3 +1,4 @@
+
 from django import forms
 
 
@@ -12,16 +13,16 @@ class RegistrationForm(forms.Form):
 class LogIn(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput, label='password')
     email = forms.EmailField(label='email')
- 
 
 
 CATEGORY_CHOICES = (
-        ('bakery', 'Bakery'),
-        ('clothes', 'Clothes'),
-        ('perfumery', 'Perfumery'),
-        ('hair_saloon', 'Hair Saloon'),
-        ('others', 'Other'),
-    )
+    ('bakery', 'Bakery'),
+    ('clothes', 'Clothes'),
+    ('perfumery', 'Perfumery'),
+    ('hair_saloon', 'Hair Saloon'),
+    ('others', 'Other'),
+)
+
 
 class ShopForm(forms.Form):
     name = forms.CharField(label='name')
@@ -31,3 +32,8 @@ class ShopForm(forms.Form):
     ids = forms.CharField(label='ids')
     address = forms.CharField(label='address')
     category = forms.ChoiceField(choices=CATEGORY_CHOICES, label='category')
+    opening_time = forms.TimeField(label='opening_time')
+    closing_time = forms.TimeField(label='closing_time')
+    slot_duration = forms.IntegerField(label='slot_duration')
+    lunch_break_start = forms.TimeField(label='lunch_break_start')
+    lunch_break_end = forms.TimeField(label='lunch_break_end')
