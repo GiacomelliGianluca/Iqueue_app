@@ -35,5 +35,4 @@ class ShopForm(forms.Form):
     opening_time = forms.TimeField(label='opening_time')
     closing_time = forms.TimeField(label='closing_time')
     slot_duration = forms.IntegerField(label='slot_duration')
-    lunch_break_start = forms.TimeField(label='lunch_break_start')
-    lunch_break_end = forms.TimeField(label='lunch_break_end')
+

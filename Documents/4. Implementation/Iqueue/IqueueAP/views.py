@@ -116,8 +116,9 @@ def Shop_view(request):
                     while current_datetime.time() < closing_time:
                         start_time = current_datetime.time()
                         end_time = (current_datetime + slot_duration).time()
+                        date = (current_datetime + slot_duration).date()
 
-                        time_slot = TimeSlot(start=start_time, end=end_time, available=True, shop=shop)
+                        time_slot = TimeSlot(start=start_time, end=end_time,date=date ,available=True, shop=shop)
                         time_slots.append(time_slot)
 
                         current_datetime += timedelta(minutes=30)
@@ -144,8 +145,14 @@ def Customer_view(request):
 
 
 def Customer_bakery_view(request):
-    shop = Shop.objects.filter(category='bakery').values()
-    return render(request, 'bakery.html', {'shop': shop})
+    if request.method == 'POST':
+        shop_name = request.POST.get('shop')
+        date = request.POST.get('date')
+        shop = Shop.objects.get(name=shop_name)
+        slots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
+        return render(request, 'bakery.html', {'shops': Shop.objects.all(), 'slots': slots})
+    else:
+        return render(request, 'bakery.html', {'shops': Shop.objects.all()})
 
 
 def Customer_category_view(request):

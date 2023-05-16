@@ -26,35 +26,32 @@
 <!--Vedere se fare un solo file html-->
 
 <body>
-  <h1>
-    <p>
-    The bakeries are:
-    {% for shop in shop %}
-        <table>
-          <tr> 
-            <td>{{ shop.name }}</td>
-            <td>{{ shop.location }}</td>
-            <td>{{ shop.address }}</td>
-            <td>{{ shop.queue }}</td>
-          </tr>
-        </table> 
-    {% endfor %}
-    </p>
-  </h1>
+  <h1>Prenotazione Slot</h1>
+  <form method="POST" action='/Customer/bakery/'>
+    {% csrf_token %}
+    <label for="shop">Seleziona un negozio:</label>
+    <select name="shop" >
+      {% for shop in shops %}
+        <option value="{{ shop.name }}">{{ shop.name }}</option>
+      {% endfor %}
+    </select>
 
+    <label for="date">Seleziona una data:</label>
+    <input type="date" name="date" id="date" required>
 
-  <h1>
-    <p>
-    What bakery do you want to choose?
-    <br>
-     <label for="name">Name:</label>
-     <input type="text" name="name" id="name">
-     <br>
-     <button onclick="window.location.href='/Booking/'"> Select</button>
-     <br>
-    </p>
-  </h1>
-  <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
+    <input type="submit" value="Visualizza slot disponibili">
+  </form>
+
+  {% if slots %}
+    <h2>Slot disponibili:</h2>
+    <ul>
+      {% for slot in slots %}
+        <li>{{ slot.start }} - {{ slot.end }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Nessuno slot disponibile per questa data.</p>
+  {% endif %}
 
 </body>
 </html>
