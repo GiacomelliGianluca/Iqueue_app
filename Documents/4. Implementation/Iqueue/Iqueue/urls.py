@@ -26,6 +26,8 @@ from IqueueAP.views import Shop_view
 from IqueueAP.views import SuccessShopRegistration
 from IqueueAP.views import Customer_view
 from IqueueAP.views import Customer_bakery_view
+from IqueueAP.views import Customer_category_view
+#from IqueueAP.views import booking, bookingSubmit
 
 urlpatterns = [
     path('', InitialLoading, name='InitialLoading'),
@@ -39,7 +41,9 @@ urlpatterns = [
     path('ShopOwner/Shop/Shoplist/',SuccessShopRegistration, name='SuccessShopRegistration'),
     path('Customer/', Customer_view, name='Customer_view'),
     path('Customer/bakery/', Customer_bakery_view, name='Customer_bakery_view'),
-    path("admin/", admin.site.urls)
+    path("admin/", admin.site.urls),
+    #path('Customer/bakery/', booking, name='booking'),
+    #path('booking-submit', bookingSubmit, name='bookingSubmit'),
 ]
 
 #Io farei che dopo la registration, si riparte sempre dal login

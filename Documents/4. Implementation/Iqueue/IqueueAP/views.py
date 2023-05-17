@@ -1,12 +1,12 @@
 from datetime import timedelta, datetime
 
 from django.shortcuts import render, redirect
-
+from django.contrib import messages
 # Create your views here.
 
 from django.views.decorators.csrf import csrf_exempt
 
-from Iqueue.forms import RegistrationForm, LogIn, ShopForm, BookingForm
+from Iqueue.forms import RegistrationForm, LogIn, ShopForm
 from IqueueAP.models import Account, Shop, Product, TimeSlot, Booking
 
 
@@ -150,11 +150,39 @@ def Customer_bakery_view(request):
         date = request.POST.get('date')
         shop = Shop.objects.get(name=shop_name)
         slots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
-        selected_slot = request.POST.get('selected_slot')
-        booking = Booking.objects.filter(name=shop_name, date=date, time_slot=selected_slot)
-        return render(request, 'bakery.html', {'shops': Shop.objects.all(), 'slots': slots, 'booking':booking})
+        return render(request, 'bakery.html', {'shops': Shop.objects.filter(category='bakery').values(), 'slots': slots})
     else:
         return render(request, 'bakery.html', {'shops': Shop.objects.all()})
+
+#def booking(request):
+    #if request.method == 'POST':
+     #   shop_name = request.POST.get('shop_name')
+      #  date = request.POST.get('date')
+        #Store shop name and date in django session:
+       # request.session['shop_name'] = shop_name
+        #request.session['date'] = date
+
+        #return redirect('bookingSubmit')
+        
+    #return render(request, 'booking.html', {'shops': Shop.objects.filter(category='bakery').values()})
+    
+
+#def bookingSubmit(request):
+    #Get stored data from django session:
+    #shop_name = request.session.get('shop_name')
+    #date = request.session.get('date')
+    #times = [
+       # "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM", "6 PM", "6:30 PM", "7 PM", "7:30 PM"
+    #]
+    #if request.method == 'POST':
+        #time = request.POST.get("time")
+        #BookingForm = Booking.objects.get_or_create(
+         #                       name = shop_name,
+          #                      date = date,
+           #                     time = time,
+            #                )
+        #messages.success(request, "Booking Saved!")
+    #return render(request, 'bookingSubmit.html', {'times': times})
 
 def Customer_category_view(request):
     shop = Shop.objects.filter(category='bakery').values()

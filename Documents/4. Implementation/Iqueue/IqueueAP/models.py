@@ -71,10 +71,22 @@ class TimeSlot(models.Model):
     available = models.BooleanField()
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, blank=True, null=True)
 
+TIME_CHOICES = (
+    ("3 PM", "3 PM"),
+    ("3:30 PM", "3:30 PM"),
+    ("4 PM", "4 PM"),
+    ("4:30 PM", "4:30 PM"),
+    ("5 PM", "5 PM"),
+    ("5:30 PM", "5:30 PM"),
+    ("6 PM", "6 PM"),
+    ("6:30 PM", "6:30 PM"),
+    ("7 PM", "7 PM"),
+    ("7:30 PM", "7:30 PM"),
+)
 class Booking(models.Model):
     name = models.CharField(max_length=100)
     date = models.DateField(default=date.today)
-    time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE, blank=True, null=True)
+    time = models.CharField(max_length=10, choices=TIME_CHOICES, default="3 PM")
     
 # class QR(models.Model):   #Vedere se mettere campi come gli altri
 #     QRid = models.CharField(max_length=50)
