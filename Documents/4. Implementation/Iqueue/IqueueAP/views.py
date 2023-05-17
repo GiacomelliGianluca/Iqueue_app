@@ -6,8 +6,8 @@ from django.shortcuts import render, redirect
 
 from django.views.decorators.csrf import csrf_exempt
 
-from Iqueue.forms import RegistrationForm, LogIn, ShopForm
-from IqueueAP.models import Account, Shop, Product, TimeSlot
+from Iqueue.forms import RegistrationForm, LogIn, ShopForm, BookingForm
+from IqueueAP.models import Account, Shop, Product, TimeSlot, Booking
 
 
 def InitialLoading(request):
@@ -150,10 +150,11 @@ def Customer_bakery_view(request):
         date = request.POST.get('date')
         shop = Shop.objects.get(name=shop_name)
         slots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
-        return render(request, 'bakery.html', {'shops': Shop.objects.all(), 'slots': slots})
+        selected_slot = request.POST.get('selected_slot')
+        booking = Booking.objects.filter(name=shop_name, date=date, time_slot=selected_slot)
+        return render(request, 'bakery.html', {'shops': Shop.objects.all(), 'slots': slots, 'booking':booking})
     else:
         return render(request, 'bakery.html', {'shops': Shop.objects.all()})
-
 
 def Customer_category_view(request):
     shop = Shop.objects.filter(category='bakery').values()

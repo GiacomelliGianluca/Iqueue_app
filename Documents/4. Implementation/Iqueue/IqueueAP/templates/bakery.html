@@ -42,16 +42,30 @@
     <input type="submit" value="Visualizza slot disponibili">
   </form>
 
-  {% if slots %}
-    <h2>Slot disponibili:</h2>
-    <ul>
-      {% for slot in slots %}
-        <li>{{ slot.start }} - {{ slot.end }}</li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>Nessuno slot disponibile per questa data.</p>
-  {% endif %}
+    {% if slots %}
+      <h2>Slot disponibili:</h2>
+      <ul>
+        {% for slot in slots %}
+          <li> {{ slot.start }} - {{ slot.end }}</li>
+        {% endfor %}
+     </ul>
+    {% else %}
+      <p>Nessuno slot disponibile per questa data.</p>
+    {% endif %}
 
+  <h1>Seleziona Slot</h1>
+  <form method="POST" action='/Customer/bakery/'>
+    {% csrf_token %}
+    <label for="selected_slot">Seleziona slot:</label>
+    <select name="selected_slot" >
+      {% for slot in slots %}
+        <option value="{{ slot.start }} - {{ slot.end }}">{{ slot.start }} - {{ slot.end }}</option>
+      {% endfor %}
+    </select>
+  
+    <input type="submit" value="Prenota">
+  </form>
+
+  <p>Hai prenotato alle {{ booking.date }}</p>
 </body>
 </html>

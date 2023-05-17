@@ -36,3 +36,5 @@ class ShopForm(forms.Form):
     closing_time = forms.TimeField(label='closing_time')
     slot_duration = forms.IntegerField(label='slot_duration')
 
+class BookingForm(forms.Form):
+    edit_booking = forms.BooleanField(widget=forms.HiddenInput, initial=True)

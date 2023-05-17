@@ -71,6 +71,11 @@ class TimeSlot(models.Model):
     available = models.BooleanField()
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, blank=True, null=True)
 
+class Booking(models.Model):
+    name = models.CharField(max_length=100)
+    date = models.DateField(default=date.today)
+    time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE, blank=True, null=True)
+    
 # class QR(models.Model):   #Vedere se mettere campi come gli altri
 #     QRid = models.CharField(max_length=50)
 #     ids = Shop.ids
