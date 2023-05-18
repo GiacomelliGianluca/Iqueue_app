@@ -9,6 +9,8 @@ from django.views.decorators.csrf import csrf_exempt
 from Iqueue.forms import RegistrationForm, LogIn, ShopForm, Shop_and_day_selectionForm, TimeSlot_selectionForm
 from IqueueAP.models import Account, Shop, Product, TimeSlot, Booking
 
+from . import forms, models
+
 
 def InitialLoading(request):
     return render(request, 'LoadingIqueue.html')
@@ -161,21 +163,19 @@ def edit_blog(request, blog_id):
     Shop_and_day_form = forms.Shop_and_day_selectionForm()
     TimeSlot_form = forms.TimeSlot_selectionForm()
     if request.method == 'POST':
-        if 'edit_blog' in request.POST:
-            edit_form = forms.BlogForm(request.POST, instance=blog)
-            if edit_form.is_valid():
-                edit_form.save()
-                return redirect('home')
-        if 'delete_blog' in request.POST:
-            delete_form = forms.DeleteBlogForm(request.POST)
-            if delete_form.is_valid():
-                blog.delete()
-                return redirect('home')
+        if 'Shop_and_day_selection' in request.POST:
+            Shop_and_day_form = forms.Shop_and_day_selectionForm(request.POST)
+            if Shop_and_day_form.is_valid():
+                return redirect('home')  #da sistemare
+        if 'TimeSlot_selection' in request.POST:
+            TimeSlot_form = forms.TimeSlot_form(request.POST)
+            if TimeSlot_form.is_valid():
+                return redirect('home')  #da sistemare
     context = {
-        'edit_form': edit_form,
-        'delete_form': delete_form,
+        'Shop_and_day_form': Shop_and_day_form,
+        'TimeSlot_form': TimeSlot_form,
     }
-    return render(request, 'blog/edit_blog.html', context=context)
+    return render(request, 'bakery.html', context=context)
 
 
 

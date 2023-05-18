@@ -19,20 +19,13 @@ class Account(models.Model):  # La classe account corrisponde a user di UML
     reward = models.IntegerField(default=0)        #Solo customer 
     idso = models.CharField(default='OOOOOOOO',max_length=8, validators=[MinLengthValidator(8)])    #Solo ShopOwner
 
-    def user_login(self, email: str, password: str):
+    def user_login(self, email: str, password: str):   #Account
         self.email = email
         self.password = password
 
 
 
-# class Shop_owner(models.Model):
-#     name = models.OneToOneField(Account, on_delete = models.CASCADE)
-#     surname = models.OneToOneField(Account, on_delete = models.CASCADE)
-#     password = models.OneToOneField(Account, on_delete = models.CASCADE)
-#     email = models.OneToOneField(Account, on_delete = models.CASCADE)
-#     birthday = models.OneToOneField(Account, on_delete = models.CASCADE)  
-#     idso = models.CharField(default='OOOOOOOO',max_length=8, validators=[MinLengthValidator(8)])
-#     #     on_delete = models.CASCADE
+
 
 
 class Shop(models.Model):
