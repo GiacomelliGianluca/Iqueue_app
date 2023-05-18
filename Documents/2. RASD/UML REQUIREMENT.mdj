@@ -2640,6 +2640,7 @@
 											"model": {
 												"$ref": "AAAAAAGHniWQHyNsT1c="
 											},
+											"visible": false,
 											"font": "Arial;13;0",
 											"left": 893,
 											"top": 574,
@@ -2731,7 +2732,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 893,
-											"top": 589,
+											"top": 574,
 											"width": 391,
 											"height": 13,
 											"text": "+Add_cus_inqueue_NOAPP(number_queue: Integer)",
@@ -2748,7 +2749,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 893,
-											"top": 604,
+											"top": 589,
 											"width": 391,
 											"height": 13,
 											"text": "+Remove_cus_inqueue_NOAPP(number_queue: Integer)",
@@ -2765,7 +2766,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 893,
-											"top": 619,
+											"top": 604,
 											"width": 391,
 											"height": 13,
 											"text": "+Set_service_time(ids: String)",
@@ -2782,7 +2783,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 893,
-											"top": 634,
+											"top": 619,
 											"width": 391,
 											"height": 13,
 											"text": "+Generate_advertisement(ids: String, idadv: String)",
@@ -2799,7 +2800,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 893,
-											"top": 649,
+											"top": 634,
 											"width": 391,
 											"height": 13,
 											"text": "+Count_product(ids: String, idp: String)",
@@ -2810,7 +2811,7 @@
 									"left": 888,
 									"top": 552,
 									"width": 401,
-									"height": 115
+									"height": 100
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",

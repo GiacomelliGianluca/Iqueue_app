@@ -25,7 +25,7 @@ from IqueueAP.views import ShopOwner_view
 from IqueueAP.views import Shop_view
 from IqueueAP.views import SuccessShopRegistration
 from IqueueAP.views import Customer_view
-from IqueueAP.views import Customer_bakery_view
+from IqueueAP.views import Booking_view
 from IqueueAP.views import Customer_category_view
 #from IqueueAP.views import booking, bookingSubmit
 
@@ -40,7 +40,7 @@ urlpatterns = [
     path('ShopOwner/Shop/', Shop_view, name='Shop_view'),
     path('ShopOwner/Shop/Shoplist/',SuccessShopRegistration, name='SuccessShopRegistration'),
     path('Customer/', Customer_view, name='Customer_view'),
-    path('Customer/bakery/', Customer_bakery_view, name='Customer_bakery_view'),
+    path('Customer/bakery/', Booking_view, name='Booking_view'),
     path("admin/", admin.site.urls),
     #path('Customer/bakery/', booking, name='booking'),
     #path('booking-submit', bookingSubmit, name='bookingSubmit'),

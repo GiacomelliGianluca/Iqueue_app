@@ -103,25 +103,27 @@ def Shop_view(request):
 
             current_date = datetime.now().date()
 
-            end_date = current_date + timedelta(weeks=2)
+            end_date = current_date + timedelta(weeks=52) #time slots definiti per un anno
 
             time_slots = []
 
-            current_date = current_date
-
+            #SE ABBIAMO tempo creare diversi time slots per giorni diversi
             while current_date <= end_date:
                 if current_date.weekday() < 5:
-                    current_datetime = datetime.combine(current_date, opening_time)
+                    current_datetime = datetime.combine(current_date, opening_time)  #current_date: data anno mese giorno; opening_time: ore minuti
 
                     while current_datetime.time() < closing_time:
-                        start_time = current_datetime.time()
+                        start_time = current_datetime.time()  #datetime.time individua 
                         end_time = (current_datetime + slot_duration).time()
+                        if end_time > closing_time:
+                            end_time = closing_time
+
                         date = (current_datetime + slot_duration).date()
 
                         time_slot = TimeSlot(start=start_time, end=end_time,date=date ,available=True, shop=shop)
                         time_slots.append(time_slot)
 
-                        current_datetime += timedelta(minutes=30)
+                        current_datetime += slot_duration
 
                 current_date += timedelta(days=1)
 
@@ -144,11 +146,12 @@ def Customer_view(request):
     return render(request, 'Customer.html')
 
 
-def Customer_bakery_view(request):
+def Booking_view(request):
     if request.method == 'POST':
         shop_name = request.POST.get('shop')
         date = request.POST.get('date')
         shop = Shop.objects.get(name=shop_name)
+        timeslot = request.POST.get('timeslot')
         slots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
         return render(request, 'bakery.html', {'shops': Shop.objects.filter(category='bakery').values(), 'slots': slots})
     else:
