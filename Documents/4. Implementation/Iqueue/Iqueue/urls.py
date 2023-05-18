@@ -35,6 +35,7 @@ urlpatterns = [
     path('login/', login_view, name='login_View'),
     path('registration/', registration_view, name='registration'),
     path('registration/success/', success, name='success'),
+    #path('Customer/bakery/qr_code', qr_generation ,name='qr' )
     path('login/SelectRole/', selectRole, name='selectRole'),
     path('account/', account_view, name='account_view'), #Serve??
     path('ShopOwner/', ShopOwner_view, name='ShopOwner_view'),
