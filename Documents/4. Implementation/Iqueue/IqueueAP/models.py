@@ -13,19 +13,15 @@ class Account(models.Model):  # La classe account corrisponde a user di UML
     password = models.CharField(max_length=50)
     email = models.EmailField(max_length=150)
     birthday = models.DateField()
-    idc = models.CharField(default='CCCCCCCC',max_length=8, validators=[MinLengthValidator(8)])     #Solo customer
-    lat = models.FloatField(default=0)             #Solo customer    #latitude: da maps
-    lon = models.FloatField(default=0)             #Solo customer    #longitude: da maps
-    reward = models.IntegerField(default=0)        #Solo customer 
-    idso = models.CharField(default='OOOOOOOO',max_length=8, validators=[MinLengthValidator(8)])    #Solo ShopOwner
+    idc = models.CharField(default='CCCCCCCC', max_length=32)  # Solo customer
+    lat = models.FloatField(default=0)  # Solo customer    #latitude: da maps
+    lon = models.FloatField(default=0)  # Solo customer    #longitude: da maps
+    reward = models.IntegerField(default=0)  # Solo customer
+    idso = models.CharField(default='OOOOOOOO', max_length=32)  # Solo ShopOwner
 
-    def user_login(self, email: str, password: str):   #Account
+    def user_login(self, email: str, password: str):  # Account
         self.email = email
         self.password = password
-
-
-
-
 
 
 class Shop(models.Model):
@@ -34,11 +30,12 @@ class Shop(models.Model):
     lon = models.FloatField(default=0)  # longitude
     max_numb_clients = models.IntegerField()
     queue = models.IntegerField(default=0)
-    ids = models.CharField(default='SSSSSSSS', max_length=8, validators=[MinLengthValidator(8)])
+    ids = models.CharField(default='SSSSSSSS', max_length=32, validators=[MinLengthValidator(8)])
     address = models.CharField(max_length=200)
     rating = models.FloatField(default=0)
     numb_of_ratings = models.IntegerField(default=0)
     category = models.CharField(max_length=100, default='Others')  # Se non compilato messo in others
+    idso = models.CharField(default='SSSSSSSS', max_length=32, validators=[MinLengthValidator(8)])
 
 
 class Product(models.Model):
@@ -57,7 +54,7 @@ class TimeSlot(models.Model):
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, blank=True, null=True)
 
 
-#Vedere se togliere
+# Vedere se togliere
 TIME_CHOICES = (
     ("3 PM", "3 PM"),
     ("3:30 PM", "3:30 PM"),
@@ -70,11 +67,13 @@ TIME_CHOICES = (
     ("7 PM", "7 PM"),
     ("7:30 PM", "7:30 PM"),
 )
+
+
 class Booking(models.Model):
     name = models.CharField(max_length=100)
     date = models.DateField(default=date.today)
     time = models.CharField(max_length=10, choices=TIME_CHOICES, default="3 PM")
-    
+
 # class QR(models.Model):   #Vedere se mettere campi come gli altri
 #     QRid = models.CharField(max_length=50)
 #     ids = Shop.ids

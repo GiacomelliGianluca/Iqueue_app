@@ -11,6 +11,7 @@ from IqueueAP.models import Account, Shop, Product, TimeSlot, Booking
 
 from Iqueue import forms
 
+import uuid
 
 def InitialLoading(request):
     return render(request, 'LoadingIqueue.html')
@@ -35,6 +36,9 @@ def registration_view(request):
             password = form.cleaned_data['password']
             email = form.cleaned_data['email']
             birthday = form.cleaned_data['birthday']
+
+            idso = str(uuid.uuid4())
+            idc = str(uuid.uuid4())
 
             account = Account(name=first_name, surname=last_name, password=password, email=email, birthday=birthday)
 
@@ -95,6 +99,8 @@ def Shop_view(request):
             opening_time = form.cleaned_data['opening_time']
             closing_time = form.cleaned_data['closing_time']
             slot_duration = form.cleaned_data['slot_duration']
+
+            ids = idc = str(uuid.uuid4())
 
             shop = Shop(name=name, lat=lat, lon=lon, max_numb_clients=max_numb_clients, ids=ids, address=address,
                         rating=0, numb_of_ratings=0, category=category)
