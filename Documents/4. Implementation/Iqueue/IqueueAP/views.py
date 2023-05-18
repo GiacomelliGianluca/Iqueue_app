@@ -1,12 +1,12 @@
 from datetime import timedelta, datetime
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 # Create your views here.
 
 from django.views.decorators.csrf import csrf_exempt
 
-from Iqueue.forms import RegistrationForm, LogIn, ShopForm
+from Iqueue.forms import RegistrationForm, LogIn, ShopForm, Shop_and_day_selectionForm, TimeSlot_selectionForm
 from IqueueAP.models import Account, Shop, Product, TimeSlot, Booking
 
 
@@ -107,7 +107,7 @@ def Shop_view(request):
 
             time_slots = []
 
-            #SE ABBIAMO tempo creare diversi time slots per giorni diversi
+            #SE ABBIAMO tempo creare per giorni diversi ls possibilità di inserire time slots diversi
             while current_date <= end_date:
                 if current_date.weekday() < 5:
                     current_datetime = datetime.combine(current_date, opening_time)  #current_date: data anno mese giorno; opening_time: ore minuti
@@ -156,6 +156,28 @@ def Booking_view(request):
         return render(request, 'bakery.html', {'shops': Shop.objects.filter(category='bakery').values(), 'slots': slots})
     else:
         return render(request, 'bakery.html', {'shops': Shop.objects.all()})
+
+def edit_blog(request, blog_id):
+    Shop_and_day_form = forms.Shop_and_day_selectionForm()
+    TimeSlot_form = forms.TimeSlot_selectionForm()
+    if request.method == 'POST':
+        if 'edit_blog' in request.POST:
+            edit_form = forms.BlogForm(request.POST, instance=blog)
+            if edit_form.is_valid():
+                edit_form.save()
+                return redirect('home')
+        if 'delete_blog' in request.POST:
+            delete_form = forms.DeleteBlogForm(request.POST)
+            if delete_form.is_valid():
+                blog.delete()
+                return redirect('home')
+    context = {
+        'edit_form': edit_form,
+        'delete_form': delete_form,
+    }
+    return render(request, 'blog/edit_blog.html', context=context)
+
+
 
 #def booking(request):
     #if request.method == 'POST':

@@ -13,23 +13,16 @@ class Account(models.Model):  # La classe account corrisponde a user di UML
     password = models.CharField(max_length=50)
     email = models.EmailField(max_length=150)
     birthday = models.DateField()
+    idc = models.CharField(default='CCCCCCCC',max_length=8, validators=[MinLengthValidator(8)])     #Solo customer
+    lat = models.FloatField(default=0)             #Solo customer    #latitude: da maps
+    lon = models.FloatField(default=0)             #Solo customer    #longitude: da maps
+    reward = models.IntegerField(default=0)        #Solo customer 
+    idso = models.CharField(default='OOOOOOOO',max_length=8, validators=[MinLengthValidator(8)])    #Solo ShopOwner
 
     def user_login(self, email: str, password: str):
         self.email = email
         self.password = password
 
-
-# #Vedere se i campi "inherited" servono tutti/ha senso inglobarli tutti (Io ho fatto così per definizione subclass)
-# class Customer(models.Model):
-#     name = models.OneToOneField(Account, on_delete = models.CASCADE)
-#     surname = models.OneToOneField(Account, on_delete = models.CASCADE)
-#     password = models.OneToOneField(Account, on_delete = models.CASCADE)
-#     email = models.OneToOneField(Account, on_delete = models.CASCADE)
-#     birthday = models.OneToOneField(Account, on_delete = models.CASCADE)
-#     idc = models.CharField(default='CCCCCCCC',max_length=8, validators=[MinLengthValidator(8)])
-#     lat = models.FloatField(default=0)                                                                      #latitude
-#     lon = models.FloatField(default=0)                                                                      #longitude
-#     reward = models.IntegerField(default=0)
 
 
 # class Shop_owner(models.Model):
@@ -39,8 +32,7 @@ class Account(models.Model):  # La classe account corrisponde a user di UML
 #     email = models.OneToOneField(Account, on_delete = models.CASCADE)
 #     birthday = models.OneToOneField(Account, on_delete = models.CASCADE)  
 #     idso = models.CharField(default='OOOOOOOO',max_length=8, validators=[MinLengthValidator(8)])
-#     reward = models.IntegerField(default=0)
-#     on_delete = models.CASCADE
+#     #     on_delete = models.CASCADE
 
 
 class Shop(models.Model):
@@ -71,6 +63,8 @@ class TimeSlot(models.Model):
     available = models.BooleanField()
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, blank=True, null=True)
 
+
+#Vedere se togliere
 TIME_CHOICES = (
     ("3 PM", "3 PM"),
     ("3:30 PM", "3:30 PM"),

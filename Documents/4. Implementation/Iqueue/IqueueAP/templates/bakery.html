@@ -26,37 +26,37 @@
 <!--Vedere se fare un solo file html-->
 
 <body>
-  <h1>Prenotazione Slot</h1>
-  <form method="POST" action='/Customer/bakery/'>
+  <h1>Slot Booking</h1>
+  <form method="POST" >
     {% csrf_token %}
-    <label for="shop">Seleziona un negozio:</label>
+    <label for="shop">Select a shop:</label>
     <select name="shop" >
       {% for shop in shops %}
         <option value="{{ shop.name }}">{{ shop.name }}</option>
       {% endfor %}
     </select>
 
-    <label for="date">Seleziona una data:</label>
+    <label for="date">Select a day:</label>
     <input type="date" name="date" id="date" required>
 
     <input type="submit" value="Visualizza slot disponibili">
   </form>
 
     {% if slots %}
-      <h2>Slot disponibili:</h2>
+      <h2>Available slots:</h2>
       <ul>
         {% for slot in slots %}
           <li> {{ slot.start }} - {{ slot.end }}</li>
         {% endfor %}
      </ul>
     {% else %}
-      <p>Nessuno slot disponibile per questa data.</p>
+      <p>No slot available for this day.</p>
     {% endif %}
 
-  <h1>Seleziona Slot</h1>
-  <form method="POST" action='/Customer/bakery/'>
+  <h1>Select a slot</h1>
+  <form method="POST" >
     {% csrf_token %}
-    <label for="selected_slot">Seleziona slot:</label>
+    <label for="selected_slot">Select a slot:</label>
     <select name="selected_slot" >
       {% for slot in slots %}
         <option value="{{ slot.start }} - {{ slot.end }}">{{ slot.start }} - {{ slot.end }}</option>
@@ -66,6 +66,6 @@
     <button type="submit" class="btn btn-primary text-white mt-3 fPersian">Submit</button>
   </form>
 
-  <p>Hai prenotato alle {{ booking.date }}</p>
+  <p>You have booking at {{ booking.date }}</p>
 </body>
 </html>

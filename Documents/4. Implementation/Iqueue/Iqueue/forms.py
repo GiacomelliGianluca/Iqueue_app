@@ -1,5 +1,6 @@
 
 from django import forms
+from . import models
 
 
 class RegistrationForm(forms.Form):
@@ -36,5 +37,9 @@ class ShopForm(forms.Form):
     closing_time = forms.TimeField(label='closing_time')
     slot_duration = forms.IntegerField(label='slot_duration')
 
+class Shop_and_day_selectionForm(forms.Form):
+    Shop_and_day_selection = forms.BooleanField(widget=forms.HiddenInput, initial=True)
 
+class TimeSlot_selectionForm(forms.Form):
+    TimeSlot_selection = forms.BooleanField(widget=forms.HiddenInput, initial=True)
     
