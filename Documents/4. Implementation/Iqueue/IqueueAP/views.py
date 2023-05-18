@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from Iqueue.forms import RegistrationForm, LogIn, ShopForm, Shop_and_day_selectionForm, TimeSlot_selectionForm
 from IqueueAP.models import Account, Shop, Product, TimeSlot, Booking
 
-from . import forms, models
+from Iqueue import forms
 
 
 def InitialLoading(request):
@@ -148,33 +148,45 @@ def Customer_view(request):
     return render(request, 'Customer.html')
 
 
-def Booking_view(request):
-    if request.method == 'POST':
-        shop_name = request.POST.get('shop')
-        date = request.POST.get('date')
-        shop = Shop.objects.get(name=shop_name)
-        timeslot = request.POST.get('timeslot')
-        slots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
-        return render(request, 'bakery.html', {'shops': Shop.objects.filter(category='bakery').values(), 'slots': slots})
-    else:
-        return render(request, 'bakery.html', {'shops': Shop.objects.all()})
+# def Booking_view(request):
+#     if request.method == 'POST':
+#         shop_name = request.POST.get('shop')
+#         date = request.POST.get('date')
+#         shop = Shop.objects.get(name=shop_name)
+#         timeslot = request.POST.get('timeslot')
+#         slots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
+#         return render(request, 'bakery.html', {'shops': Shop.objects.filter(category='bakery').values(), 'slots': slots})
+#     else:
+#         return render(request, 'bakery.html', {'shops': Shop.objects.all()})
 
-def edit_blog(request, blog_id):
+def Booking_view(request):
     Shop_and_day_form = forms.Shop_and_day_selectionForm()
     TimeSlot_form = forms.TimeSlot_selectionForm()
     if request.method == 'POST':
+        
         if 'Shop_and_day_selection' in request.POST:
             Shop_and_day_form = forms.Shop_and_day_selectionForm(request.POST)
+            return redirect('success')
             if Shop_and_day_form.is_valid():
-                return redirect('home')  #da sistemare
+                shop_name = request.POST.get('shop')
+                date = request.POST.get('date')
+                shop = Shop.objects.get(name=shop_name)
+                timeslot = request.POST.get('timeslot')   #vedere se serve o togliere
+                slots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
+                return render(request, 'bakery.html', {'shops': Shop.objects.filter(category='bakery').values(), 'slots': slots}, context=context)
+            
         if 'TimeSlot_selection' in request.POST:
             TimeSlot_form = forms.TimeSlot_form(request.POST)
             if TimeSlot_form.is_valid():
-                return redirect('home')  #da sistemare
+                return redirect('success')  #DA SISTEMARE QUANDO SI CREA LA PAGINA DEL QR
+
+
     context = {
+        'shops': Shop.objects.all(),
         'Shop_and_day_form': Shop_and_day_form,
         'TimeSlot_form': TimeSlot_form,
     }
+
     return render(request, 'bakery.html', context=context)
 
 
@@ -209,6 +221,8 @@ def edit_blog(request, blog_id):
         #messages.success(request, "Booking Saved!")
     #return render(request, 'bookingSubmit.html', {'times': times})
 
+
+#Da implementare
 def Customer_category_view(request):
     shop = Shop.objects.filter(category='bakery').values()
     return render(request, 'category_selection.html', {'shop': shop})

@@ -27,7 +27,8 @@
 
 <body>
   <h1>Slot Booking</h1>
-  <form method="POST" >
+  <form method="POST" enctype="multipart/form-data">
+    {{Shop_and_day_selectionForm}}
     {% csrf_token %}
     <label for="shop">Select a shop:</label>
     <select name="shop" >
@@ -54,7 +55,8 @@
     {% endif %}
 
   <h1>Select a slot</h1>
-  <form method="POST" >
+  <form method="POST" enctype="multipart/form-data">
+    {{TimeSlot_selectionForm}}
     {% csrf_token %}
     <label for="selected_slot">Select a slot:</label>
     <select name="selected_slot" >

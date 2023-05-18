@@ -27,6 +27,7 @@ from IqueueAP.views import SuccessShopRegistration
 from IqueueAP.views import Customer_view
 from IqueueAP.views import Booking_view
 from IqueueAP.views import Customer_category_view
+from IqueueAP.views import Booking_view
 #from IqueueAP.views import booking, bookingSubmit
 
 urlpatterns = [
