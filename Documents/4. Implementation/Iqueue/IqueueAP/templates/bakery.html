@@ -27,7 +27,7 @@
 
 <body>
   <h1>Slot Booking</h1>
-  <form method="POST" enctype="multipart/form-data">
+  <form method="POST">
     {{Shop_and_day_selectionForm}}
     {% csrf_token %}
     <label for="shop">Select a shop:</label>
@@ -40,7 +40,8 @@
     <label for="date">Select a day:</label>
     <input type="date" name="date" id="date" required>
 
-    <input type="submit" value="Visualizza slot disponibili">
+   <button type="submit" name="btnform1">View the available slots</button>
+
   </form>
 
     {% if slots %}
@@ -54,8 +55,10 @@
       <p>No slot available for this day.</p>
     {% endif %}
 
+
+
   <h1>Select a slot</h1>
-  <form method="POST" enctype="multipart/form-data">
+  <form method="POST">
     {{TimeSlot_selectionForm}}
     {% csrf_token %}
     <label for="selected_slot">Select a slot:</label>
@@ -65,9 +68,9 @@
       {% endfor %}
     </select>
   
-    <button type="submit" class="btn btn-primary text-white mt-3 fPersian">Submit</button>
+    <button type="submit" name="btnform2">Submit</button>
   </form>
 
-  <p>You have booking at {{ booking.date }}</p>
+
 </body>
 </html>

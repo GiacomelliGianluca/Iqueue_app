@@ -163,22 +163,16 @@ def Booking_view(request):
     Shop_and_day_form = forms.Shop_and_day_selectionForm()
     TimeSlot_form = forms.TimeSlot_selectionForm()
     if request.method == 'POST':
-        
-        if 'Shop_and_day_selection' in request.POST:
-            Shop_and_day_form = forms.Shop_and_day_selectionForm(request.POST)
-            return redirect('success')
-            if Shop_and_day_form.is_valid():
-                shop_name = request.POST.get('shop')
-                date = request.POST.get('date')
-                shop = Shop.objects.get(name=shop_name)
-                timeslot = request.POST.get('timeslot')   #vedere se serve o togliere
-                slots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
-                return render(request, 'bakery.html', {'shops': Shop.objects.filter(category='bakery').values(), 'slots': slots}, context=context)
+        if 'btnform1' in request.POST:
+            shop_name = request.POST.get('shop')
+            date = request.POST.get('date')
+            shop = Shop.objects.get(name=shop_name)
+            slots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
+            return render(request, 'bakery.html', {'shops': Shop.objects.filter(category='bakery').values(), 'slots': slots, 'Shop_and_day_form': Shop_and_day_form, 'TimeSlot_form': TimeSlot_form,})
             
-        if 'TimeSlot_selection' in request.POST:
-            TimeSlot_form = forms.TimeSlot_form(request.POST)
-            if TimeSlot_form.is_valid():
-                return redirect('success')  #DA SISTEMARE QUANDO SI CREA LA PAGINA DEL QR
+        if 'btnform2' in request.POST:
+            timeslot = request.POST.get('selected_slot')   #vedere se serve o togliere
+            return redirect('success', timeslot)  #DA SISTEMARE QUANDO SI CREA LA PAGINA DEL QR
 
 
     context = {
