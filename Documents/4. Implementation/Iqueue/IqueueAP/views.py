@@ -1,4 +1,7 @@
 from datetime import timedelta, datetime
+
+from django.http import JsonResponse
+
 from Iqueue import forms
 from io import BytesIO
 from io import BytesIO
@@ -11,17 +14,7 @@ from IqueueAP.models import Account, Shop, Product, TimeSlot, Booking
 from django.contrib import messages
 from qrcode import QRCode
 
-
 from django.views.decorators.csrf import csrf_exempt
-
-
-
-
-
-
-
-
-
 
 
 def InitialLoading(request):
@@ -264,3 +257,41 @@ def Booking_view(request):
 def Customer_category_view(request):
     shop = Shop.objects.filter(category='bakery').values()
     return render(request, 'category_selection.html', {'shop': shop})
+
+
+def scan_qr(request):
+    if request.method == 'POST':
+        qr_code_value = request.POST.get('qrCodeValue')
+
+        qr_code_lines = qr_code_value.split('\n')
+        shop_name = qr_code_lines[0].split(': ')[1]
+        shop_name = shop_name.strip()
+        date_str = qr_code_lines[1].split(': ')[1]
+        date_str = date_str.strip()
+        time_range_str = qr_code_lines[2].split(': ')[1]
+        time_range_str = time_range_str.strip()
+
+        date = datetime.strptime(date_str, '%Y-%m-%d').date()
+
+        start_time_str, end_time_str = time_range_str.split(' - ')
+        start_time = datetime.strptime(start_time_str, '%H:%M:%S').time()
+        end_time = datetime.strptime(end_time_str, '%H:%M:%S').time()
+
+        start_datetime = datetime.combine(date, start_time)
+        end_datetime = datetime.combine(date, end_time)
+
+        try:
+            shop = Shop.objects.get(name=shop_name)
+        except Shop.DoesNotExist:
+            return render(request, 'error.html')
+
+        try:
+            time_slot = TimeSlot.objects.get(shop=shop, start=start_datetime, end=end_datetime, date=date)
+            if not time_slot.available:
+                shop.queue -= 1
+                shop.save()
+                return render(request, "scan_successful.html")
+        except TimeSlot.DoesNotExist:
+            return render(request, 'error.html')
+
+    return render(request, 'scan.html')
