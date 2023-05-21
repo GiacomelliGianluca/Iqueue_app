@@ -180,17 +180,20 @@ def Customer_view(request):
 def Booking_view(request):
     Shop_and_day_form = forms.Shop_and_day_selectionForm()
     TimeSlot_form = forms.TimeSlot_selectionForm()
+    selected_shop = 0
     if request.method == 'POST':
         if 'btnform1' in request.POST:
             shop_name = request.POST.get('shop')
             date = request.POST.get('date')
             shop = Shop.objects.get(name=shop_name)
             slots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
-            addresses = [shop.address for shop in Shop.objects.all()]
+            addresses = [shop.address]
+            selected_shop = 1
+
             return render(request, 'bakery.html',
-                          {'shops': Shop.objects.filter(category='bakery').values(), 'slots': slots,
+                          {'shop': Shop.objects.filter(category='bakery', name='shop_name').values(), 'slots': slots,
                            'Shop_and_day_form': Shop_and_day_form, 'TimeSlot_form': TimeSlot_form,
-                           'addresses': addresses})
+                           'addresses': addresses, 'selected_shop': selected_shop})
 
         if 'btnform2' in request.POST and 'selected_slot' in request.POST:
             timeslot_id = request.POST.get('selected_slot')
@@ -215,7 +218,9 @@ def Booking_view(request):
             qr_code_img_str = base64.b64encode(buffer.read()).decode('utf-8')
             addresses = [shop.address for shop in Shop.objects.all()]
 
-            return render(request, 'qr.html', {'qr_code_img': qr_code_img_str, 'time_slot': timeslot_id, 'addresses': addresses})
+
+
+            return render(request, 'qr.html', {'qr_code_img': qr_code_img_str, 'time_slot': timeslot_id, 'addresses': addresses, 'selected_shop': selected_shop})
 
     addresses = [shop.address for shop in Shop.objects.all()]
 
@@ -224,6 +229,7 @@ def Booking_view(request):
         'Shop_and_day_form': Shop_and_day_form,
         'TimeSlot_form': TimeSlot_form,
         'addresses': addresses,
+        'selected_shop': selected_shop,
     }
 
     return render(request, 'bakery.html', context=context)

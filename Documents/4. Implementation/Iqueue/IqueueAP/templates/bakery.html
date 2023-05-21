@@ -60,60 +60,67 @@
   </form>
 
   <script type="text/javascript">
-    var shopAddresses = {{ addresses|safe }};
+  var shopAddresses = {{ addresses|safe }};
 
-    window.onload = function() {
-      var map = L.map('map');
+  var SelectedShop = {{ selected_shop|safe }};
 
+  window.onload = function() {
+    var map = L.map('map');
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-        maxZoom: 18,
-      }).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      maxZoom: 18,
+    }).addTo(map);
 
-      var markersLayer = L.layerGroup().addTo(map);
+    var markersLayer = L.layerGroup().addTo(map);
 
+    var redIcon = L.icon({
+      iconUrl: 'https://www.vhv.rs/dpng/d/437-4377070_porsche-taycan-wallpaper-4k-hd-png-download.png',
+      iconSize: [40, 40],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
 
-      var redIcon = L.icon({
-        iconUrl: 'https://www.vhv.rs/dpng/d/437-4377070_porsche-taycan-wallpaper-4k-hd-png-download.png',
-        iconSize: [40, 40],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-      });
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          var latlng = L.latLng(position.coords.latitude, position.coords.longitude);
+          map.setView(latlng, 13);
+          var marker = L.marker(latlng, { icon: redIcon });
+          markersLayer.addLayer(marker);
+        },
+        function(error) {
+          console.log('Error getting current position:', error.message);
+        }
+      );
+    } else {
+      console.log('Geolocation is not supported by this browser.');
+    }
 
+    for (var i = 0; i < shopAddresses.length; i++) {
+      var address = shopAddresses[i];
+      console.log('Address:', address);
 
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          function(position) {
-            var latlng = L.latLng(position.coords.latitude, position.coords.longitude);
-
-
-            map.setView(latlng, 13);
-
-
-            var marker = L.marker(latlng, { icon: redIcon });
-            markersLayer.addLayer(marker);
-          },
-          function(error) {
-            console.log('Error getting current position:', error.message);
-          }
-        );
-      } else {
-        console.log('Geolocation is not supported by this browser.');
-      }
-
-      for (var i = 0; i < shopAddresses.length; i++) {
-        var address = shopAddresses[i];
-        console.log('Address:', address);
-
-
+      if (SelectedShop === 1) {
         let geocode = L.Control.Geocoder.nominatim().geocode(address, function(results) {
           if (results && results.length > 0) {
             var latlng = results[0].center;
             console.log('Coordinates:', latlng);
+            map.setView(latlng, 13);
+            var marker = L.marker(latlng);
+            markersLayer.addLayer(marker);
+          } else {
+            console.log('No geocoding results found.');
+          }
 
-
+          return false;
+        });
+      } else {
+        let geocode = L.Control.Geocoder.nominatim().geocode(address, function(results) {
+          if (results && results.length > 0) {
+            var latlng = results[0].center;
+            console.log('Coordinates:', latlng);
             var marker = L.marker(latlng);
             markersLayer.addLayer(marker);
           } else {
@@ -123,8 +130,9 @@
           return false;
         });
       }
-    };
-  </script>
+    }
+  };
+</script>
 
 </body>
 </html>
