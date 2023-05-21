@@ -186,10 +186,11 @@ def Booking_view(request):
             date = request.POST.get('date')
             shop = Shop.objects.get(name=shop_name)
             slots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
+            addresses = [shop.address for shop in Shop.objects.all()]
             return render(request, 'bakery.html',
                           {'shops': Shop.objects.filter(category='bakery').values(), 'slots': slots,
                            'Shop_and_day_form': Shop_and_day_form, 'TimeSlot_form': TimeSlot_form,
-                           'lat': shop.lat, 'lon': shop.lon})
+                           'addresses': addresses})
 
         if 'btnform2' in request.POST and 'selected_slot' in request.POST:
             timeslot_id = request.POST.get('selected_slot')
@@ -212,8 +213,9 @@ def Booking_view(request):
             image.save(buffer, format='PNG')
             buffer.seek(0)
             qr_code_img_str = base64.b64encode(buffer.read()).decode('utf-8')
+            addresses = [shop.address for shop in Shop.objects.all()]
 
-            return render(request, 'qr.html', {'qr_code_img': qr_code_img_str, 'time_slot': timeslot_id})
+            return render(request, 'qr.html', {'qr_code_img': qr_code_img_str, 'time_slot': timeslot_id, 'addresses': addresses})
 
     addresses = [shop.address for shop in Shop.objects.all()]
 
