@@ -30,19 +30,19 @@ class Shop(models.Model):
     lon = models.FloatField(default=0)  # longitude
     max_numb_clients = models.IntegerField()
     queue = models.IntegerField(default=0)
-    ids = models.CharField(default='SSSSSSSS', max_length=32, validators=[MinLengthValidator(8)])
+    ids = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
     address = models.CharField(max_length=200)
     rating = models.FloatField(default=0)
     numb_of_ratings = models.IntegerField(default=0)
     category = models.CharField(max_length=100, default='Others')  # Se non compilato messo in others
-    idso = models.CharField(default='SSSSSSSS', max_length=32, validators=[MinLengthValidator(8)])
+    idso = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
 
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
     shop_discount = models.FloatField()
-    id_product = models.CharField(max_length=8, validators=[MinLengthValidator(8)])
+    id_product = models.CharField(max_length=36, validators=[MinLengthValidator(8)])
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
 
 

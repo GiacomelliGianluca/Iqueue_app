@@ -13,6 +13,7 @@ from Iqueue.forms import RegistrationForm, LogIn, ShopForm, Shop_and_day_selecti
 from IqueueAP.models import Account, Shop, Product, TimeSlot, Booking
 from django.contrib import messages
 from qrcode import QRCode
+import json
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -187,7 +188,8 @@ def Booking_view(request):
             slots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
             return render(request, 'bakery.html',
                           {'shops': Shop.objects.filter(category='bakery').values(), 'slots': slots,
-                           'Shop_and_day_form': Shop_and_day_form, 'TimeSlot_form': TimeSlot_form})
+                           'Shop_and_day_form': Shop_and_day_form, 'TimeSlot_form': TimeSlot_form,
+                           'lat': shop.lat, 'lon': shop.lon})
 
         if 'btnform2' in request.POST and 'selected_slot' in request.POST:
             timeslot_id = request.POST.get('selected_slot')
@@ -213,10 +215,13 @@ def Booking_view(request):
 
             return render(request, 'qr.html', {'qr_code_img': qr_code_img_str, 'time_slot': timeslot_id})
 
+    addresses = [shop.address for shop in Shop.objects.all()]
+
     context = {
         'shops': Shop.objects.all(),
         'Shop_and_day_form': Shop_and_day_form,
         'TimeSlot_form': TimeSlot_form,
+        'addresses': addresses,
     }
 
     return render(request, 'bakery.html', context=context)
