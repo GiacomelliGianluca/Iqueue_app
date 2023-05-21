@@ -1,7 +1,7 @@
 {
 	"_type": "Project",
 	"_id": "AAAAAAFF+h6SjaM2Hec=",
-	"name": "Untitled",
+	"name": "Iqueue Project",
 	"ownedElements": [
 		{
 			"_type": "UMLModel",
@@ -9,7 +9,7 @@
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
-			"name": "Model",
+			"name": "UML Architectural Diagram",
 			"ownedElements": [
 				{
 					"_type": "UMLClassDiagram",
@@ -75,9 +75,9 @@
 											"font": "Arial;13;0",
 											"left": 3040,
 											"top": 640,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -362,9 +362,9 @@
 											"font": "Arial;13;0",
 											"left": 3952,
 											"top": 672,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -538,9 +538,9 @@
 											"font": "Arial;13;0",
 											"left": 5216,
 											"top": -1200,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -808,9 +808,9 @@
 											"font": "Arial;13;0",
 											"left": 3424,
 											"top": 1056,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -1024,9 +1024,9 @@
 											"font": "Arial;13;0",
 											"left": 4112,
 											"top": 640,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -1331,9 +1331,9 @@
 											"font": "Arial;13;0",
 											"left": 4656,
 											"top": 496,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -1567,9 +1567,9 @@
 											"font": "Arial;13;0",
 											"left": 4544,
 											"top": -416,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -1840,9 +1840,9 @@
 											"font": "Arial;13;0",
 											"left": 3136,
 											"top": 880,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -2109,9 +2109,9 @@
 											"font": "Arial;13;0",
 											"left": 4880,
 											"top": 704,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -2361,9 +2361,9 @@
 											"font": "Arial;13;0",
 											"left": 7136,
 											"top": -144,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -2573,9 +2573,9 @@
 											"font": "Arial;13;0",
 											"left": 8052,
 											"top": -613,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -2802,9 +2802,9 @@
 											"font": "Arial;13;0",
 											"left": 7056,
 											"top": -304,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -3014,9 +3014,9 @@
 											"font": "Arial;13;0",
 											"left": 736,
 											"top": 2064,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -3328,9 +3328,9 @@
 											"font": "Arial;13;0",
 											"left": 2016,
 											"top": 2048,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -3832,9 +3832,9 @@
 											"font": "Arial;13;0",
 											"left": 1904,
 											"top": 1936,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -4008,9 +4008,9 @@
 											"font": "Arial;13;0",
 											"left": 1872,
 											"top": 1968,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -4184,9 +4184,9 @@
 											"font": "Arial;13;0",
 											"left": 1824,
 											"top": 1984,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -4360,9 +4360,9 @@
 											"font": "Arial;13;0",
 											"left": 4800,
 											"top": 2240,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -4536,9 +4536,9 @@
 											"font": "Arial;13;0",
 											"left": 4064,
 											"top": 2640,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -5182,9 +5182,9 @@
 											"font": "Arial;13;0",
 											"left": 1456,
 											"top": 1984,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -5976,9 +5976,9 @@
 											"font": "Arial;13;0",
 											"left": 1840,
 											"top": 2096,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -6171,9 +6171,9 @@
 											"font": "Arial;13;0",
 											"left": 1808,
 											"top": 2032,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -6554,9 +6554,9 @@
 											"font": "Arial;13;0",
 											"left": -112,
 											"top": 912,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -6730,9 +6730,9 @@
 											"font": "Arial;13;0",
 											"left": 4752,
 											"top": 16,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -6906,9 +6906,9 @@
 											"font": "Arial;13;0",
 											"left": 4928,
 											"top": 156,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -7175,9 +7175,9 @@
 											"font": "Arial;13;0",
 											"left": 4672,
 											"top": 172,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -7444,9 +7444,9 @@
 											"font": "Arial;13;0",
 											"left": 5120,
 											"top": 156,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -7713,9 +7713,9 @@
 											"font": "Arial;13;0",
 											"left": 5280,
 											"top": 156,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -7982,9 +7982,9 @@
 											"font": "Arial;13;0",
 											"left": 5520,
 											"top": 124,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -8251,9 +8251,9 @@
 											"font": "Arial;13;0",
 											"left": 4896,
 											"top": 28,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -8520,9 +8520,9 @@
 											"font": "Arial;13;0",
 											"left": 4624,
 											"top": 44,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -8791,9 +8791,9 @@
 											"font": "Arial;13;0",
 											"left": -272,
 											"top": 1272,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -9101,9 +9101,9 @@
 											"font": "Arial;13;0",
 											"left": -960,
 											"top": 640,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -10201,9 +10201,9 @@
 											"font": "Arial;13;0",
 											"left": 2240,
 											"top": 584,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -11033,9 +11033,9 @@
 											"font": "Arial;13;0",
 											"left": 400,
 											"top": 784,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -11512,9 +11512,9 @@
 											"font": "Arial;13;0",
 											"left": -1104,
 											"top": 1304,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -11898,9 +11898,9 @@
 											"font": "Arial;13;0",
 											"left": -448,
 											"top": 1024,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -12072,9 +12072,9 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"top": 976,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -12519,9 +12519,9 @@
 											"font": "Arial;13;0",
 											"left": 656,
 											"top": 960,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -12716,9 +12716,9 @@
 											"font": "Arial;13;0",
 											"left": -132,
 											"top": 1840,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -13172,9 +13172,9 @@
 											"font": "Arial;13;0",
 											"left": 304,
 											"top": 1432,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -13662,9 +13662,9 @@
 											"font": "Arial;13;0",
 											"left": -3416.58984375,
 											"top": 816,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -14116,9 +14116,9 @@
 											"font": "Arial;13;0",
 											"left": 464,
 											"top": 1168,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -14294,9 +14294,9 @@
 											"font": "Arial;13;0",
 											"left": -1136,
 											"top": 1336,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -14750,9 +14750,9 @@
 											"font": "Arial;13;0",
 											"left": 1168,
 											"top": 728,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -15226,9 +15226,9 @@
 											"font": "Arial;13;0",
 											"left": 2752,
 											"top": 744,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -15884,9 +15884,9 @@
 											"font": "Arial;13;0",
 											"left": -1856,
 											"top": 936,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -16323,9 +16323,9 @@
 											"font": "Arial;13;0",
 											"left": 1136,
 											"top": -408,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -16615,9 +16615,9 @@
 											"font": "Arial;13;0",
 											"left": 1280,
 											"top": -554,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -16885,9 +16885,9 @@
 											"font": "Arial;13;0",
 											"left": 272,
 											"top": -288,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -17964,9 +17964,9 @@
 											"font": "Arial;13;0",
 											"left": 336,
 											"top": 536,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -18643,9 +18643,9 @@
 											"font": "Arial;13;0",
 											"left": 1008,
 											"top": -40,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -19048,9 +19048,9 @@
 											"font": "Arial;13;0",
 											"left": 1936,
 											"top": -296,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -19436,9 +19436,9 @@
 											"font": "Arial;13;0",
 											"left": -992,
 											"top": 584,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -19824,9 +19824,9 @@
 											"font": "Arial;13;0",
 											"left": -1584,
 											"top": -728,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -20264,9 +20264,9 @@
 											"font": "Arial;13;0",
 											"left": 1328,
 											"top": 200,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -20922,9 +20922,9 @@
 											"font": "Arial;13;0",
 											"left": -640,
 											"top": -200,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -21848,9 +21848,9 @@
 											"font": "Arial;13;0",
 											"left": 192,
 											"top": -240,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -22381,9 +22381,9 @@
 											"font": "Arial;13;0",
 											"left": -176,
 											"top": -288,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -22961,9 +22961,9 @@
 											"font": "Arial;13;0",
 											"left": -64,
 											"top": 96,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -23463,9 +23463,9 @@
 											"font": "Arial;13;0",
 											"left": -96,
 											"top": -32,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -23885,9 +23885,9 @@
 											"font": "Arial;13;0",
 											"left": -16,
 											"top": 64,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -24192,9 +24192,9 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -16,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -24474,9 +24474,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -24702,9 +24702,9 @@
 											"font": "Arial;13;0",
 											"left": -128,
 											"top": -48,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -25090,9 +25090,9 @@
 											"font": "Arial;13;0",
 											"left": -256,
 											"top": 1136,
-											"width": 73.67724609375,
+											"width": 194.314453125,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from UML Architectural Diagram)"
 										},
 										{
 											"_type": "LabelView",
@@ -36227,9 +36227,9 @@
 														"$ref": "AAAAAAGIFEVAR8Z4vXY="
 													},
 													"font": "Arial;13;0",
-													"left": 30.55908203125,
+													"left": 32.72998046875,
 													"top": 13,
-													"width": 102.791015625,
+													"width": 115.9052734375,
 													"height": 13,
 													"text": "SequenceDiagram1"
 												},
@@ -36242,7 +36242,7 @@
 													"font": "Arial;13;1",
 													"left": 13,
 													"top": 13,
-													"width": 12.55908203125,
+													"width": 14.72998046875,
 													"height": 13,
 													"text": "sd"
 												}

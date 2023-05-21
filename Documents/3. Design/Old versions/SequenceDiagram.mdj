@@ -69,9 +69,9 @@
 														"$ref": "AAAAAAGH1sSFCIZrfUc="
 													},
 													"font": "Arial;13;0",
-													"left": 24.72998046875,
+													"left": 22.55908203125,
 													"top": 13,
-													"width": 60.25537109375,
+													"width": 56.59912109375,
 													"height": 13,
 													"text": "UserLogin"
 												},
@@ -84,7 +84,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 13,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
@@ -789,9 +789,9 @@
 														"$ref": "AAAAAAGH1uz0c4huExw="
 													},
 													"font": "Arial;13;0",
-													"left": 67.578125,
+													"left": 66.11181640625,
 													"top": 189,
-													"width": 89.9052734375,
+													"width": 82.0849609375,
 													"height": 13,
 													"text": "logged == false"
 												},
@@ -804,7 +804,7 @@
 													"font": "Arial;13;1",
 													"left": 37,
 													"top": 189,
-													"width": 25.578125,
+													"width": 24.11181640625,
 													"height": 13,
 													"text": "loop"
 												},
@@ -1203,9 +1203,9 @@
 														"$ref": "AAAAAAGH1vFFXYiKbMs="
 													},
 													"font": "Arial;13;0",
-													"left": 24.72998046875,
+													"left": 22.55908203125,
 													"top": 13,
-													"width": 181.6162109375,
+													"width": 162.77001953125,
 													"height": 13,
 													"text": "Use Case: Book                        "
 												},
@@ -1218,7 +1218,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 13,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
@@ -3050,9 +3050,9 @@
 														"$ref": "AAAAAAGH69dHHeFDrOY="
 													},
 													"font": "Arial;13;0",
-													"left": 24.72998046875,
+													"left": 22.55908203125,
 													"top": 5,
-													"width": 181.6162109375,
+													"width": 162.77001953125,
 													"height": 13,
 													"text": "Use Case: Book                        "
 												},
@@ -3065,7 +3065,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 5,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
@@ -3417,9 +3417,9 @@
 														"$ref": "AAAAAAGH18LHto3TKCE="
 													},
 													"font": "Arial;13;0",
-													"left": 24.72998046875,
+													"left": 22.55908203125,
 													"top": 5,
-													"width": 299.38427734375,
+													"width": 267.46826171875,
 													"height": 13,
 													"text": "Use Case name: Count clients                                  "
 												},
@@ -3432,7 +3432,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 5,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
@@ -3912,9 +3912,9 @@
 											"font": "Arial;13;0",
 											"left": 624,
 											"top": 200,
-											"width": 89.47900390625,
+											"width": 90.208984375,
 											"height": 116,
-											"text": "QRCoseScan gives 1 if the reading is okay, otherwise it gives 0"
+											"text": "QRCodeScan gives 1 if the reading is okay, otherwise it gives 0"
 										}
 									]
 								}
@@ -9723,7 +9723,7 @@
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
-			"name": "Collaboration1",
+			"name": "Cust_ShopOwnerReg",
 			"ownedElements": [
 				{
 					"_type": "UMLInteraction",
@@ -11120,7 +11120,7 @@
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
-			"name": "Collaboration2",
+			"name": "CustomerDeleteBooking",
 			"ownedElements": [
 				{
 					"_type": "UMLInteraction",
@@ -12634,7 +12634,7 @@
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
-			"name": "Collaboration3",
+			"name": "Add|RemoveItemToWaitingList",
 			"ownedElements": [
 				{
 					"_type": "UMLInteraction",
@@ -13749,7 +13749,7 @@
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
-			"name": "Collaboration4",
+			"name": "AddCusManual",
 			"ownedElements": [
 				{
 					"_type": "UMLInteraction",
@@ -14865,7 +14865,7 @@
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
-			"name": "Collaboration5",
+			"name": "Advertisement",
 			"ownedElements": [
 				{
 					"_type": "UMLInteraction",
@@ -15856,7 +15856,7 @@
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
-			"name": "Collaboration10",
+			"name": "Use Case: Search",
 			"ownedElements": [
 				{
 					"_type": "UMLInteraction",
