@@ -34,6 +34,10 @@ class ShopForm(forms.Form):
     closing_time = forms.TimeField(label='closing_time')
     slot_duration = forms.IntegerField(label='slot_duration')
 
+class ProductForm(forms.Form):
+    name = forms.CharField(label='name')
+    price = forms.FloatField(label='price')
+
 
 class Shop_and_day_selectionForm(forms.Form):
     Shop_and_day_selection = forms.BooleanField(widget=forms.HiddenInput, initial=True)

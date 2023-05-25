@@ -42,8 +42,10 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
     shop_discount = models.FloatField()
-    id_product = models.CharField(max_length=36, validators=[MinLengthValidator(8)])
-    shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    idso = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
+    ids = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
+    idp = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
+    #shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
 
 
 class TimeSlot(models.Model):

@@ -1,0 +1,46 @@
+<html>
+<head>
+  <title>Shop Owner</title>
+
+  <script type="text/javascript">
+    function Redirect(url) {
+       location.replace("http://127.0.0.1:8000/"+url);
+    }
+ </script>
+
+  <style>
+
+    .anybutton {
+      top:75%;
+      left:75%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 183, 255); 
+      }
+    
+     </style>
+
+</head>
+
+
+<body>
+  <form method="post">
+      {% csrf_token %}
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name">
+    <br>
+    <label for="price">price:</label>
+    <input type="text" name="price" id="price">
+    <br>
+    <label for="shop_discount">shop_discount </label>
+    <input type="number" name="shop_discount" id="shop_discount">
+    <br>
+    
+    <input type="submit" value="Record">
+
+  </form>
+
+  <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
+</body>

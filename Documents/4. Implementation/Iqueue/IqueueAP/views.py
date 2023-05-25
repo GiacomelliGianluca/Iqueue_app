@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 import uuid
 import qrcode
 import base64
-from Iqueue.forms import RegistrationForm, LogIn, ShopForm, Shop_and_day_selectionForm, TimeSlot_selectionForm
+from Iqueue.forms import RegistrationForm, LogIn, ShopForm, ProductForm, Shop_and_day_selectionForm, TimeSlot_selectionForm
 from IqueueAP.models import Account, Shop, Product, TimeSlot, Booking
 from django.contrib import messages
 from qrcode import QRCode
@@ -165,17 +165,26 @@ def Customer_view(request):
     return render(request, 'Customer.html')
 
 
-# def Booking_view(request):
-#     if request.method == 'POST':
-#         shop_name = request.POST.get('shop')
-#         date = request.POST.get('date')
-#         shop = Shop.objects.get(name=shop_name)
-#         timeslot = request.POST.get('timeslot')
-#         slots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
-#         return render(request, 'bakery.html', {'shops': Shop.objects.filter(category='bakery').values(), 'slots': slots})
-#     else:
-#         return render(request, 'bakery.html', {'shops': Shop.objects.all()})
+def Product_view(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            price = form.cleaned_data['price']
+            shop_discount = form.cleaned_data['shop_discount']
+            idso = request.session.get('idso', '')
+            ids = request.session.get('ids', '')
+            idp = str(uuid.uuid4())
 
+            product = Product(name=name, price=price, shop_discount=shop_discount, idso=idso, ids=ids, idp=idp)
+
+            product.save()
+ 
+
+    else:
+        form = ProductForm()
+
+    return render(request, 'ProductRegistration.html', {'form': form})
 
 def Booking_view(request):
     Shop_and_day_form = forms.Shop_and_day_selectionForm()

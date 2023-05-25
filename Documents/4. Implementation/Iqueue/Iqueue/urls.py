@@ -23,6 +23,7 @@ from IqueueAP.views import selectRole
 from IqueueAP.views import account_view
 from IqueueAP.views import ShopOwner_view
 from IqueueAP.views import Shop_view
+from IqueueAP.views import Product_view
 from IqueueAP.views import SuccessShopRegistration
 from IqueueAP.views import Customer_view
 from IqueueAP.views import Booking_view
@@ -40,6 +41,7 @@ urlpatterns = [
     path('account/', account_view, name='account_view'), #Serve??
     path('ShopOwner/', ShopOwner_view, name='ShopOwner_view'),
     path('ShopOwner/Shop/', Shop_view, name='Shop_view'),
+    path('ShopOwner/Product/', Product_view, name='Product_view'),
     path('ShopOwner/Shop/Shoplist/',SuccessShopRegistration, name='SuccessShopRegistration'),
     path('Customer/', Customer_view, name='Customer_view'),
     path('Customer/bakery/', Booking_view, name='Booking_view'),
