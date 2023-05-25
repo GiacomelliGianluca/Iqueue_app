@@ -45,7 +45,7 @@ class Product(models.Model):
     idso = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
     ids = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
     idp = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
-    #shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    #shop = models.ForeignKey(Shop, on_delete=models.CASCADE, default='0')
 
 
 class TimeSlot(models.Model):

@@ -26,19 +26,39 @@
 
 
 <body>
+  <h1>Shop selection</h1>
+  <form method="POST">
+    {{ ShopSelectionProductForm }}
+    {% csrf_token %}
+    <label for="shop">Select a shop:</label>
+    <select name="shop">
+      {% for shop in shops %}
+        <option value="{{ shop.name }}">{{ shop.name }}</option>
+      {% endfor %}
+    </select>
+
+    <button type="submit" name="btnform1">Confirm</button>
+  </form>
+
   <form method="post">
+    {{ ProductForm }}
       {% csrf_token %}
+    <select name="shop">
+      {% for shop in shops %}
+        <option value="{{ shop.name }}">{{ shop.name }}</option>
+                {% endfor %}
+     </select>
     <label for="name">Name:</label>
     <input type="text" name="name" id="name">
     <br>
     <label for="price">price:</label>
-    <input type="text" name="price" id="price">
+    <input type="number" name="price" id="price">
     <br>
     <label for="shop_discount">shop_discount </label>
     <input type="number" name="shop_discount" id="shop_discount">
     <br>
     
-    <input type="submit" value="Record">
+    <button type="submit" name="btnform2">Confirm</button>
 
   </form>
 

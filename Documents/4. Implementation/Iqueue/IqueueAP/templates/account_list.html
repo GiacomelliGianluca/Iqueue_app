@@ -6,10 +6,12 @@
   <h1>
     <p>
     The accounts are:
-    {% for account in account %}
-        <li> {{ account.name }} </li>
+    {% for shop in shops %}
+      {{if shop.idso == idso}}
+        <li> {{ shop.name }} </li>
     {% endfor %}
     </p>
+    idso
   </h1>
   
 </body>

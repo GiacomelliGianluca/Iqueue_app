@@ -84,8 +84,9 @@ def login_view(request):
 
 
 def account_view(request):
-    account = Account.objects.all()
-    return render(request, 'account_list.html', {'account': account})
+    idso = request.session.get('idso','')
+    shops = Shop.objects.filter(idso='idso').values()
+    return render(request, 'account_list.html', {'shops': shops, 'idso':idso})
 
 
 def ShopOwner_view(request):
@@ -164,27 +165,46 @@ def SuccessShopRegistration(request):
 def Customer_view(request):
     return render(request, 'Customer.html')
 
-
 def Product_view(request):
+    ShopSelectionProduct = forms.ShopSelectionProductForm()
+    Product_form = forms.ProductForm()
+    selected_shop = 0
+    idso = request.session.get('idso', '')
     if request.method == 'POST':
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            price = form.cleaned_data['price']
-            shop_discount = form.cleaned_data['shop_discount']
+        if 'btnform1' in request.POST:
+            idso = request.session.get('idso', '')
+            shops = Shop.objects.all()
+            shops = Shop.objects.filter(idso=idso).values()
+            shop_name = request.POST.get('shop')
+            selected_shop = 1
+            return render(request, 'ProductRegistration.html',
+                          {'shops': shops, 
+                           'ShopSelectionProduct': ShopSelectionProduct, 'Product_form': Product_form,
+                            'selected_shop': selected_shop})
+
+        if 'btnform2' in request.POST:  
+            shops = Shop.objects.filter(idso=idso).values()
+            selected_shop = request.POST.get('shop')           
+            product_name = request.POST.get('name')
+            price = request.POST.get('price')
+            shop_discount = request.POST.get('shop_discount')
             idso = request.session.get('idso', '')
             ids = request.session.get('ids', '')
             idp = str(uuid.uuid4())
-
-            product = Product(name=name, price=price, shop_discount=shop_discount, idso=idso, ids=ids, idp=idp)
+            product = Product(name=product_name, price=price, shop_discount=shop_discount, idso=idso, ids=ids, idp=idp)
 
             product.save()
  
-
-    else:
-        form = ProductForm()
-
-    return render(request, 'ProductRegistration.html', {'form': form})
+            return redirect('success')
+    
+    context = {
+        
+        'shops': Shop.objects.filter(idso=idso),
+        'ShopSelectionProduct': ShopSelectionProduct,
+        'Product_form': Product_form,
+        'selected_shop': selected_shop,
+    }
+    return render(request, 'ProductRegistration.html', context=context)
 
 def Booking_view(request):
     Shop_and_day_form = forms.Shop_and_day_selectionForm()
@@ -244,35 +264,6 @@ def Booking_view(request):
     return render(request, 'bakery.html', context=context)
 
 
-# def booking(request):
-# if request.method == 'POST':
-#   shop_name = request.POST.get('shop_name')
-#  date = request.POST.get('date')
-# Store shop name and date in django session:
-# request.session['shop_name'] = shop_name
-# request.session['date'] = date
-
-# return redirect('bookingSubmit')
-
-# return render(request, 'booking.html', {'shops': Shop.objects.filter(category='bakery').values()})
-
-
-# def bookingSubmit(request):
-# Get stored data from django session:
-# shop_name = request.session.get('shop_name')
-# date = request.session.get('date')
-# times = [
-# "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM", "6 PM", "6:30 PM", "7 PM", "7:30 PM"
-# ]
-# if request.method == 'POST':
-# time = request.POST.get("time")
-# BookingForm = Booking.objects.get_or_create(
-#                       name = shop_name,
-#                      date = date,
-#                     time = time,
-#                )
-# messages.success(request, "Booking Saved!")
-# return render(request, 'bookingSubmit.html', {'times': times})
 
 
 # Da implementare
