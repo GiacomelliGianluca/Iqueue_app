@@ -13825,9 +13825,9 @@
 																"$ref": "AAAAAAGIPweZBqG1GcI="
 															},
 															"font": "Arial;13;0",
-															"left": 22.55908203125,
+															"left": 24.72998046875,
 															"top": 13,
-															"width": 162.77001953125,
+															"width": 181.6162109375,
 															"height": 13,
 															"text": "Use Case: Book                        "
 														},
@@ -13840,7 +13840,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 13,
-															"width": 12.55908203125,
+															"width": 14.72998046875,
 															"height": 13,
 															"text": "sd"
 														}
@@ -15230,9 +15230,9 @@
 																"$ref": "AAAAAAGIPweZBqIbdTs="
 															},
 															"font": "Arial;13;0",
-															"left": 913,
+															"left": 908,
 															"top": 453,
-															"width": 138.734375,
+															"width": 148.8525390625,
 															"height": 13,
 															"alpha": 1.5707963267948966,
 															"distance": 10,
@@ -15240,7 +15240,7 @@
 																"$ref": "AAAAAAGIPweZBqH8sQQ="
 															},
 															"edgePosition": 1,
-															"text": "9 : Sent_Notification(so)"
+															"text": "9 : Sent_Notification(idso)"
 														},
 														{
 															"_type": "EdgeLabelView",
@@ -15697,7 +15697,7 @@
 											"signature": {
 												"$ref": "AAAAAAGHnhkDgLu7oZM="
 											},
-											"arguments": "so"
+											"arguments": "idso"
 										},
 										{
 											"_type": "UMLMessage",
@@ -15884,9 +15884,9 @@
 																"$ref": "AAAAAAGIPweZB6Is4bA="
 															},
 															"font": "Arial;13;0",
-															"left": 22.55908203125,
+															"left": 24.72998046875,
 															"top": 5,
-															"width": 267.46826171875,
+															"width": 299.38427734375,
 															"height": 13,
 															"text": "Use Case name: Count clients                                  "
 														},
@@ -15899,7 +15899,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 5,
-															"width": 12.55908203125,
+															"width": 14.72998046875,
 															"height": 13,
 															"text": "sd"
 														}
@@ -16515,9 +16515,9 @@
 																"$ref": "AAAAAAGIPweZB6JRB9s="
 															},
 															"font": "Arial;13;0",
-															"left": 30.55908203125,
+															"left": 32.72998046875,
 															"top": 13,
-															"width": 302.15185546875,
+															"width": 339.10791015625,
 															"height": 13,
 															"text": "Use Case: Register Shop                                                     "
 														},
@@ -16530,7 +16530,7 @@
 															"font": "Arial;13;1",
 															"left": 13,
 															"top": 13,
-															"width": 12.55908203125,
+															"width": 14.72998046875,
 															"height": 13,
 															"text": "sd"
 														}
@@ -17245,9 +17245,9 @@
 																"$ref": "AAAAAAGIPweZB6J2JLk="
 															},
 															"font": "Arial;13;0",
-															"left": 122.11181640625,
+															"left": 123.578125,
 															"top": 245,
-															"width": 129.02587890625,
+															"width": 144.1015625,
 															"height": 13,
 															"text": "Registered_Shop==false"
 														},
@@ -17260,7 +17260,7 @@
 															"font": "Arial;13;1",
 															"left": 93,
 															"top": 245,
-															"width": 24.11181640625,
+															"width": 25.578125,
 															"height": 13,
 															"text": "loop"
 														},
@@ -17681,9 +17681,9 @@
 																"$ref": "AAAAAAGIPweZCKKLUzE="
 															},
 															"font": "Arial;13;0",
-															"left": 122.11181640625,
+															"left": 123.578125,
 															"top": 493,
-															"width": 145.6376953125,
+															"width": 162.87158203125,
 															"height": 13,
 															"text": "Registered_Product==False"
 														},
@@ -17696,7 +17696,7 @@
 															"font": "Arial;13;1",
 															"left": 93,
 															"top": 493,
-															"width": 24.11181640625,
+															"width": 25.578125,
 															"height": 13,
 															"text": "loop"
 														},
@@ -18339,9 +18339,9 @@
 																"$ref": "AAAAAAGIPweZCKKqods="
 															},
 															"font": "Arial;13;0",
-															"left": 130.11181640625,
+															"left": 131.578125,
 															"top": 789,
-															"width": 154.08642578125,
+															"width": 171.548828125,
 															"height": 13,
 															"text": "Registered_Product_discount"
 														},
@@ -18354,7 +18354,7 @@
 															"font": "Arial;13;1",
 															"left": 101,
 															"top": 789,
-															"width": 24.11181640625,
+															"width": 25.578125,
 															"height": 13,
 															"text": "loop"
 														},
@@ -19143,9 +19143,9 @@
 																"$ref": "AAAAAAGIP4TISNv1sKo="
 															},
 															"font": "Arial;13;0",
-															"left": 22.55908203125,
+															"left": 24.72998046875,
 															"top": 5,
-															"width": 91.96826171875,
+															"width": 106.49169921875,
 															"height": 13,
 															"text": "Use Case: Search"
 														},
@@ -19158,7 +19158,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 5,
-															"width": 12.55908203125,
+															"width": 14.72998046875,
 															"height": 13,
 															"text": "sd"
 														}
@@ -20280,9 +20280,9 @@
 																"$ref": "AAAAAAGIP4RIiNg3FYE="
 															},
 															"font": "Arial;13;0",
-															"left": 30.55908203125,
+															"left": 32.72998046875,
 															"top": 5,
-															"width": 124.50634765625,
+															"width": 131.78076171875,
 															"height": 13,
 															"text": "AddProductToWishList"
 														},
@@ -20295,7 +20295,7 @@
 															"font": "Arial;13;1",
 															"left": 13,
 															"top": 5,
-															"width": 12.55908203125,
+															"width": 14.72998046875,
 															"height": 13,
 															"text": "sd"
 														}
@@ -21413,9 +21413,9 @@
 																"$ref": "AAAAAAGIP4SpcNq78ac="
 															},
 															"font": "Arial;13;0",
-															"left": 30.55908203125,
+															"left": 32.72998046875,
 															"top": 13,
-															"width": 77.53369140625,
+															"width": 84.0908203125,
 															"height": 13,
 															"text": "Advertisement"
 														},
@@ -21428,7 +21428,7 @@
 															"font": "Arial;13;1",
 															"left": 13,
 															"top": 13,
-															"width": 12.55908203125,
+															"width": 14.72998046875,
 															"height": 13,
 															"text": "sd"
 														}
@@ -22409,9 +22409,9 @@
 																"$ref": "AAAAAAGIP4QzpNa6btI="
 															},
 															"font": "Arial;13;0",
-															"left": 22.55908203125,
+															"left": 24.72998046875,
 															"top": 5,
-															"width": 130.25732421875,
+															"width": 141.9052734375,
 															"height": 13,
 															"text": "CustomerDeleteBooking"
 														},
@@ -22424,7 +22424,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 5,
-															"width": 12.55908203125,
+															"width": 14.72998046875,
 															"height": 13,
 															"text": "sd"
 														}
@@ -23788,9 +23788,9 @@
 																"$ref": "AAAAAAGIPweZCqNRgpY="
 															},
 															"font": "Arial;13;0",
-															"left": 38.55908203125,
+															"left": 40.72998046875,
 															"top": 21,
-															"width": 84.763671875,
+															"width": 94.208984375,
 															"height": 13,
 															"text": "RemoveProduct"
 														},
@@ -23803,7 +23803,7 @@
 															"font": "Arial;13;1",
 															"left": 21,
 															"top": 21,
-															"width": 12.55908203125,
+															"width": 14.72998046875,
 															"height": 13,
 															"text": "sd"
 														}
@@ -24778,9 +24778,9 @@
 																"$ref": "AAAAAAGIPweZBaF0tx0="
 															},
 															"font": "Arial;13;0",
-															"left": 22.55908203125,
+															"left": 24.72998046875,
 															"top": 13,
-															"width": 56.59912109375,
+															"width": 60.25537109375,
 															"height": 13,
 															"text": "UserLogin"
 														},
@@ -24793,7 +24793,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 13,
-															"width": 12.55908203125,
+															"width": 14.72998046875,
 															"height": 13,
 															"text": "sd"
 														}
@@ -25498,9 +25498,9 @@
 																"$ref": "AAAAAAGIPweZBaGZK2k="
 															},
 															"font": "Arial;13;0",
-															"left": 66.11181640625,
+															"left": 67.578125,
 															"top": 189,
-															"width": 82.0849609375,
+															"width": 89.9052734375,
 															"height": 13,
 															"text": "logged == false"
 														},
@@ -25513,7 +25513,7 @@
 															"font": "Arial;13;1",
 															"left": 37,
 															"top": 189,
-															"width": 24.11181640625,
+															"width": 25.578125,
 															"height": 13,
 															"text": "loop"
 														},
@@ -25888,9 +25888,9 @@
 																"$ref": "AAAAAAGIP4JDy9Um4BE="
 															},
 															"font": "Arial;13;0",
-															"left": 22.55908203125,
+															"left": 24.72998046875,
 															"top": 5,
-															"width": 46.4873046875,
+															"width": 52.29541015625,
 															"height": 13,
 															"text": "UserReg"
 														},
@@ -25903,7 +25903,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 5,
-															"width": 12.55908203125,
+															"width": 14.72998046875,
 															"height": 13,
 															"text": "sd"
 														}
@@ -26945,9 +26945,9 @@
 																"$ref": "AAAAAAGIP4JDzNVa63M="
 															},
 															"font": "Arial;13;0",
-															"left": 58.11181640625,
+															"left": 59.578125,
 															"top": 261,
-															"width": 91.4541015625,
+															"width": 101.45166015625,
 															"height": 13,
 															"text": "registered==false"
 														},
@@ -26960,7 +26960,7 @@
 															"font": "Arial;13;1",
 															"left": 29,
 															"top": 261,
-															"width": 24.11181640625,
+															"width": 25.578125,
 															"height": 13,
 															"text": "loop"
 														},
