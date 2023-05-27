@@ -1,0 +1,35 @@
+<html>
+<head>
+  <title>Shop Owner</title>
+
+  <script type="text/javascript">
+    function Redirect(url) {
+       location.replace("http://127.0.0.1:8000/"+url);
+    }
+ </script>
+
+  <style>
+
+    .anybutton {
+      top:75%;
+      left:75%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 183, 255); 
+      }
+    
+     </style>
+
+</head>
+
+
+<p>
+    Your shops are:
+</p>
+  {% for shop in shops %}
+    <option value="{{ shop.name }}">{{ shop.name }}</option>
+    <option value="{{ shop.rating }}">{{ shop.rating }}</option>
+    <option value="{{ shop.numb_of_ratings }}">{{ shop.numb_of_ratings }}</option>
+    {% endfor %}

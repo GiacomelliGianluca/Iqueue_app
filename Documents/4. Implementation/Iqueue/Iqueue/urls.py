@@ -27,9 +27,10 @@ from IqueueAP.views import Product_view
 from IqueueAP.views import SuccessShopRegistration
 from IqueueAP.views import Customer_view
 from IqueueAP.views import Booking_view
-from IqueueAP.views import Customer_category_view
+#from IqueueAP.views import Customer_category_view
 from IqueueAP.views import Booking_view
-#from IqueueAP.views import booking, bookingSubmit
+from IqueueAP.views import MyShops_view
+
 
 urlpatterns = [
     path('', InitialLoading, name='InitialLoading'),
@@ -41,14 +42,16 @@ urlpatterns = [
     path('account/', account_view, name='account_view'), #Serve??
     path('ShopOwner/', ShopOwner_view, name='ShopOwner_view'),
     path('ShopOwner/Shop/', Shop_view, name='Shop_view'),
+    path('ShopOwner/Shop/myshops/', MyShops_view, name='MyShops_view'),
     path('ShopOwner/Product/', Product_view, name='Product_view'),
     path('ShopOwner/Shop/Shoplist/',SuccessShopRegistration, name='SuccessShopRegistration'),
     path('Customer/', Customer_view, name='Customer_view'),
-    path('Customer/bakery/', Booking_view, name='Booking_view'),
+    path('Customer/(?P<selected_category>\s+)/', Booking_view, name='Booking_view'),
     path("admin/", admin.site.urls),
     #path('Customer/bakery/', booking, name='booking'),
     #path('booking-submit', bookingSubmit, name='bookingSubmit'),
     path('ShopOwner/Scan/', scan_qr, name='scan'),
+
 ]
 
 #Io farei che dopo la registration, si riparte sempre dal login

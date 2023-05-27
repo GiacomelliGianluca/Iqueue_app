@@ -39,8 +39,8 @@ class ProductForm(forms.Form):
     price = forms.FloatField(label='price')
     shop_discount = forms.FloatField(label='shop_discount')
 
-class ShopSelectionProductForm(forms.Form):
-    ShopSelectionProduct = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+class ShopCategorySelectionForm(forms.Form):
+    ShopCategorySelection = forms.BooleanField(widget=forms.HiddenInput, initial=True)
 
 class Shop_and_day_selectionForm(forms.Form):
     Shop_and_day_selection = forms.BooleanField(widget=forms.HiddenInput, initial=True)

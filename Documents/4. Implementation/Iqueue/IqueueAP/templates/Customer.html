@@ -26,16 +26,27 @@
 
 <body>
   <h1>Select shop category you want to visit</h1>
-  <button onclick="window.location.href='bakery'">Bakery </button>
-  <br>
-  <button onclick="window.location.href='clothes'">Clothes</button>
-  <br>
-  <button onclick="window.location.href='perfumery'">Perfumery</button>
-  <br>
-  <button onclick="window.location.href='hair_saloon'">Hair Saloon</button>
-  <br>
-  <button onclick="window.location.href='other'">Others</button>
-  <br>
+  <form method="POST">
+    {% csrf_token %}
+    
+      <label for="bakery"> Bakery</label>
+      <input type="radio" id="category" name="category" value="bakery">
+      <br>
+      <label for="clothes"> Clothes</label>
+      <input type="radio" id="category" name="category" value="clothes">
+      <br>
+      <label for="perfumery"> Perfumery</label>
+      <input type="radio" id="category" name="category" value="perfumery">
+      <br>
+      <label for="hair_saloon"> Hair Saloon</label>
+      <input type="radio" id="category" name="category" value="hair_saloon">
+      <br>
+      <label for="others"> Other</label>
+      <input type="radio" id="category" name="category" value="others">
+      <br>
+  
+    <input type="submit" value="select">
+  </form>
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
 
 </body>
