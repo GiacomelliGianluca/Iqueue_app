@@ -1,12 +1,15 @@
-<html>
 <head>
   <title>Shop Owner</title>
 
   <script type="text/javascript">
     function Redirect(url) {
        location.replace("http://127.0.0.1:8000/"+url);
+       
     }
  </script>
+
+ <!-- <script src="htmx.min.js" defer></script> -->
+
 
   <style>
 
@@ -67,13 +70,15 @@
 
 
     <input type="submit" value="Record">
-  <p>Your shop time slots will be defined for a year starting from now!</p>
-<!-- 
-  ONLINE UPDATE (future step)
-  </form>
-  {% if j > 0 %} 
+</form>
+
+  <!-- ONLINE UPDATE (future step) -->
+  <!-- {% if j > 0 %} 
     <p>The progress is:{{progress}} % </p>
+    <div hx-get="ShopOwner/MyShops/NewShop/" hx-trigger="every 5s"></div>
   {% endif %} -->
+
+
 
 
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />

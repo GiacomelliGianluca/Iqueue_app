@@ -30,8 +30,15 @@
 </p>
 {% for shop in shops %}
   <h1>{{ shop.name }}</h1>
+  <p>People in queue: {{ shop.queue }}</p>
   <p>Rating: {{ shop.rating }}</p>
   <p>Number of ratings: {{ shop.numb_of_ratings }}</p>
+<form action=" " method="get" onsubmit="location.reload()">
+  <input type="hidden" value={{shop.ids}} name="ShopIDs"/>
+  <input type="submit" name="ADDbtn" value="ADD customer without Iqueue">
+  <input type="submit" name="DECbtn" value="DEC customer without Iqueue">
+</form>
+
 {% endfor %}
 <br>
 <p>Do you want to register a new shop?</p>

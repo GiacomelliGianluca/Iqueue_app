@@ -169,7 +169,7 @@ def Shop_view(request):
     else:
         form = ShopForm()
 
-    return render(request, 'ShopRegistration.html')
+    return render(request, 'ShopRegistration.html',{'form': form,'j':j,'progress':progress})
 
 
 def SuccessShopRegistration(request):
@@ -186,7 +186,21 @@ def Customer_view(request):
 
 def MyShops_view(request):
     idso = request.session.get('idso', '')
-    shops = Shop.objects.filter(idso=idso).values()
+
+    if(request.GET.get('ADDbtn')):
+        shop = get_object_or_404(Shop, ids=request.GET.get('ShopIDs'))
+        shop.queue += 1
+        shop.save()
+        return redirect('MyShops_view')
+    
+    if(request.GET.get('DECbtn')):
+        shop = get_object_or_404(Shop, ids=request.GET.get('ShopIDs'))
+        if(shop.queue>0):
+            shop.queue -= 1
+            shop.save()
+        return redirect('MyShops_view')
+
+
     context = {
         
         'shops': Shop.objects.filter(idso=idso)

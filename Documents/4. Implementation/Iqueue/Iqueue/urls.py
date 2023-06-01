@@ -32,6 +32,7 @@ from IqueueAP.views import Booking_view
 from IqueueAP.views import MyShops_view
 
 
+
 urlpatterns = [
     path('', InitialLoading, name='InitialLoading'),
     path('login/', login_view, name='login_View'),
