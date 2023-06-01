@@ -57,10 +57,19 @@ class TimeSlot(models.Model):
 
 
 class Slot(models.Model):
-    number = models.IntegerField()
+    number = models.IntegerField(default=1)
     available = models.BooleanField(default=True)
     TimeSlot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE, blank=True, null=True)
     idc = models.CharField(max_length=36, validators=[MinLengthValidator(8)])
+
+# class QR(models.Model):
+#     img
+#     idc
+#     ids
+#     idso
+#     idQR
+#     number
+#     Campo temporale 
 
 # Vedere se togliere
 TIME_CHOICES = (

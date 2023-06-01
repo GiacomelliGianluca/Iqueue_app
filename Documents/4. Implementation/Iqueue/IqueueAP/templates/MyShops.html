@@ -6,7 +6,13 @@
     function Redirect(url) {
        location.replace("http://127.0.0.1:8000/"+url);
     }
- </script>
+
+    // function sub(a,b) {
+    //   var c
+    //   document.write(c);
+      
+    // }
+  </script>
 
   <style>
 
@@ -32,7 +38,7 @@
   <h1>{{ shop.name }}</h1>
   <p>People in queue: {{ shop.queue }}</p>
   {% if shop.queue > shop.max_numb_clients %}
-    <font color="red">Exceeding the maximum number of clients.</font>
+      <p><font color="red">Exceeding the maximum number of clients in the shop</font></p>
   {% endif %} 
   <p>Rating: {{ shop.rating }}</p>
   <p>Number of ratings: {{ shop.numb_of_ratings }}</p>

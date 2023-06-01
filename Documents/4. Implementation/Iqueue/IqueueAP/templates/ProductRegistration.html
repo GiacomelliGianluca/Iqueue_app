@@ -32,10 +32,10 @@
       <p>
         Select the shop for which you want to add the product:
       </p>
-    <select name="shop">
+    <select name="selected_shop">
       {% for shop in shops %}
-        <option value="{{ shop.name }}">{{ shop.name }}</option>
-                {% endfor %}
+        <option value="{{ shop.ids }}">{{ shop.name }}</option>
+      {% endfor %}
      </select>
      <br>
     <label for="name">Name:</label>

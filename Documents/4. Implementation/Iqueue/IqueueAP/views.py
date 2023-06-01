@@ -213,8 +213,8 @@ def Product_view(request):
     idso = request.session.get('idso', '')
     if request.method == 'POST':
         shops = Shop.objects.filter(idso=idso).values()
-        selected_shop = request.POST.get('shop')  
-        shop_id = Shop.objects.get(name=selected_shop)
+        ids_selected_shop = request.POST.get('selected_shop')  
+        shop_id = Shop.objects.get(ids=ids_selected_shop)
         request.session['ids'] = str(shop_id.ids)         
         product_name = request.POST.get('name')
         price = request.POST.get('price')
@@ -223,11 +223,9 @@ def Product_view(request):
         ids = request.session.get('ids', '')
         idp = str(uuid.uuid4())
         product = Product(name=product_name, price=price, shop_discount=shop_discount, idso=idso, ids=ids, idp=idp)
-
         product.save()
- 
-        return redirect('success')
-    
+        return redirect('SuccessProductRegistration')
+   
     context = {
         
         'shops': Shop.objects.filter(idso=idso),
@@ -235,6 +233,9 @@ def Product_view(request):
         'selected_shop': selected_shop,
     }
     return render(request, 'ProductRegistration.html', context=context)
+
+def SuccessProductRegistration(request):
+    return render(request, 'registrationProductSuccess.html')
 
 def Booking_view(request, selected_category):
     Shop_and_day_form = forms.Shop_and_day_selectionForm()
@@ -257,7 +258,7 @@ def Booking_view(request, selected_category):
                            'addresses': addresses, 'selected_shop': selected_shop})
 
         if 'btnform2' in request.POST and 'selected_slot' in request.POST:
-            idc = request.session.get('idso', '')
+            idc = request.session.get('idc', '')
             selected_slot_id = request.POST.get('selected_slot')
             timeslot = get_object_or_404(TimeSlot, id=selected_slot_id)
             print(timeslot)

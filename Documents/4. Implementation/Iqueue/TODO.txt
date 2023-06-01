@@ -1,0 +1,5 @@
+>Mettere constraint quando si registra product: NO prezzo negativo, NO discount che è sopra il 100% o negativo
+
+>In myShops, fare tastino che mostra tutti i prodotti assegnati allo shop
+
+>Dare possibilità di delate di shop, prenotazione, prodotto
