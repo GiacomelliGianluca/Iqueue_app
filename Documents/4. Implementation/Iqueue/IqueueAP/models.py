@@ -42,9 +42,9 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
     shop_discount = models.FloatField()
-    idso = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
+    idso = models.CharField(default='OOOOOOOO', max_length=36, validators=[MinLengthValidator(8)])
     ids = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
-    idp = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
+    idp = models.CharField(default='PPPPPPPP', max_length=36, validators=[MinLengthValidator(8)])
     #shop = models.ForeignKey(Shop, on_delete=models.CASCADE, default='0')
 
 
@@ -52,9 +52,15 @@ class TimeSlot(models.Model):
     start = models.TimeField()
     end = models.TimeField()
     date = models.DateField(default=date.today)
-    available = models.BooleanField()
+    available = models.BooleanField(default=True)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, blank=True, null=True)
 
+
+class Slot(models.Model):
+    number = models.IntegerField()
+    available = models.BooleanField(default=True)
+    TimeSlot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE, blank=True, null=True)
+    idc = models.CharField(max_length=36, validators=[MinLengthValidator(8)])
 
 # Vedere se togliere
 TIME_CHOICES = (

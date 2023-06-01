@@ -10,7 +10,7 @@ import uuid
 import qrcode
 import base64
 from Iqueue.forms import RegistrationForm, LogIn, ShopForm, ProductForm, Shop_and_day_selectionForm, TimeSlot_selectionForm
-from IqueueAP.models import Account, Shop, Product, TimeSlot, Booking
+from IqueueAP.models import Account, Shop, Product, TimeSlot, Booking, Slot
 from django.contrib import messages
 from qrcode import QRCode
 import json
@@ -87,6 +87,8 @@ def account_view(request):
     idso = request.session.get('idso','')
     shops = Shop.objects.filter(idso='idso').values()
     return render(request, 'account_list.html', {'shops': shops, 'idso':idso})
+    # account = Account.objects.all()
+    # return render(request, 'account_list.html', {'account': account})
 
 
 def ShopOwner_view(request):
@@ -121,7 +123,6 @@ def Shop_view(request):
             slot_duration = timedelta(minutes=slot_duration)
 
             current_date = datetime.now().date()
-
             end_date = current_date + timedelta(weeks=52)  # time slots definiti per un anno
 
             time_slots = []
@@ -129,25 +130,30 @@ def Shop_view(request):
             # SE ABBIAMO tempo creare per giorni diversi ls possibilità di inserire time slots diversi
             while current_date <= end_date:
                 if current_date.weekday() < 5:
-                    current_datetime = datetime.combine(current_date,
-                                                        opening_time)  # current_date: data anno mese giorno; opening_time: ore minuti
+                    current_datetime = datetime.combine(current_date, opening_time)
 
                     while current_datetime.time() < closing_time:
-                        start_time = current_datetime.time()  # datetime.time individua
-                        end_time = (current_datetime + slot_duration).time()
-                        if end_time > closing_time:
-                            end_time = closing_time
-
-                        date = (current_datetime + slot_duration).date()
+                        date = current_datetime.date()
+                        start_time = current_datetime.time()
+                        end_time = min(current_datetime + slot_duration,
+                                       datetime.combine(current_date, closing_time)).time()
 
                         time_slot = TimeSlot(start=start_time, end=end_time, date=date, available=True, shop=shop)
-                        time_slots.append(time_slot)
+                        time_slot.save()
+                         # Salva il TimeSlot nel database
+
+
+                        for i in range(1, shop.max_numb_clients):
+                            slot = Slot(number=i, available=True, TimeSlot=time_slot)
+                            slot.save()
+
+
 
                         current_datetime += slot_duration
 
                 current_date += timedelta(days=1)
 
-            TimeSlot.objects.bulk_create(time_slots)
+
 
             return redirect('SuccessShopRegistration')
 
@@ -218,26 +224,36 @@ def Booking_view(request, selected_category):
             shop_name = request.POST.get('shop')
             date = request.POST.get('date')
             shop = Shop.objects.get(name=shop_name)
-            slots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
+            timeslots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
             addresses = [shop.address]
             selected_shop = 1
 
             return render(request, 'bakery.html',
-                          {'shops': Shop.objects.filter(category=selected_category, name=shop_name).values(), 'slots': slots,
+                          {'shop': Shop.objects.filter(category='bakery', name='shop_name').values(),
+                           'timeslots': timeslots,
                            'Shop_and_day_form': Shop_and_day_form, 'TimeSlot_form': TimeSlot_form,
                            'addresses': addresses, 'selected_shop': selected_shop})
 
         if 'btnform2' in request.POST and 'selected_slot' in request.POST:
-            timeslot_id = request.POST.get('selected_slot')
-            timeslot = get_object_or_404(TimeSlot, pk=timeslot_id)
+            idc = request.session.get('idso', '')
+            selected_slot_id = request.POST.get('selected_slot')
+            timeslot = get_object_or_404(TimeSlot, id=selected_slot_id)
+            print(timeslot)
+            slot = Slot.objects.filter(TimeSlot=timeslot, available=True).first()
+            print(slot)
             shop = timeslot.shop
+
+            slot.available = False
+            slot.idc = idc
+            slot.save()
             shop.queue += 1
             shop.save()
 
-            timeslot.available = False
-            timeslot.save()
+            if not Slot.objects.filter(available=True, TimeSlot=timeslot).exists():
+                timeslot.available = False
+                timeslot.save()
 
-            qr_data = f"Negozio: {shop.name}\nData: {timeslot.date}\nOrario: {timeslot.start} - {timeslot.end}"
+            qr_data = f"Negozio: {shop.name}\nData: {timeslot.date}\nOrario: {timeslot.start} - {timeslot.end}\nNumero nella fscia oraria: {slot.number}"
 
             qr_code_img = qrcode.QRCode()
             qr_code_img.add_data(qr_data)
@@ -250,9 +266,9 @@ def Booking_view(request, selected_category):
             qr_code_img_str = base64.b64encode(buffer.read()).decode('utf-8')
             addresses = [shop.address for shop in Shop.objects.all()]
 
-
-
-            return render(request, 'qr.html', {'qr_code_img': qr_code_img_str, 'time_slot': timeslot_id, 'addresses': addresses, 'selected_shop': selected_shop})
+            return render(request, 'qr.html',
+                          {'qr_code_img': qr_code_img_str, 'addresses': addresses,
+                           'selected_shop': selected_shop})
 
     addresses = [shop.address for shop in Shop.objects.all()]
 
@@ -267,6 +283,35 @@ def Booking_view(request, selected_category):
     return render(request, 'bakery.html', context=context)
 
 
+# def booking(request):
+# if request.method == 'POST':
+#   shop_name = request.POST.get('shop_name')
+#  date = request.POST.get('date')
+# Store shop name and date in django session:
+# request.session['shop_name'] = shop_name
+# request.session['date'] = date
+
+# return redirect('bookingSubmit')
+
+# return render(request, 'booking.html', {'shops': Shop.objects.filter(category='bakery').values()})
+
+
+# def bookingSubmit(request):
+# Get stored data from django session:
+# shop_name = request.session.get('shop_name')
+# date = request.session.get('date')
+# times = [
+# "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM", "6 PM", "6:30 PM", "7 PM", "7:30 PM"
+# ]
+# if request.method == 'POST':
+# time = request.POST.get("time")
+# BookingForm = Booking.objects.get_or_create(
+#                       name = shop_name,
+#                      date = date,
+#                     time = time,
+#                )
+# messages.success(request, "Booking Saved!")
+# return render(request, 'bookingSubmit.html', {'times': times})
 
 
 # Da implementare
@@ -289,6 +334,8 @@ def scan_qr(request):
         date_str = date_str.strip()
         time_range_str = qr_code_lines[2].split(': ')[1]
         time_range_str = time_range_str.strip()
+        number_within_slot = qr_code_lines[3].split(': ')[1]
+        number_within_slot = time_range_str.strip()
 
         date = datetime.strptime(date_str, '%Y-%m-%d').date()
 
@@ -306,7 +353,8 @@ def scan_qr(request):
 
         try:
             time_slot = TimeSlot.objects.get(shop=shop, start=start_datetime, end=end_datetime, date=date)
-            if not time_slot.available:
+            slot = Slot.objects.get(time_slot=time_slot, number=number_within_slot)
+            if not slot.available:
                 shop.queue -= 1
                 shop.save()
                 return render(request, "scan_successful.html")
