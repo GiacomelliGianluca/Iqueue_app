@@ -169,7 +169,7 @@ def Shop_view(request):
     else:
         form = ShopForm()
 
-    return render(request, 'ShopRegistration.html',{'form': form,'j':j,'progress':progress})
+    return render(request, 'ShopRegistration.html')
 
 
 def SuccessShopRegistration(request):
