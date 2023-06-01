@@ -27,7 +27,10 @@ def success(request):
 
 
 def selectRole(request):
-    return render(request, 'SelectRole.html')
+    name = request.session.get('name','')
+    idc = request.session.get('idc', '')
+    idso = request.session.get('idso', '')
+    return render(request, 'SelectRole.html',  {'name': name, 'idc': idc, 'idso':idso})
 
 
 def registration_view(request):
@@ -67,8 +70,10 @@ def login_view(request):
 
             try:
                 account = Account.objects.get(email=email, password=password)
+                request.session['name'] = str(account.name)
+                request.session['idc'] = str(account.idc)
                 request.session['idso'] = str(account.idso)
-                return render(request, 'SelectRole.html')
+                return render(request, 'SelectRole.html',{'name':account.name, 'idc':account.idc, 'idso':account.idso})
             except Account.DoesNotExist:
                 error = 'Credenziali non valide'
                 form.add_error(None, error)
@@ -96,6 +101,9 @@ def ShopOwner_view(request):
 
 
 def Shop_view(request):
+    #To make online update... (future step)
+    # j=0
+    # progress=0 
     if request.method == 'POST':
         form = ShopForm(request.POST)
         if form.is_valid():
@@ -127,6 +135,7 @@ def Shop_view(request):
 
             time_slots = []
 
+
             # SE ABBIAMO tempo creare per giorni diversi ls possibilità di inserire time slots diversi
             while current_date <= end_date:
                 if current_date.weekday() < 5:
@@ -147,25 +156,24 @@ def Shop_view(request):
                             slot = Slot(number=i, available=True, TimeSlot=time_slot)
                             slot.save()
 
-
-
                         current_datetime += slot_duration
 
                 current_date += timedelta(days=1)
-
-
+                #To make online update... (future step)
+                # j += 1
+                # progress = j/365
+                #SE SI FA LE COSE SONO POI DA AGGIUNGERE NEL CONTEXT E NELL'HTML CON L'IF
 
             return redirect('SuccessShopRegistration')
 
     else:
         form = ShopForm()
 
-    return render(request, 'ShopRegistration.html', {'form': form})
+    return render(request, 'ShopRegistration.html')
 
 
 def SuccessShopRegistration(request):
-    shop = Shop.objects.all()
-    return render(request, 'ShopList.html', {'shop': shop})
+    return render(request, 'registrationShopSuccess.html')
 
 
 def Customer_view(request):

@@ -24,12 +24,21 @@
 
 </head>
 
-
+<body>
 <p>
-    Your shops are:
+    Your current shops are:
 </p>
-  {% for shop in shops %}
-    <option value="{{ shop.name }}">{{ shop.name }}</option>
-    <option value="{{ shop.rating }}">{{ shop.rating }}</option>
-    <option value="{{ shop.numb_of_ratings }}">{{ shop.numb_of_ratings }}</option>
-    {% endfor %}
+{% for shop in shops %}
+  <h1>{{ shop.name }}</h1>
+  <p>Rating: {{ shop.rating }}</p>
+  <p>Number of ratings: {{ shop.numb_of_ratings }}</p>
+{% endfor %}
+<br>
+<p>Do you want to register a new shop?</p>
+<button onclick="window.location.href='NewShop'"> Register a new shop </button>
+
+<!-- FARE TASTO DELATE
+MOSTRARE CODA
+INCREMENTARE/DECREMENTARE PERSONE IN CODA -->
+
+</body>

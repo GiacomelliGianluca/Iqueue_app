@@ -41,10 +41,10 @@ urlpatterns = [
     path('login/SelectRole/', selectRole, name='selectRole'),
     path('account/', account_view, name='account_view'), #Serve??
     path('ShopOwner/', ShopOwner_view, name='ShopOwner_view'),
-    path('ShopOwner/Shop/', Shop_view, name='Shop_view'),
-    path('ShopOwner/Shop/myshops/', MyShops_view, name='MyShops_view'),
+    path('ShopOwner/MyShops/NewShop/', Shop_view, name='Shop_view'),
+    path('ShopOwner/MyShops/', MyShops_view, name='MyShops_view'),
     path('ShopOwner/Product/', Product_view, name='Product_view'),
-    path('ShopOwner/Shop/Shoplist/',SuccessShopRegistration, name='SuccessShopRegistration'),
+    path('ShopOwner/MyShops/NewShop/success/',SuccessShopRegistration, name='SuccessShopRegistration'),
     path('Customer/', Customer_view, name='Customer_view'),
     path('Customer/(?P<selected_category>\s+)/', Booking_view, name='Booking_view'),
     path("admin/", admin.site.urls),
