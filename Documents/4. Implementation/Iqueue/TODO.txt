@@ -1,5 +1,9 @@
 PRIORITA':
 >Da sistemare mappa negozi!!!
+>Verificare che i booking vanno sempre a buon fine
+>Fare Coda
+>Fare Review
+>Fare mappa che mostra negozi entro una certa distanza da noi
 
 -----------------------------------------
 
