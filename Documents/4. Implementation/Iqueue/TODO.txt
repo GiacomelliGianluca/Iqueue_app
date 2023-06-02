@@ -1,5 +1,20 @@
->Mettere constraint quando si registra product: NO prezzo negativo, NO discount che è sopra il 100% o negativo
+PRIORITA':
+>Da sistemare mappa negozi!!!
+
+-----------------------------------------
+
+>Mettere constraint quando si registra product: NO prezzo negativo, NO discount che è sopra il 100% o negativo. Se violati, dire che il form dà errore
 
 >In myShops, fare tastino che mostra tutti i prodotti assegnati allo shop
 
 >Dare possibilità di delate di shop, prenotazione, prodotto
+
+>Fare che NOAPPINC e NOAPPDEC funzionano solo quando il negozio è aperto?? 
+
+>Indicare orari negozio in MyShop?
+
+>Indicare via in MyShop
+
+>Quando si visualizza il QR permettere di tornare indietro e dare più informazioni
+
+>Vedere se mettere nome paese, CAP ecc ai negozi per fare compilare la latitudinde e longitudine in modo automatico.

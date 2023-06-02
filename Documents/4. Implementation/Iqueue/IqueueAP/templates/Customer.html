@@ -1,7 +1,7 @@
 <html>
 <head>
-  <title>Customer</title>
-
+  <title>Shop Owner</title>
+  
   <script type="text/javascript">
     function Redirect(url) {
        location.replace("http://127.0.0.1:8000/"+url);
@@ -25,28 +25,15 @@
 </head>
 
 <body>
-  <h1>Select shop category you want to visit</h1>
-  <form method="POST">
-    {% csrf_token %}
-    
-      <label for="bakery"> Bakery</label>
-      <input type="radio" id="category" name="category" value="bakery">
-      <br>
-      <label for="clothes"> Clothes</label>
-      <input type="radio" id="category" name="category" value="clothes">
-      <br>
-      <label for="perfumery"> Perfumery</label>
-      <input type="radio" id="category" name="category" value="perfumery">
-      <br>
-      <label for="hair_saloon"> Hair Saloon</label>
-      <input type="radio" id="category" name="category" value="hair_saloon">
-      <br>
-      <label for="others"> Other</label>
-      <input type="radio" id="category" name="category" value="others">
-      <br>
+  <h1>Select an option</h1>
+  <button onclick="window.location.href='Selection/'">See shops </button>
+  <br>
+  <button onclick="window.location.href='QR/'">MyQR</button>
+  <br>
+  <button onclick="window.location.href='WriteReview'">Write a review</button>
+  <br>
   
-    <input type="submit" value="Select">
-  </form>
+
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
 
 </body>

@@ -1,11 +1,42 @@
 <html>
 <head>
   <title>QR Code</title>
+
+  <script type="text/javascript">
+    function Redirect(url) {
+       location.replace("http://127.0.0.1:8000/"+url);
+    }
+
+    // function sub(a,b) {
+    //   var c
+    //   document.write(c);
+      
+    // }
+  </script>
+
+  <style>
+
+    .anybutton {
+      top:75%;
+      left:75%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 183, 255); 
+      }
+    
+     </style>
+
 </head>
 <body>
   <h1>QR Code</h1>
   <a href="data:image/png;base64,{{ qr_code_img }}" download>
     <img src="data:image/png;base64,{{ qr_code_img }}" alt="QR Code">
   </a>
+  <br>
+  <input type="button" onclick="Redirect('Customer/');" value="Going back to Customer view" />
+  <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
+
 </body>
 </html>

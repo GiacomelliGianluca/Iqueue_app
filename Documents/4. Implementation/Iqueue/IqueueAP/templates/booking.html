@@ -1,0 +1,154 @@
+<html>
+<head>
+  <title>Booking</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+  <script type="text/javascript">
+    function Redirect(url) {
+       location.replace("http://127.0.0.1:8000/"+url);
+    }
+
+    // function sub(a,b) {
+    //   var c
+    //   document.write(c);
+      
+    // }
+  </script>
+
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Slot Booking</h1>
+  <form method="POST">
+    {{ Shop_and_day_selectionForm }}
+    {% csrf_token %}
+    <label for="shop">Select a shop:</label>
+    <select name="shop_ids">
+      {% for shop in shops %}
+        <option value="{{ shop.ids }}">{{ shop.name }}</option>
+      {% endfor %}
+    </select>
+
+    <div id="map"></div>
+
+    <label for="date">Select a day:</label>
+    <input type="date" name="date" id="date" required>
+
+    <button type="submit" name="btnform1">View the available slots</button>
+  </form>
+
+  {% if slots %}
+    <h2>Available slots:</h2>
+    <ul>
+      {% for timeslot in timeslots %}
+        <li>{{ timeslotslot.start }} - {{ timeslotslot.end }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No slot available for this day.</p>
+  {% endif %}
+
+  <h1>Select a slot</h1>
+  <form method="POST">
+    {{ TimeSlot_selectionForm }}
+    {% csrf_token %}
+    <label for="selected_slot">Select a slot:</label>
+    <select name="selected_slot">
+    {% for timeslot in timeslots %}
+         <option value="{{ timeslot.id }}">{{ timeslot.start }} - {{ timeslot.end }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" name="btnform2">Submit</button>
+  </form>
+
+  <input type="button" onclick="Redirect('Customer/');" value="Going back to Customer view" />
+
+
+
+
+  <script type="text/javascript">
+  var shopAddresses = {{ addresses|safe }};
+
+  var SelectedShop = {{ selected_shop|safe }};
+
+  window.onload = function() {
+    var map = L.map('map');
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      maxZoom: 18,
+    }).addTo(map);
+
+    var markersLayer = L.layerGroup().addTo(map);
+
+    var redIcon = L.icon({
+      iconUrl: 'https://www.vhv.rs/dpng/d/437-4377070_porsche-taycan-wallpaper-4k-hd-png-download.png',
+      iconSize: [40, 40],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          var latlng = L.latLng(position.coords.latitude, position.coords.longitude);
+          map.setView(latlng, 13);
+          var marker = L.marker(latlng, { icon: redIcon });
+          markersLayer.addLayer(marker);
+        },
+        function(error) {
+          console.log('Error getting current position:', error.message);
+        }
+      );
+    } else {
+      console.log('Geolocation is not supported by this browser.');
+    }
+
+    for (var i = 0; i < shopAddresses.length; i++) {
+      var address = shopAddresses[i];
+      console.log('Address:', address);
+
+      if (SelectedShop === 1) {
+        let geocode = L.Control.Geocoder.nominatim().geocode(address, function(results) {
+          if (results && results.length > 0) {
+            var latlng = results[0].center;
+            console.log('Coordinates:', latlng);
+            map.setView(latlng, 13);
+            var marker = L.marker(latlng);
+            markersLayer.addLayer(marker);
+          } else {
+            console.log('No geocoding results found.');
+          }
+
+          return false;
+        });
+      } else {
+        let geocode = L.Control.Geocoder.nominatim().geocode(address, function(results) {
+          if (results && results.length > 0) {
+            var latlng = results[0].center;
+            console.log('Coordinates:', latlng);
+            var marker = L.marker(latlng);
+            markersLayer.addLayer(marker);
+          } else {
+            console.log('No geocoding results found.');
+          }
+
+          return false;
+        });
+      }
+    }
+  };
+</script>
+
+</body>
+</html>

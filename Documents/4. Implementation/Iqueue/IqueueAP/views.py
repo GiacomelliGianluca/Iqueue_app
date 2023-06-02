@@ -175,14 +175,18 @@ def Shop_view(request):
 def SuccessShopRegistration(request):
     return render(request, 'registrationShopSuccess.html')
 
-
 def Customer_view(request):
+    return render(request, 'Customer.html')
+
+
+
+def Customer_CategorySelection_view(request):
     Category_form = forms.ShopCategorySelectionForm()
     if request.method == 'POST':
         selected_category = request.POST.get('category') 
         return redirect('Booking_view', selected_category)
 
-    return render(request, 'Customer.html')
+    return render(request, 'CustomerCategorySelection.html')
 
 def MyShops_view(request):
     idso = request.session.get('idso', '')
@@ -244,15 +248,14 @@ def Booking_view(request, selected_category):
     shops = Shop.objects.filter(category = selected_category).values()
     if request.method == 'POST':
         if 'btnform1' in request.POST:
-            shop_name = request.POST.get('shop')
+            shop_ids = request.POST.get('shop_ids')
             date = request.POST.get('date')
-            shop = Shop.objects.get(name=shop_name)
+            shop = Shop.objects.get(ids=shop_ids)
             timeslots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
             addresses = [shop.address]
             selected_shop = 1
-
-            return render(request, 'bakery.html',
-                          {'shop': Shop.objects.filter(category='bakery', name='shop_name').values(),
+            return render(request, 'booking.html',
+                          {'shop': Shop.objects.filter(category=selected_category).values(),
                            'timeslots': timeslots,
                            'Shop_and_day_form': Shop_and_day_form, 'TimeSlot_form': TimeSlot_form,
                            'addresses': addresses, 'selected_shop': selected_shop})
@@ -303,7 +306,7 @@ def Booking_view(request, selected_category):
         'selected_shop': selected_shop,
     }
 
-    return render(request, 'bakery.html', context=context)
+    return render(request, 'booking.html', context=context)
 
 
 # def booking(request):
@@ -316,7 +319,7 @@ def Booking_view(request, selected_category):
 
 # return redirect('bookingSubmit')
 
-# return render(request, 'booking.html', {'shops': Shop.objects.filter(category='bakery').values()})
+# return render(request, 'booking.html', {'shops': Shop.objects.filter(category='booking').values()})
 
 
 # def bookingSubmit(request):
@@ -369,6 +372,7 @@ def scan_qr(request):
         start_datetime = datetime.combine(date, start_time)
         end_datetime = datetime.combine(date, end_time)
 
+        # da fare il get con l'ids!!!
         try:
             shop = Shop.objects.get(name=shop_name)
         except Shop.DoesNotExist:
