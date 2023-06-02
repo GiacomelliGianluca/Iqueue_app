@@ -1,0 +1,57 @@
+<html>
+<head>
+  <title>Reservations</title>
+
+  <script type="text/javascript">
+    function Redirect(url) {
+       location.replace("http://127.0.0.1:8000/"+url);
+    }
+
+    // function sub(a,b) {
+    //   var c
+    //   document.write(c);
+      
+    // }
+  </script>
+
+  <style>
+
+    .anybutton {
+      top:75%;
+      left:75%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 183, 255); 
+      }
+    
+     </style>
+
+</head>
+
+<body>
+<p>
+    Your current reservations are:
+</p>
+{% for QR in QRs %}
+  <a href="data:image/png;base64,{{ QR.img }}" download>
+    <img src="data:image/png;base64,{{ QR.img }}" alt="QR Code">
+  </a>
+  <br>
+  <p>You have make a reservation for the {{QR.date}} between {{QR.time_start}} and {{QR.time_end}} </p>
+  <p>Your position in the queue is: {{QR.number}}</p>
+  <br>
+  <!-- DA FARE CANCELLAZIONE
+  <form action=" " method="get" onsubmit="location.reload()">
+    <input type="hidden" value={{shop.ids}} name="ShopIDs"/>
+    <input type="submit" name="ADDbtn" value="ADD customer without Iqueue">
+    <input type="submit" name="DECbtn" value="DEC customer without Iqueue">
+  </form> -->
+{% endfor %}
+
+  <input type="button" onclick="Redirect('Customer/');" value="Going back to Customer view" />
+  <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
+
+</body>
+</html>

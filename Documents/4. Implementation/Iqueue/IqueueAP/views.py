@@ -187,8 +187,14 @@ def Booking_view(request, selected_category):
 #CUSTOMER reservations
 
 def Reservation_view(request):
+    idc = request.session.get('idc', '')
 
-    return render(request, 'MyReservations.html')
+    context = {
+        
+        'QRs': QR.objects.filter(idc=idc)
+    }
+
+    return render(request, 'CustomerReservations.html',context=context)
 
 
 
