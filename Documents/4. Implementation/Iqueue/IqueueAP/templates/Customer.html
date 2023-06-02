@@ -19,13 +19,25 @@
       z-index: 2;
       background: rgb(0, 183, 255); 
       }
+
+    .ChangeRolebutton {
+      top:60%;
+      left:75%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 255, 0); 
+      }
+
     
      </style>
 
 </head>
 
 <body>
-  <h1>Select an option</h1>
+  <h1>Customer View</h1>
+  <h2>Select an option</h2>
   <button onclick="window.location.href='Selection/'">See shops </button>
   <br>
   <button onclick="window.location.href='Reservations/'">MyReservations</button>
@@ -33,7 +45,7 @@
   <button onclick="window.location.href='WriteReview'">Write a review</button>
   <br>
   
-
+  <input type="button" class="ChangeRolebutton" onclick="Redirect('login/SelectRole/');" value="Change Role" />
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
 
 </body>

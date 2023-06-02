@@ -30,6 +30,16 @@
       background-color: red;
       color: white;
       }
+
+    .GoingBackButton {
+      top:60%;
+      left:75%;
+      width:200px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 255, 0); 
+      }
     
      </style>
 
@@ -61,9 +71,11 @@
 <p>Do you want to register a new shop?</p>
 <button onclick="window.location.href='NewShop'"> Register a new shop </button>
 
-<!-- FARE TASTO DELATE
+<!-- 
 MOSTRARE CODA
 INCREMENTARE/DECREMENTARE PERSONE IN CODA -->
+
+<input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" />
 <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" /><!-- DA SISTEMARE POSIZIONE--->
 
 </body>

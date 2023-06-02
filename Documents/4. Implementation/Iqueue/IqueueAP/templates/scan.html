@@ -3,6 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <title>Scannerizza QR Code</title>
+
+  <script type="text/javascript">
+    function Redirect(url) {
+       location.replace("http://127.0.0.1:8000/"+url);
+    }
+
+    // function sub(a,b) {
+    //   var c
+    //   document.write(c);
+      
+    // }
+  </script>
+
+  <style>
+
+    .anybutton {
+      top:75%;
+      left:75%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 183, 255); 
+      }
+    
+    .GoingBackButton {
+      top:60%;
+      left:75%;
+      width:200px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 255, 0); 
+      }
+    
+     </style>
+     </style>
+
+
 </head>
 
 <body>
@@ -64,5 +103,9 @@
 
     document.addEventListener('DOMContentLoaded', startScanning);
   </script>
+
+  <input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" />
+  <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
+
 </body>
 </html>

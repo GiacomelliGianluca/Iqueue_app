@@ -20,6 +20,16 @@
       background: rgb(0, 183, 255); 
       }
     
+    .GoingBackButton {
+      top:60%;
+      left:75%;
+      width:200px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 255, 0); 
+      }
+    
      </style>
 
 </head>
@@ -52,5 +62,6 @@
 
   </form>
 
+  <input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" />
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
 </body>

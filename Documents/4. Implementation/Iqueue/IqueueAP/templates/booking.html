@@ -23,6 +23,27 @@
       height: 400px;
       width: 100%;
     }
+
+    .anybutton {
+      top:75%;
+      left:75%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 183, 255); 
+      }
+  
+    .GoingBackButton {
+      top:69%;
+      left:75%;
+      width:200px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 255, 0); 
+      }
+    
   </style>
 </head>
 
@@ -70,8 +91,8 @@
     <button type="submit" name="btnform2">Submit</button>
   </form>
 
-  <input type="button" onclick="Redirect('Customer/');" value="Going back to Customer view" />
-
+  <input type="button" class="GoingBackButton" onclick="Redirect('Customer/');" value="Going back to Customer view" />
+  <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
 
 
 
