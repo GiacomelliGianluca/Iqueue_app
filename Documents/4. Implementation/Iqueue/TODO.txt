@@ -7,7 +7,7 @@ PRIORITA':
 
 >In myShops, fare tastino che mostra tutti i prodotti assegnati allo shop
 
->Dare possibilità di delate di shop, prenotazione, prodotto
+>Dare possibilità di delate prenotazione, prodotto
 
 >Fare che NOAPPINC e NOAPPDEC funzionano solo quando il negozio è aperto?? 
 

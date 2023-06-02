@@ -316,6 +316,10 @@ def MyShops_view(request):
             shop.queue -= 1
             shop.save()
         return redirect('MyShops_view')
+    
+    if(request.GET.get('Delete')):
+        shop_to_delete = get_object_or_404(Shop, ids=request.GET.get('ShopIDs'))
+        return redirect('DeleteShop', ids=shop_to_delete.ids)
 
 
     context = {
@@ -323,6 +327,18 @@ def MyShops_view(request):
         'shops': Shop.objects.filter(idso=idso)
     }
     return render(request, 'MyShops.html', context=context)
+
+def DeleteShop(request,ids):
+    shop = get_object_or_404(Shop, ids=ids)
+    if(request.GET.get('Choice')):
+        Choice=request.GET.get('Choice')
+        if Choice=='Yes':         
+            shop.delete()
+
+        return redirect('MyShops_view')
+    
+    return render(request, 'DeleteShop.html')
+
 
 def Product_view(request):
     Product_form = forms.ProductForm()
