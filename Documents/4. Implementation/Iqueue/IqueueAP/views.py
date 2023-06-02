@@ -14,6 +14,11 @@ from IqueueAP.models import Account, Shop, Product, TimeSlot, Slot, QR
 from django.contrib import messages
 from qrcode import QRCode
 import json
+from django.http import HttpResponseRedirect
+from django.template import RequestContext
+
+
+
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -188,13 +193,29 @@ def Booking_view(request, selected_category):
 
 def Reservation_view(request):
     idc = request.session.get('idc', '')
+    qrs = QR.objects.filter(idc=idc)
+    shop_names = []
+    shop_address = []
 
+    for qr in qrs:
+        shop = Shop.objects.get(ids=qr.ids)
+        shop_names.append(shop.name)
+        shop_address.append(shop.address)
+
+    if(request.GET.get('Guide')):
+        ids_for_address = request.GET.get('ids')
+        shop_for_address = Shop.objects.get(ids=ids_for_address)
+        address=shop_for_address.address
+        maps_url = f"https://www.google.com/maps/search/?api=1&query={address}"
+        return redirect(maps_url)
+
+    list = zip(qrs , shop_names, shop_address)
     context = {
-        
-        'QRs': QR.objects.filter(idc=idc)
+        'list':list
     }
 
     return render(request, 'CustomerReservations.html',context=context)
+
 
 
 

@@ -36,6 +36,7 @@ from IqueueAP.views import Reservation_view
 
 
 
+
 urlpatterns = [
     path('', InitialLoading, name='InitialLoading'),
     path('login/', login_view, name='login_View'),
@@ -51,7 +52,7 @@ urlpatterns = [
     path('ShopOwner/Product/success/', SuccessProductRegistration, name='SuccessProductRegistration'),
     path('ShopOwner/MyShops/NewShop/success/',SuccessShopRegistration, name='SuccessShopRegistration'),
     path('Customer/', Customer_view, name='Customer_view'),
-    path('Customer/Selection/', Customer_CategorySelection_view, name='Customer_CategorySelection_view'),
+    path('Customer/Selection/', Customer_CategorySelection_view, name='Customer_CategorySelection_view'),    
     path('Customer/Selection/(?P<selected_category>\s+)/', Booking_view, name='Booking_view'),
     path('Customer/Reservations/', Reservation_view, name='Reservation_view'),
     path("admin/", admin.site.urls),

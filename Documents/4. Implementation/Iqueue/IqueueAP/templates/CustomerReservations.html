@@ -34,13 +34,16 @@
 <p>
     Your current reservations are:
 </p>
-{% for QR in QRs %}
-  <a href="data:image/png;base64,{{ QR.img }}" download>
-    <img src="data:image/png;base64,{{ QR.img }}" alt="QR Code">
+{% for item1, item2, item3 in list %}
+  <h1>{{ item2 }}</h1>
+  <a href="data:image/png;base64,{{ item1.img }}" download>
+    <img src="data:image/png;base64,{{ item1.img }}" alt="QR Code">
   </a>
   <br>
-  <p>You have make a reservation for the {{QR.date}} between {{QR.time_start}} and {{QR.time_end}} </p>
-  <p>Your position in the queue is: {{QR.number}}</p>
+  <p>{{ item3 }}<form action=" " method="get">  {% csrf_token %} <input type="hidden" value= {{item1.ids}} name="ids"/>   <input type="submit" name="Guide" value="Guide me to the shop!"> </form>
+  </p>
+  <p>You have make a reservation for the {{item1.date}} between {{item1.time_start}} and {{item1.time_end}} </p>
+  <p>Your position in the queue is: {{item1.number}}</p>
   <br>
   <!-- DA FARE CANCELLAZIONE
   <form action=" " method="get" onsubmit="location.reload()">
