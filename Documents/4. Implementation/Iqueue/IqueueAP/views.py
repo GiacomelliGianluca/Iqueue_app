@@ -80,7 +80,7 @@ def login_view(request):
                 request.session['idso'] = str(account.idso)
                 return render(request, 'SelectRole.html',{'name':account.name, 'idc':account.idc, 'idso':account.idso})
             except Account.DoesNotExist:
-                error = 'Credenziali non valide'
+                error = 'Inserted data are not valid'
                 form.add_error(None, error)
         else:
             error = 'Inserted data are not valid'
