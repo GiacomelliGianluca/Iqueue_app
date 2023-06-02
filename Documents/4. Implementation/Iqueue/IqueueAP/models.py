@@ -2,6 +2,7 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
 from datetime import date
+from datetime import time
 
 
 # Realizziamo tutti gli ID di lunghezza 8
@@ -62,34 +63,16 @@ class Slot(models.Model):
     TimeSlot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE, blank=True, null=True)
     idc = models.CharField(max_length=36, validators=[MinLengthValidator(8)])
 
-# class QR(models.Model):
-#     img
-#     idc
-#     ids
-#     idso
-#     idQR
-#     number
-#     Campo temporale 
-
-# Vedere se togliere
-TIME_CHOICES = (
-    ("3 PM", "3 PM"),
-    ("3:30 PM", "3:30 PM"),
-    ("4 PM", "4 PM"),
-    ("4:30 PM", "4:30 PM"),
-    ("5 PM", "5 PM"),
-    ("5:30 PM", "5:30 PM"),
-    ("6 PM", "6 PM"),
-    ("6:30 PM", "6:30 PM"),
-    ("7 PM", "7 PM"),
-    ("7:30 PM", "7:30 PM"),
-)
-
-
-class Booking(models.Model):
-    name = models.CharField(max_length=100)
-    date = models.DateField(default=date.today)
-    time = models.CharField(max_length=10, choices=TIME_CHOICES, default="3 PM")
+class QR(models.Model):
+    img = models.TextField()  #L'immagine è una stringa in base64 
+    idc = models.CharField(max_length=36, validators=[MinLengthValidator(8)])
+    idso = models.CharField(default='OOOOOOOO', max_length=36, validators=[MinLengthValidator(8)])
+    ids = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
+    idQR = models.CharField(default='QQQQQQQQ', max_length=36, validators=[MinLengthValidator(8)])
+    number = models.IntegerField(default=-1) #-1 vuol dire che non è stato ancora assegnato
+    date = models.DateField(default=date.today) #Si compila esso con la stessa data del TimeSlot.date
+    time_start = models.TimeField(default=time(0, 0, 0)) #Si compila esso con Timeslot.start
+    time_end = models.TimeField(default=time(12, 0,0 )) #Si compila esso con Timeslot.end
 
 # class QR(models.Model):   #Vedere se mettere campi come gli altri
 #     QRid = models.CharField(max_length=50)

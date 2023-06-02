@@ -10,7 +10,7 @@ import uuid
 import qrcode
 import base64
 from Iqueue.forms import RegistrationForm, LogIn, ShopForm, ProductForm, Shop_and_day_selectionForm, TimeSlot_selectionForm
-from IqueueAP.models import Account, Shop, Product, TimeSlot, Booking, Slot
+from IqueueAP.models import Account, Shop, Product, TimeSlot, Slot, QR
 from django.contrib import messages
 from qrcode import QRCode
 import json
@@ -96,6 +96,104 @@ def account_view(request):
     # return render(request, 'account_list.html', {'account': account})
 
 
+#CUSTOMER
+def Customer_view(request):
+    return render(request, 'Customer.html')
+
+
+# CUSTOMER Booking
+def Customer_CategorySelection_view(request):
+    Category_form = forms.ShopCategorySelectionForm()
+    if request.method == 'POST':
+        selected_category = request.POST.get('category') 
+        return redirect('Booking_view', selected_category)
+
+    return render(request, 'CustomerCategorySelection.html')
+
+def Booking_view(request, selected_category):
+    Shop_and_day_form = forms.Shop_and_day_selectionForm()
+    TimeSlot_form = forms.TimeSlot_selectionForm()
+    selected_shop = 0
+    shops = Shop.objects.filter(category = selected_category).values()
+    if request.method == 'POST':
+        if 'btnform1' in request.POST:
+            shop_ids = request.POST.get('shop_ids')
+            date = request.POST.get('date')
+            shop = Shop.objects.get(ids=shop_ids)
+            timeslots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
+            addresses = [shop.address]
+            selected_shop = 1
+            return render(request, 'booking.html',
+                          {'shop': Shop.objects.filter(category=selected_category).values(),
+                           'timeslots': timeslots,
+                           'Shop_and_day_form': Shop_and_day_form, 'TimeSlot_form': TimeSlot_form,
+                           'addresses': addresses, 'selected_shop': selected_shop})
+
+        if 'btnform2' in request.POST and 'selected_slot' in request.POST:
+            idc = request.session.get('idc', '')
+            selected_slot_id = request.POST.get('selected_slot')
+            timeslot = get_object_or_404(TimeSlot, id=selected_slot_id)
+            print(timeslot)
+            slot = Slot.objects.filter(TimeSlot=timeslot, available=True).first()
+            print(slot)
+            shop = timeslot.shop
+
+            slot.available = False
+            slot.idc = idc
+            slot.save()
+            shop.queue += 1 #DA TOGLIERE
+            shop.save()
+
+            if not Slot.objects.filter(available=True, TimeSlot=timeslot).exists():
+                timeslot.available = False
+                timeslot.save()
+
+            qr_data = f"Negozio: {shop.ids}\nData: {timeslot.date}\nOrario: {timeslot.start} - {timeslot.end}\nNumero nella fscia oraria: {slot.number}"
+
+            qr_code_img = qrcode.QRCode()
+            qr_code_img.add_data(qr_data)
+            qr_code_img.make(fit=True)
+
+            image = qr_code_img.make_image(fill="black", back_color="white")
+            buffer = BytesIO()
+            image.save(buffer, format='PNG')
+            buffer.seek(0)
+            qr_code_img_str = base64.b64encode(buffer.read()).decode('utf-8')
+            addresses = [shop.address for shop in Shop.objects.all()]
+
+            idQR = str(uuid.uuid4())
+            qr = QR(img= qr_code_img_str , idc=slot.idc, idso=shop.idso, ids=shop.ids , idQR=idQR , number=slot.number, date=timeslot.date, time_start=timeslot.start, time_end=timeslot.end)
+            qr.save()
+
+                        
+
+            return render(request, 'qr.html',
+                          {'qr_code_img': qr_code_img_str, 'addresses': addresses,
+                           'selected_shop': selected_shop, 'QR': qr})
+
+    addresses = [shop.address for shop in Shop.objects.all()]
+
+    context = {
+        'shops': Shop.objects.filter(category = selected_category),
+        'Shop_and_day_form': Shop_and_day_form,
+        'TimeSlot_form': TimeSlot_form,
+        'addresses': addresses,
+        'selected_shop': selected_shop,
+    }
+
+    return render(request, 'booking.html', context=context)
+
+
+#CUSTOMER reservations
+
+def Reservation_view(request):
+
+    return render(request, 'MyReservations.html')
+
+
+
+
+#SHOP OWNER
 def ShopOwner_view(request):
     return render(request, 'ShopOwner.html')
 
@@ -175,18 +273,6 @@ def Shop_view(request):
 def SuccessShopRegistration(request):
     return render(request, 'registrationShopSuccess.html')
 
-def Customer_view(request):
-    return render(request, 'Customer.html')
-
-
-
-def Customer_CategorySelection_view(request):
-    Category_form = forms.ShopCategorySelectionForm()
-    if request.method == 'POST':
-        selected_category = request.POST.get('category') 
-        return redirect('Booking_view', selected_category)
-
-    return render(request, 'CustomerCategorySelection.html')
 
 def MyShops_view(request):
     idso = request.session.get('idso', '')
@@ -241,72 +327,7 @@ def Product_view(request):
 def SuccessProductRegistration(request):
     return render(request, 'registrationProductSuccess.html')
 
-def Booking_view(request, selected_category):
-    Shop_and_day_form = forms.Shop_and_day_selectionForm()
-    TimeSlot_form = forms.TimeSlot_selectionForm()
-    selected_shop = 0
-    shops = Shop.objects.filter(category = selected_category).values()
-    if request.method == 'POST':
-        if 'btnform1' in request.POST:
-            shop_ids = request.POST.get('shop_ids')
-            date = request.POST.get('date')
-            shop = Shop.objects.get(ids=shop_ids)
-            timeslots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
-            addresses = [shop.address]
-            selected_shop = 1
-            return render(request, 'booking.html',
-                          {'shop': Shop.objects.filter(category=selected_category).values(),
-                           'timeslots': timeslots,
-                           'Shop_and_day_form': Shop_and_day_form, 'TimeSlot_form': TimeSlot_form,
-                           'addresses': addresses, 'selected_shop': selected_shop})
 
-        if 'btnform2' in request.POST and 'selected_slot' in request.POST:
-            idc = request.session.get('idc', '')
-            selected_slot_id = request.POST.get('selected_slot')
-            timeslot = get_object_or_404(TimeSlot, id=selected_slot_id)
-            print(timeslot)
-            slot = Slot.objects.filter(TimeSlot=timeslot, available=True).first()
-            print(slot)
-            shop = timeslot.shop
-
-            slot.available = False
-            slot.idc = idc
-            slot.save()
-            shop.queue += 1
-            shop.save()
-
-            if not Slot.objects.filter(available=True, TimeSlot=timeslot).exists():
-                timeslot.available = False
-                timeslot.save()
-
-            qr_data = f"Negozio: {shop.name}\nData: {timeslot.date}\nOrario: {timeslot.start} - {timeslot.end}\nNumero nella fscia oraria: {slot.number}"
-
-            qr_code_img = qrcode.QRCode()
-            qr_code_img.add_data(qr_data)
-            qr_code_img.make(fit=True)
-
-            image = qr_code_img.make_image(fill="black", back_color="white")
-            buffer = BytesIO()
-            image.save(buffer, format='PNG')
-            buffer.seek(0)
-            qr_code_img_str = base64.b64encode(buffer.read()).decode('utf-8')
-            addresses = [shop.address for shop in Shop.objects.all()]
-
-            return render(request, 'qr.html',
-                          {'qr_code_img': qr_code_img_str, 'addresses': addresses,
-                           'selected_shop': selected_shop})
-
-    addresses = [shop.address for shop in Shop.objects.all()]
-
-    context = {
-        'shops': Shop.objects.filter(category = selected_category),
-        'Shop_and_day_form': Shop_and_day_form,
-        'TimeSlot_form': TimeSlot_form,
-        'addresses': addresses,
-        'selected_shop': selected_shop,
-    }
-
-    return render(request, 'booking.html', context=context)
 
 
 # def booking(request):

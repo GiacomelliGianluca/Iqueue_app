@@ -35,6 +35,8 @@
     <img src="data:image/png;base64,{{ qr_code_img }}" alt="QR Code">
   </a>
   <br>
+  <p>You have make a reservation for the {{QR.date}} between {{QR.time_start}} and {{QR.time_end}} </p>
+  <p>Your position in the queue is: {{QR.number}}</p>
   <input type="button" onclick="Redirect('Customer/');" value="Going back to Customer view" />
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
 
