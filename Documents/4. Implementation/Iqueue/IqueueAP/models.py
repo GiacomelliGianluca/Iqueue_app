@@ -1,7 +1,7 @@
 # Create your models here.
 from django.db import models
 from django.core.validators import MinLengthValidator
-from datetime import date
+from datetime import date, datetime
 from datetime import time
 
 
@@ -38,6 +38,28 @@ class Shop(models.Model):
     category = models.CharField(max_length=100, default='Others')  # Se non compilato messo in others
     idso = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
 
+    def checkQueue(self, timeslots):
+        current_time = datetime.now().time()
+        current_date = datetime.now().date()
+
+        #forced_date = datetime(2023, 6, 21).date()
+        #forced_time = datetime(2023, 6, 21, 8, 30).time()
+
+        #forced_datetime = datetime.combine(forced_date, forced_time)
+
+        timeslot = timeslots.filter(shop=self, date=current_date, start__lte=current_time, end__gt=current_time).first()
+
+        if timeslot:
+            # Conta il numero di slot disponibili per il timeslot attuale
+            num_available_slots = Slot.objects.filter(TimeSlot=timeslot, available=False).count()
+
+            # Ottieni gli idc dei timeslot attuali
+            idcs = Slot.objects.filter(TimeSlot=timeslot, available=False).values_list('idc', flat=True)
+
+            return num_available_slots, idcs
+
+        return 0, []
+
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -46,7 +68,7 @@ class Product(models.Model):
     idso = models.CharField(default='OOOOOOOO', max_length=36, validators=[MinLengthValidator(8)])
     ids = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
     idp = models.CharField(default='PPPPPPPP', max_length=36, validators=[MinLengthValidator(8)])
-    #shop = models.ForeignKey(Shop, on_delete=models.CASCADE, default='0')
+    # shop = models.ForeignKey(Shop, on_delete=models.CASCADE, default='0')
 
 
 class TimeSlot(models.Model):
@@ -63,16 +85,17 @@ class Slot(models.Model):
     TimeSlot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE, blank=True, null=True)
     idc = models.CharField(max_length=36, validators=[MinLengthValidator(8)])
 
+
 class QR(models.Model):
-    img = models.TextField()  #L'immagine è una stringa in base64 
+    img = models.TextField()  # L'immagine è una stringa in base64
     idc = models.CharField(max_length=36, validators=[MinLengthValidator(8)])
     idso = models.CharField(default='OOOOOOOO', max_length=36, validators=[MinLengthValidator(8)])
     ids = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
     idQR = models.CharField(default='QQQQQQQQ', max_length=36, validators=[MinLengthValidator(8)])
-    number = models.IntegerField(default=-1) #-1 vuol dire che non è stato ancora assegnato
-    date = models.DateField(default=date.today) #Si compila esso con la stessa data del TimeSlot.date
-    time_start = models.TimeField(default=time(0, 0, 0)) #Si compila esso con Timeslot.start
-    time_end = models.TimeField(default=time(12, 0,0 )) #Si compila esso con Timeslot.end
+    number = models.IntegerField(default=-1)  # -1 vuol dire che non è stato ancora assegnato
+    date = models.DateField(default=date.today)  # Si compila esso con la stessa data del TimeSlot.date
+    time_start = models.TimeField(default=time(0, 0, 0))  # Si compila esso con Timeslot.start
+    time_end = models.TimeField(default=time(12, 0, 0))  # Si compila esso con Timeslot.end
 
 # class QR(models.Model):   #Vedere se mettere campi come gli altri
 #     QRid = models.CharField(max_length=50)

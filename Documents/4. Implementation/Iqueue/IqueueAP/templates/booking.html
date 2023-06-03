@@ -6,18 +6,6 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
-  <script type="text/javascript">
-    function Redirect(url) {
-       location.replace("http://127.0.0.1:8000/"+url);
-    }
-
-    // function sub(a,b) {
-    //   var c
-    //   document.write(c);
-      
-    // }
-  </script>
-
   <style>
     #map {
       height: 400px;
@@ -25,25 +13,28 @@
     }
 
     .anybutton {
-      top:75%;
-      left:75%;
-      width:100px;
-      height:40px;
+      top: 75%;
+      left: 75%;
+      width: 100px;
+      height: 40px;
       position: absolute;
       z-index: 2;
-      background: rgb(0, 183, 255); 
-      }
-  
+      background: rgb(0, 183, 255);
+    }
+
     .GoingBackButton {
-      top:69%;
-      left:75%;
-      width:200px;
-      height:40px;
+      top: 69%;
+      left: 75%;
+      width: 200px;
+      height: 40px;
       position: absolute;
       z-index: 2;
-      background: rgb(0, 255, 0); 
-      }
-    
+      background: rgb(0, 255, 0);
+    }
+
+    .popup {
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -71,7 +62,7 @@
     <h2>Available slots:</h2>
     <ul>
       {% for timeslot in timeslots %}
-        <li>{{ timeslotslot.start }} - {{ timeslotslot.end }}</li>
+        <li>{{ timeslot.start }} - {{ timeslot.end }}</li>
       {% endfor %}
     </ul>
   {% else %}
@@ -84,8 +75,8 @@
     {% csrf_token %}
     <label for="selected_slot">Select a slot:</label>
     <select name="selected_slot">
-    {% for timeslot in timeslots %}
-         <option value="{{ timeslot.id }}">{{ timeslot.start }} - {{ timeslot.end }}</option>
+      {% for timeslot in timeslots %}
+        <option value="{{ timeslot.id }}">{{ timeslot.start }} - {{ timeslot.end }}</option>
       {% endfor %}
     </select>
     <button type="submit" name="btnform2">Submit</button>
@@ -94,15 +85,15 @@
   <input type="button" class="GoingBackButton" onclick="Redirect('Customer/');" value="Going back to Customer view" />
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
 
-
-
   <script type="text/javascript">
-  var shopAddresses = {{ addresses|safe }};
+    function Redirect(url) {
+      location.replace("http://127.0.0.1:8000/" + url);
+    }
 
-  var SelectedShop = {{ selected_shop|safe }};
+    var shopAddresses = {{ addresses|safe }};
+    var shopNames = {{ names|safe }};
 
-  window.onload = function() {
-    var map = L.map('map');
+    var map = L.map('map').setView([0, 0], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
@@ -136,40 +127,25 @@
     }
 
     for (var i = 0; i < shopAddresses.length; i++) {
-      var address = shopAddresses[i];
-      console.log('Address:', address);
+          var address = shopAddresses[i];
+          var name = shopNames[i];
+          console.log('Address:', address);
+          console.log('Name:', name);
 
-      if (SelectedShop === 1) {
-        let geocode = L.Control.Geocoder.nominatim().geocode(address, function(results) {
-          if (results && results.length > 0) {
-            var latlng = results[0].center;
-            console.log('Coordinates:', latlng);
-            map.setView(latlng, 13);
-            var marker = L.marker(latlng);
-            markersLayer.addLayer(marker);
-          } else {
-            console.log('No geocoding results found.');
-          }
-
-          return false;
-        });
-      } else {
-        let geocode = L.Control.Geocoder.nominatim().geocode(address, function(results) {
-          if (results && results.length > 0) {
-            var latlng = results[0].center;
-            console.log('Coordinates:', latlng);
-            var marker = L.marker(latlng);
-            markersLayer.addLayer(marker);
-          } else {
-            console.log('No geocoding results found.');
-          }
-
-          return false;
-        });
-      }
-    }
-  };
-</script>
-
+          (function(address, name) {
+            let geocode = L.Control.Geocoder.nominatim().geocode(address, function(results) {
+              if (results && results.length > 0) {
+                var latlng = results[0].center;
+                console.log('Coordinates:', latlng);
+                var marker = L.marker(latlng);
+                markersLayer.addLayer(marker);
+                marker.bindPopup('<div class="popup">' + name + '</div>').openPopup();
+              } else {
+                console.log('No geocoding results found for address:', address);
+              }
+            });
+          })(address, name);
+        }
+  </script>
 </body>
 </html>

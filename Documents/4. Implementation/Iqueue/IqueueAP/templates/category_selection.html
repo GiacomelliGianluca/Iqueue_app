@@ -4,57 +4,52 @@
 
   <script type="text/javascript">
     function Redirect(url) {
-       location.replace("http://127.0.0.1:8000/"+url);
+       location.replace("http://127.0.0.1:8000/" + url);
     }
  </script>
 
   <style>
-
     .anybutton {
-      top:75%;
-      left:75%;
-      width:100px;
-      height:40px;
+      top: 75%;
+      left: 75%;
+      width: 100px;
+      height: 40px;
       position: absolute;
       z-index: 2;
-      background: rgb(0, 183, 255); 
-      }
-    
-     </style>
+      background: rgb(0, 183, 255);
+    }
+  </style>
 </head>
-
-
 
 <body>
   <h1>
     <p>
-    Select shop category you want to visit
-    {% for shop in shop %}
+      Select shop category you want to visit
+      {% for s in shop %}
         <table>
-          <tr> 
-            <td>{{ shop.name }}</td>
-            <td>{{ shop.location }}</td>
-            <td>{{ shop.address }}</td>
-            <td>{{ shop.queue }}</td>
+          <tr>
+            <td>{{ s.name }}</td>
+            <td>{{ s.location }}</td>
+            <td>{{ s.address }}</td>
+            <td>{{ s.queue }}</td>
           </tr>
-        </table> 
-    {% endfor %}
+        </table>
+        <a href="/booking/{{ s.category }}">Select</a>
+      {% endfor %}
     </p>
   </h1>
 
-  
   <h1>
     <p>
-    What bakery do you want to choose?
-    <br>
-     <label for="name">Name:</label>
-     <input type="text" name="name" id="name">
-     <br>
-     <button onclick="window.location.href='/Booking/'"> Select</button>
-     <br>
+      What bakery do you want to choose?
+      <br>
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name">
+      <br>
+      <button onclick="window.location.href='/Booking/'">Select</button>
+      <br>
     </p>
   </h1>
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
-
 </body>
 </html>

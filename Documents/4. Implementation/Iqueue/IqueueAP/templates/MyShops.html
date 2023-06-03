@@ -1,4 +1,5 @@
 <html>
+{% load custom_tags %}
 <head>
   <title>Shop Owner</title>
 
@@ -51,21 +52,23 @@
 </p>
 {% for shop in shops %}
   <h1>{{ shop.name }}</h1>
-  <p>People in queue: {{ shop.queue }}</p>
+  {% with queue_info=shop.checkQueue %}
+    {% get_queue_info shop timeslots as queue_info %}
+    <p>People in queue: {{ queue_info.0 }}</p>
+    <p>Customers in queue: {{ queue_info.1|join:", " }}</p>
+  {% endwith %}
   {% if shop.queue > shop.max_numb_clients %}
-      <p><font color="red">Exceeding the maximum number of clients in the shop</font></p>
-  {% endif %} 
+    <p><font color="red">Exceeding the maximum number of clients in the shop</font></p>
+  {% endif %}
   <p>Rating: {{ shop.rating }}</p>
   <p>Number of ratings: {{ shop.numb_of_ratings }}</p>
-<form action=" " method="get" onsubmit="location.reload()">
-  <input type="hidden" value={{shop.ids}} name="ShopIDs"/>
-  <input type="submit" name="ADDbtn" value="ADD customer without Iqueue">
-  <input type="submit" name="DECbtn" value="DEC customer without Iqueue">
-  <br>
-  <input type="submit" name="Delete" value="Delete this shop" class="delete-button">
-</form>
-
-
+  <form action="" method="get" onsubmit="location.reload()">
+    <input type="hidden" value="{{ shop.ids }}" name="ShopIDs"/>
+    <input type="submit" name="ADDbtn" value="ADD customer without Iqueue">
+    <input type="submit" name="DECbtn" value="DEC customer without Iqueue">
+    <br>
+    <input type="submit" name="Delete" value="Delete this shop" class="delete-button">
+  </form>
 {% endfor %}
 <br>
 <p>Do you want to register a new shop?</p>
