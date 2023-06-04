@@ -34,7 +34,7 @@ class Shop(models.Model):
     ids = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
     address = models.CharField(max_length=200)
     rating = models.FloatField(default=0)
-    numb_of_ratings = models.IntegerField(default=0)
+    num_reviews = models.IntegerField(default=0)
     category = models.CharField(max_length=100, default='Others')  # Se non compilato messo in others
     idso = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
 
@@ -42,10 +42,10 @@ class Shop(models.Model):
         current_time = datetime.now().time()
         current_date = datetime.now().date()
 
-        #forced_date = datetime(2023, 6, 21).date()
-        #forced_time = datetime(2023, 6, 21, 8, 30).time()
+        # forced_date = datetime(2023, 6, 21).date()
+        # forced_time = datetime(2023, 6, 21, 8, 30).time()
 
-        #forced_datetime = datetime.combine(forced_date, forced_time)
+        # forced_datetime = datetime.combine(forced_date, forced_time)
 
         timeslot = timeslots.filter(shop=self, date=current_date, start__lte=current_time, end__gt=current_time).first()
 
@@ -55,6 +55,8 @@ class Shop(models.Model):
 
             # Ottieni gli idc dei timeslot attuali
             idcs = Slot.objects.filter(TimeSlot=timeslot, available=False).values_list('idc', flat=True)
+
+            self.queue = num_available_slots
 
             return num_available_slots, idcs
 
@@ -96,9 +98,19 @@ class QR(models.Model):
     date = models.DateField(default=date.today)  # Si compila esso con la stessa data del TimeSlot.date
     time_start = models.TimeField(default=time(0, 0, 0))  # Si compila esso con Timeslot.start
     time_end = models.TimeField(default=time(12, 0, 0))  # Si compila esso con Timeslot.end
+    scanned = models.BooleanField(default=False)
+
 
 # class QR(models.Model):   #Vedere se mettere campi come gli altri
 #     QRid = models.CharField(max_length=50)
 #     ids = Shop.ids
 #     idso = Shop_owner.idso
 #     idc = Customer.idc
+
+class Review(models.Model):
+    review = models.TextField(default="")
+    date = models.DateField(default=date.today)
+    idc = models.CharField(max_length=36, validators=[MinLengthValidator(8)])
+    ids = models.ForeignKey(Shop, on_delete=models.CASCADE,)
+    name_of_the_shop = models.CharField(max_length=36, default='SSSSSSSSSSSSSSS', validators=[MinLengthValidator(8)])
+    written = models.BooleanField(default=False)

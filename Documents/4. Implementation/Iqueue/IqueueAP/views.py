@@ -11,7 +11,7 @@ import qrcode
 import base64
 from Iqueue.forms import RegistrationForm, LogIn, ShopForm, ProductForm, Shop_and_day_selectionForm, \
     TimeSlot_selectionForm
-from IqueueAP.models import Account, Shop, Product, TimeSlot, Slot, QR
+from IqueueAP.models import Account, Shop, Product, TimeSlot, Slot, QR, Review
 from django.contrib import messages
 from qrcode import QRCode
 import json
@@ -152,7 +152,7 @@ def Booking_view(request, selected_category):
                 timeslot.available = False
                 timeslot.save()
 
-            qr_data = f"Negozio: {shop.ids}\nData: {timeslot.date}\nOrario: {timeslot.start} - {timeslot.end}\nNumero nella fscia oraria: {slot.number}"
+            qr_data = f"Negozio: {shop.ids}\nData: {timeslot.date}\nOrario: {timeslot.start} - {timeslot.end}\nNumero nella fscia oraria: {slot.number}\nIdc: {slot.idc}"
 
             qr_code_img = qrcode.QRCode()
             qr_code_img.add_data(qr_data)
@@ -415,14 +415,16 @@ def scan_qr(request):
         qr_code_value = request.POST.get('qrCodeValue')
 
         qr_code_lines = qr_code_value.split('\n')
-        shop_name = qr_code_lines[0].split(': ')[1]
-        shop_name = shop_name.strip()
+        ids = qr_code_lines[0].split(': ')[1]
+        ids = ids.strip()
         date_str = qr_code_lines[1].split(': ')[1]
         date_str = date_str.strip()
         time_range_str = qr_code_lines[2].split(': ')[1]
         time_range_str = time_range_str.strip()
         number_within_slot = qr_code_lines[3].split(': ')[1]
-        number_within_slot = time_range_str.strip()
+        number_within_slot = number_within_slot.strip()
+        idc = qr_code_lines[4].split(': ')[1]
+        idc = idc.strip()
 
         date = datetime.strptime(date_str, '%Y-%m-%d').date()
 
@@ -435,18 +437,41 @@ def scan_qr(request):
 
         # da fare il get con l'ids!!!
         try:
-            shop = Shop.objects.get(name=shop_name)
+            shop = Shop.objects.get(ids=ids)
         except Shop.DoesNotExist:
             return render(request, 'error.html')
 
         try:
             time_slot = TimeSlot.objects.get(shop=shop, start=start_datetime, end=end_datetime, date=date)
-            slot = Slot.objects.get(time_slot=time_slot, number=number_within_slot)
+            slot = Slot.objects.get(TimeSlot=time_slot, number=number_within_slot)
             if not slot.available:
-                shop.queue -= 1
-                shop.save()
-                return render(request, "scan_successful.html")
+                qr = QR.objects.get(ids=ids, date=date, time_start=start_datetime, time_end=end_datetime,
+                                    number=number_within_slot)
+                qr.scanned = True
+                review = Review(ids=shop, idc=idc, name_of_the_shop=shop.name)
+                review.save()
+                return render(request, "scan_successful.html", {'review': review})
         except TimeSlot.DoesNotExist:
             return render(request, 'error.html')
 
     return render(request, 'scan.html')
+
+
+# qr = QR(img=qr_code_img_str, idc=slot.idc, idso=shop.idso, ids=shop.ids, idQR=idQR, number=slot.number,
+#                   date=timeslot.date, time_start=timeslot.start, time_end=timeslot.end)
+
+def write_review(request):
+    idc = request.session.get('idc', '')
+    reviews = Review.objects.filter(written=False, idc=idc)
+    if request.method == 'POST':
+        review_id = request.POST.get('review_id')
+        rating = int(request.POST.get(f'rating_{review_id}'))
+        review = Review.objects.get(id=review_id)
+        shop = review.ids
+        shop.rating = round(((shop.rating * shop.num_reviews) + rating) / (shop.num_reviews + 1),1)
+        shop.num_reviews += 1
+        shop.save()
+        review.written = True
+        review.save()
+
+    return render(request, "Reviews.html", {'reviews': reviews})

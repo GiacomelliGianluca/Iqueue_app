@@ -54,8 +54,8 @@
   <h1>{{ shop.name }}</h1>
   {% with queue_info=shop.checkQueue %}
     {% get_queue_info shop timeslots as queue_info %}
-    <p>People in queue: {{ queue_info.0 }}</p>
-    <p>Customers in queue: {{ queue_info.1|join:", " }}</p>
+    <p>People in queue: {{ shop.queue }}</p>
+    <p>Customers in queue: {{ idcs }}</p>
   {% endwith %}
   {% if shop.queue > shop.max_numb_clients %}
     <p><font color="red">Exceeding the maximum number of clients in the shop</font></p>

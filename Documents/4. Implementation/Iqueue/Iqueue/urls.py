@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from IqueueAP.views import InitialLoading, scan_qr
+from IqueueAP.views import InitialLoading, scan_qr, write_review
 from IqueueAP.views import registration_view, login_view
 from IqueueAP.views import success
 from IqueueAP.views import selectRole
@@ -62,6 +62,7 @@ urlpatterns = [
     #path('Customer/bakery/', booking, name='booking'),
     #path('booking-submit', bookingSubmit, name='bookingSubmit'),
     path('ShopOwner/Scan/', scan_qr, name='scan'),
+    path('Customer/WriteReview/', write_review, name='Reservation_view'),
 
 ]
 
