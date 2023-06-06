@@ -31,6 +31,7 @@ class Shop(models.Model):
     lon = models.FloatField(default=0)  # longitude
     max_numb_clients = models.IntegerField()
     queue = models.IntegerField(default=0)
+    queue_no_app = models.IntegerField(default=0)
     ids = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
     address = models.CharField(max_length=200)
     rating = models.FloatField(default=0)
@@ -42,12 +43,12 @@ class Shop(models.Model):
         current_time = datetime.now().time()
         current_date = datetime.now().date()
 
-        # forced_date = datetime(2023, 6, 21).date()
-        # forced_time = datetime(2023, 6, 21, 8, 30).time()
+        forced_date = datetime(2023, 6, 22).date()
+        forced_time = datetime(2023, 6, 21, 8, 30).time()
 
         # forced_datetime = datetime.combine(forced_date, forced_time)
 
-        timeslot = timeslots.filter(shop=self, date=current_date, start__lte=current_time, end__gt=current_time).first()
+        timeslot = timeslots.filter(shop=self, date=forced_date, start__lte=forced_time, end__gt=forced_time).first()
 
         if timeslot:
             # Conta il numero di slot disponibili per il timeslot attuale
@@ -56,11 +57,10 @@ class Shop(models.Model):
             # Ottieni gli idc dei timeslot attuali
             idcs = Slot.objects.filter(TimeSlot=timeslot, available=False).values_list('idc', flat=True)
 
-            self.queue = num_available_slots
 
             return num_available_slots, idcs
-
         return 0, []
+
 
 
 class Product(models.Model):
@@ -111,6 +111,6 @@ class Review(models.Model):
     review = models.TextField(default="")
     date = models.DateField(default=date.today)
     idc = models.CharField(max_length=36, validators=[MinLengthValidator(8)])
-    ids = models.ForeignKey(Shop, on_delete=models.CASCADE,)
+    ids = models.ForeignKey(Shop, on_delete=models.CASCADE, )
     name_of_the_shop = models.CharField(max_length=36, default='SSSSSSSSSSSSSSS', validators=[MinLengthValidator(8)])
     written = models.BooleanField(default=False)

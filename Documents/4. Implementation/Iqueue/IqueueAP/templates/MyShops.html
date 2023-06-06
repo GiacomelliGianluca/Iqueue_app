@@ -50,18 +50,15 @@
 <p>
     Your current shops are:
 </p>
-{% for shop in shops %}
+{% for shop, idc in list %}
   <h1>{{ shop.name }}</h1>
-  {% with queue_info=shop.checkQueue %}
-    {% get_queue_info shop timeslots as queue_info %}
     <p>People in queue: {{ shop.queue }}</p>
-    <p>Customers in queue: {{ idcs }}</p>
-  {% endwith %}
+    <p>Customers in queue: {{ idc }}</p>
   {% if shop.queue > shop.max_numb_clients %}
     <p><font color="red">Exceeding the maximum number of clients in the shop</font></p>
   {% endif %}
   <p>Rating: {{ shop.rating }}</p>
-  <p>Number of ratings: {{ shop.numb_of_ratings }}</p>
+  <p>Number of ratings: {{ shop.num_reviews }}</p>
   <form action="" method="get" onsubmit="location.reload()">
     <input type="hidden" value="{{ shop.ids }}" name="ShopIDs"/>
     <input type="submit" name="ADDbtn" value="ADD customer without Iqueue">

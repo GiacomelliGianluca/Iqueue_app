@@ -193,27 +193,32 @@ def Booking_view(request, selected_category):
 def Reservation_view(request):
     idc = request.session.get('idc', '')
     qrs = QR.objects.filter(idc=idc)
+    print(qrs)
     shop_names = []
     shop_address = []
 
     for qr in qrs:
+        print(qr.ids)
         shop = Shop.objects.get(ids=qr.ids)
+
         shop_names.append(shop.name)
         shop_address.append(shop.address)
 
     if (request.GET.get('Guide')):
         ids_for_address = request.GET.get('ids')
         shop_for_address = Shop.objects.get(ids=ids_for_address)
-        address = shop_for_address.address
+        address=shop_for_address.address
         maps_url = f"https://www.google.com/maps/search/?api=1&query={address}"
+
         return redirect(maps_url)
 
-    list = zip(qrs, shop_names, shop_address)
+    list = zip(qrs , shop_names, shop_address)
+
     context = {
-        'list': list
+        'list':list
     }
 
-    return render(request, 'CustomerReservations.html', context=context)
+    return render(request, 'CustomerReservations.html',context=context)
 
 
 # SHOP OWNER
@@ -245,7 +250,7 @@ def Shop_view(request):
 
             shop = Shop(name=name, lat=lat, lon=lon, max_numb_clients=max_numb_clients, ids=ids, idso=idso,
                         address=address,
-                        rating=0, numb_of_ratings=0, category=category)
+                        rating=0, num_reviews=0, category=category)
 
             shop.save()
 
@@ -298,17 +303,27 @@ def SuccessShopRegistration(request):
 def MyShops_view(request):
     idso = request.session.get('idso', '')
     timeslots = TimeSlot.objects.all()
+    shops = Shop.objects.filter(idso=idso)
+
+    idcs = []
+
+    for shop in shops:
+        timeslot = TimeSlot.objects.filter(shop=shop)
+        num_av_slots, idc = shop.checkQueue(timeslot)
+        shop.queue = num_av_slots + shop.queue_no_app
+        idcs.append(idc)
+        shop.save()
 
     if (request.GET.get('ADDbtn')):
         shop = get_object_or_404(Shop, ids=request.GET.get('ShopIDs'))
-        shop.queue += 1
+        shop.queue_no_app += 1
         shop.save()
         return redirect('MyShops_view')
 
     if (request.GET.get('DECbtn')):
         shop = get_object_or_404(Shop, ids=request.GET.get('ShopIDs'))
-        if (shop.queue > 0):
-            shop.queue -= 1
+        if (shop.queue_no_app > 0):
+            shop.queue_no_app -= 1
             shop.save()
         return redirect('MyShops_view')
 
@@ -316,11 +331,10 @@ def MyShops_view(request):
         shop_to_delete = get_object_or_404(Shop, ids=request.GET.get('ShopIDs'))
         return redirect('DeleteShop', ids=shop_to_delete.ids)
 
-    context = {
+    data = zip(shops, idcs)
 
-        'shops': Shop.objects.filter(idso=idso),
-        'timeslots': timeslots,
-        'idso': idso,
+    context = {
+        'list': data,
     }
 
     return render(request, 'MyShops.html', context=context)
@@ -448,6 +462,7 @@ def scan_qr(request):
                 qr = QR.objects.get(ids=ids, date=date, time_start=start_datetime, time_end=end_datetime,
                                     number=number_within_slot)
                 qr.scanned = True
+                qr.delete()
                 review = Review(ids=shop, idc=idc, name_of_the_shop=shop.name)
                 review.save()
                 return render(request, "scan_successful.html", {'review': review})
@@ -468,7 +483,7 @@ def write_review(request):
         rating = int(request.POST.get(f'rating_{review_id}'))
         review = Review.objects.get(id=review_id)
         shop = review.ids
-        shop.rating = round(((shop.rating * shop.num_reviews) + rating) / (shop.num_reviews + 1),1)
+        shop.rating = round(((shop.rating * shop.num_reviews) + rating) / (shop.num_reviews + 1), 1)
         shop.num_reviews += 1
         shop.save()
         review.written = True
