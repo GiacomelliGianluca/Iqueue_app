@@ -35,6 +35,8 @@ from IqueueAP.views import MyShops_view
 from IqueueAP.views import Reservation_view
 from IqueueAP.views import ShopQueueList
 from IqueueAP.views import DeleteShop
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 
@@ -66,6 +68,8 @@ urlpatterns = [
     #path('Customer/bakery/', booking, name='booking'),
     #path('booking-submit', bookingSubmit, name='bookingSubmit'),
 ]
+
+urlpatterns+=static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 
 #Io farei che dopo la registration, si riparte sempre dal login
 

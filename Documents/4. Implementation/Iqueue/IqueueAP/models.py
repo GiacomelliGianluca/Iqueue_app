@@ -24,8 +24,12 @@ class Account(models.Model):  # La classe account corrisponde a user di UML
         self.email = email
         self.password = password
 
+def get_default_image():
+    return "default_image.png"
+
 
 class Shop(models.Model):
+    img = models.ImageField(upload_to='images/', height_field=None, width_field=None, max_length=10000,  default=get_default_image)
     name = models.CharField(max_length=100)
     lat = models.FloatField(default=0)  # latitude
     lon = models.FloatField(default=0)  # longitude

@@ -29,7 +29,7 @@
 
 
 <body>
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
     <label for="name">Name:</label>
     <input type="text" name="name" id="name">
@@ -66,9 +66,9 @@
     <label for="slot_duration">Slot Duration (in minutes):</label>
     <input type="number" name="slot_duration" id="slot_duration">
     <br>
-
-
-
+    <label for="img">Image:</label>
+    <input type="file" name="img" id="img">
+    <br>
     <input type="submit" value="Record">
 </form>
 

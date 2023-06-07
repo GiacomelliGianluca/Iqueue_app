@@ -231,7 +231,7 @@ def Shop_view(request):
     # j=0
     # progress=0 
     if request.method == 'POST':
-        form = ShopForm(request.POST)
+        form = ShopForm(request.POST, request.FILES)
         if form.is_valid():
             name = form.cleaned_data['name']
             lat = form.cleaned_data['lat']
@@ -249,8 +249,12 @@ def Shop_view(request):
             ids = str(uuid.uuid4())
 
             shop = Shop(name=name, lat=lat, lon=lon, max_numb_clients=max_numb_clients, ids=ids, idso=idso,
-                        address=address,
-                        rating=0, num_reviews=0, category=category)
+                        address=address, rating=0, num_reviews=0, category=category)
+
+            # assegnare il campo immagine dell'istanza di Shop al file caricato dall'utente
+
+            if 'img' in request.FILES:
+                shop.img = request.FILES['img']
 
             shop.save()
 
