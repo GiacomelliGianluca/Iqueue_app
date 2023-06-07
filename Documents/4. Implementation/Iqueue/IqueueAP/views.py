@@ -340,12 +340,21 @@ def MyShops_view(request):
     idso = request.session.get('idso', '')
     shops = Shop.objects.filter(idso=idso)
     
-
+    #Queue update
     for shop in shops:
         timeslot = TimeSlot.objects.filter(shop=shop)
         num_av_slots = shop.checkQueue(timeslot)
         shop.queue = num_av_slots + shop.queue_no_app
         shop.save()
+
+    #Advertisement
+    adv=[]
+    for shop in shops:
+        advert = Advertisement.objects.filter(ids=shop.ids).first()
+        if advert:
+            adv.append(advert)
+        else:
+            adv.append(None)
 
 
     if (request.GET.get('ADDbtn')):
@@ -361,17 +370,22 @@ def MyShops_view(request):
             shop.save()
         return redirect('MyShops_view')
 
-    if (request.GET.get('Delete')):
+    if (request.GET.get('Delete_shop')):
         shop_to_delete = get_object_or_404(Shop, ids=request.GET.get('ShopIDs'))
         return redirect('DeleteShop', ids=shop_to_delete.ids)
     
     if (request.GET.get('QueueList')):
         shop_to_show_queue = get_object_or_404(Shop, ids=request.GET.get('ShopIDs'))
         return redirect('ShopQueueList', ids=shop_to_show_queue.ids)
+    
+    if (request.GET.get('Delete_adv')):
+        adv_to_delete = get_object_or_404(Advertisement, ids=request.GET.get('ShopIDs'))
+        return redirect('DeleteAdv', ids=adv_to_delete.ids)
 
+    list=zip(shops,adv)
   
     context = {
-        'shops': shops,
+        'list': list 
     }
 
     return render(request, 'MyShops.html', context=context)
@@ -418,6 +432,17 @@ def DeleteShop(request, ids):
         return redirect('MyShops_view')
 
     return render(request, 'DeleteShop.html')
+
+def DeleteAdv(request, ids):
+    adv = get_object_or_404(Advertisement, ids=ids)
+    if (request.GET.get('Choice')):
+        Choice = request.GET.get('Choice')
+        if Choice == 'Yes':
+            adv.delete()
+
+        return redirect('MyShops_view')
+
+    return render(request, 'DeleteAdvertisement.html')
 
 
 def Product_view(request):

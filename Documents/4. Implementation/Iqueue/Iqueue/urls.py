@@ -35,6 +35,7 @@ from IqueueAP.views import MyShops_view
 from IqueueAP.views import Reservation_view
 from IqueueAP.views import ShopQueueList
 from IqueueAP.views import DeleteShop
+from IqueueAP.views import DeleteAdv
 from IqueueAP.views import Advertisement_view
 from IqueueAP.views import SuccessAdvertisementRegistration
 from django.conf.urls.static import static
@@ -59,6 +60,7 @@ urlpatterns = [
     path('ShopOwner/MyShops/NewShop/success/',SuccessShopRegistration, name='SuccessShopRegistration'),
     path('ShopOwner/MyShops/QueueList/<str:ids>/', ShopQueueList, name='ShopQueueList'),
     path('ShopOwner/MyShops/DeleteShop/<str:ids>/', DeleteShop, name='DeleteShop'),
+    path('ShopOwner/MyShops/DeleteAdv/<str:ids>/', DeleteAdv, name='DeleteAdv'),
     path('ShopOwner/Product/', Product_view, name='Product_view'),
     path('ShopOwner/Product/success/', SuccessProductRegistration, name='SuccessProductRegistration'),
     path('ShopOwner/Advertisement/', Advertisement_view, name='Advertisement_view'),

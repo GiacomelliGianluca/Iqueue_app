@@ -48,7 +48,7 @@
 
 <body>
 <p>Your current shops are: </p>
-{% for shop in shops %}
+{% for shop, adv in list %}
   <h1>{{ shop.name }}</h1>
   <form action="" method="get" onsubmit="location.reload()">
     <input type="hidden" value="{{ shop.ids }}" name="ShopIDs"/>
@@ -61,7 +61,11 @@
     <input type="submit" name="ADDbtn" value="ADD customer without Iqueue">
     <input type="submit" name="DECbtn" value="DEC customer without Iqueue">
     <br>
-    <input type="submit" name="Delete" value="Delete this shop" class="delete-button">
+    <input type="submit" name="Delete_shop" value="Delete this shop" class="delete-button">
+    {% if adv %}
+      <p><b>This shop has been advertised</b>: from {{ adv.date_start }} to {{ adv.date_end }}</p>
+      <input type="submit" name="Delete_adv" value="Delete the advertisement" class="delete-button">
+    {% endif %}
   </form>
   {% empty %}
   <h1>No shops registered yet</h1>

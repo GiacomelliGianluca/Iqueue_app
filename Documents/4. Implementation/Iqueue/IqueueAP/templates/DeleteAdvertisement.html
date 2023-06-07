@@ -1,0 +1,45 @@
+<html>
+<head>
+  <title>Delete Shop</title>
+
+  <script type="text/javascript">
+    function Redirect(url) {
+       location.replace("http://127.0.0.1:8000/"+url);
+    }
+
+    // function sub(a,b) {
+    //   var c
+    //   document.write(c);
+      
+    // }
+  </script>
+
+  <style>
+
+    .anybutton {
+      top:75%;
+      left:75%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 183, 255); 
+      }
+    
+     </style>
+
+</head>
+
+<body>
+<h1>
+    Are you sure that you want to delete the advertisement?
+</h1>
+<form action=" " method="get" ">
+  <input type="submit" name="Choice" value="Yes">
+  <input type="submit" name="Choice" value="No">
+</form>
+
+<input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" /><!-- DA SISTEMARE POSIZIONE--->
+
+</body>
+</html>
