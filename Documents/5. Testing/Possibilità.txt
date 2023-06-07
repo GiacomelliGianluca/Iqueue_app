@@ -1,0 +1,2 @@
+-Il testing black-box si potrebbe fare sul booking dello slot;
+-Sulla creazione della coda
