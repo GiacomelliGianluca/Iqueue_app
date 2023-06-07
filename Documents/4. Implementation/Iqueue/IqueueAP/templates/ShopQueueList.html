@@ -1,0 +1,91 @@
+<html>
+{% load custom_tags %}
+<head>
+  <title>Shop Owner</title>
+
+  <script type="text/javascript">
+    function Redirect(url) {
+       location.replace("http://127.0.0.1:8000/"+url);
+    }
+
+    // function sub(a,b) {
+    //   var c
+    //   document.write(c);
+      
+    // }
+  </script>
+
+  <style>
+
+    .anybutton {
+      top:75%;
+      left:75%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 183, 255); 
+      }
+
+    .GoingBackButton {
+      top:60%;
+      left:75%;
+      width:200px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 255, 0); 
+      }
+    
+    table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    }
+    
+    th, td {
+    padding: 10px;
+    width: 33.33%;
+    border: 1px solid black;
+    }
+
+     </style>
+
+</head>
+
+<body>
+<p>The current queue in the shop <b>{{shop.name}}</b> is: </p>
+<table>
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Name</th>
+      <th>ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item1, item2 in list %}
+      <tr>
+        <td>{{ item1.number }}</td>
+        <td>{{ item2 }}</td>
+        <td>{{ item1.idc|slice:"0:8" }}-{{ item1.idc|slice:"8:12" }}-{{ item1.idc|slice:"12:16" }}-{{ item1.idc|slice:"16:20" }}-{{ item1.idc|slice:"20:" }}</td>
+      </tr>
+    {% endfor %}
+    {% for number in NumberNOAPP %}
+      <tr>
+        <td>{{ number }}</td>
+        <td>NO APP customer</td>
+        <td>//</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p>The number of the customers without the app starts from the maximum number of people in the shop (with this shop <b>{{shop.max_numb_clients}}</b>).</p>
+
+<input type="button" onclick="Redirect('ShopOwner/Scan/');" value="SCAN QR" />
+
+<input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" />
+<input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" /><!-- DA SISTEMARE POSIZIONE--->
+
+</body>
+</html>

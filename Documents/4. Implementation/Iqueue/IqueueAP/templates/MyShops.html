@@ -47,25 +47,24 @@
 </head>
 
 <body>
-<p>
-    Your current shops are:
-</p>
-{% for shop, idc in list %}
+<p>Your current shops are: </p>
+{% for shop in shops %}
   <h1>{{ shop.name }}</h1>
-    <p>People in queue: {{ shop.queue }}</p>
-    <p>Customers in queue: {{ idc }}</p>
-  {% if shop.queue > shop.max_numb_clients %}
-    <p><font color="red">Exceeding the maximum number of clients in the shop</font></p>
-  {% endif %}
-  <p>Rating: {{ shop.rating }}</p>
-  <p>Number of ratings: {{ shop.num_reviews }}</p>
   <form action="" method="get" onsubmit="location.reload()">
     <input type="hidden" value="{{ shop.ids }}" name="ShopIDs"/>
+    <p>People in queue: {{ shop.queue }}  {% if shop.queue > 0 %} <input type="submit" name="QueueList" value="Show queue"> {% endif %}</p>
+    {% if shop.queue > shop.max_numb_clients %}
+      <p><font color="red">Exceeding the maximum number of clients in the shop</font></p>
+    {% endif %}
+    <p>Rating: {{ shop.rating }}</p>
+    <p>Number of ratings: {{ shop.num_reviews }}</p>
     <input type="submit" name="ADDbtn" value="ADD customer without Iqueue">
     <input type="submit" name="DECbtn" value="DEC customer without Iqueue">
     <br>
     <input type="submit" name="Delete" value="Delete this shop" class="delete-button">
   </form>
+  {% empty %}
+  <h1>No shop registered yet</h1>
 {% endfor %}
 <br>
 <p>Do you want to register a new shop?</p>

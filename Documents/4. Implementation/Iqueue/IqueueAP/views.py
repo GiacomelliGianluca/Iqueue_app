@@ -302,17 +302,15 @@ def SuccessShopRegistration(request):
 
 def MyShops_view(request):
     idso = request.session.get('idso', '')
-    timeslots = TimeSlot.objects.all()
     shops = Shop.objects.filter(idso=idso)
-
-    idcs = []
+    
 
     for shop in shops:
         timeslot = TimeSlot.objects.filter(shop=shop)
-        num_av_slots, idc = shop.checkQueue(timeslot)
+        num_av_slots = shop.checkQueue(timeslot)
         shop.queue = num_av_slots + shop.queue_no_app
-        idcs.append(idc)
         shop.save()
+
 
     if (request.GET.get('ADDbtn')):
         shop = get_object_or_404(Shop, ids=request.GET.get('ShopIDs'))
@@ -330,14 +328,48 @@ def MyShops_view(request):
     if (request.GET.get('Delete')):
         shop_to_delete = get_object_or_404(Shop, ids=request.GET.get('ShopIDs'))
         return redirect('DeleteShop', ids=shop_to_delete.ids)
+    
+    if (request.GET.get('QueueList')):
+        shop_to_show_queue = get_object_or_404(Shop, ids=request.GET.get('ShopIDs'))
+        return redirect('ShopQueueList', ids=shop_to_show_queue.ids)
 
-    data = zip(shops, idcs)
-
+  
     context = {
-        'list': data,
+        'shops': shops,
     }
 
     return render(request, 'MyShops.html', context=context)
+
+def ShopQueueList(request, ids):
+    shop = get_object_or_404(Shop, ids=ids) 
+    qrs  =  QR.objects.filter(ids=ids)
+    names=[]
+    
+    for qr in qrs:
+        name = Account.objects.filter(idc=qr.idc).first()
+        if name:
+            names.append(name.name)    
+
+    numberNOAPP=[]
+    if shop.queue_no_app>=0:
+        for i in range(shop.queue_no_app):
+            numberNOAPP.append(shop.max_numb_clients+i+1)
+    # if (request.GET.get('Choice')):
+    #     Choice = request.GET.get('Choice')
+    #     if Choice == 'Yes':
+    #         shop.delete()
+
+        # return redirect('MyShops_view')
+
+    list = zip(qrs ,names)
+
+    context = {
+        'list':list,
+        'NumberNOAPP': numberNOAPP,
+        'shop': shop
+    }
+
+    return render(request, 'ShopQueueList.html', context=context)
 
 
 def DeleteShop(request, ids):

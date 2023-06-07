@@ -33,6 +33,7 @@ from IqueueAP.views import Booking_view
 from IqueueAP.views import Booking_view
 from IqueueAP.views import MyShops_view
 from IqueueAP.views import Reservation_view
+from IqueueAP.views import ShopQueueList
 from IqueueAP.views import DeleteShop
 
 
@@ -40,6 +41,7 @@ from IqueueAP.views import DeleteShop
 
 
 urlpatterns = [
+    path('Customer/WriteReview/', write_review, name='Reservation_view'),
     path('', InitialLoading, name='InitialLoading'),
     path('login/', login_view, name='login_View'),
     path('registration/', registration_view, name='registration'),
@@ -51,9 +53,11 @@ urlpatterns = [
     path('ShopOwner/MyShops/', MyShops_view, name='MyShops_view'),
     path('ShopOwner/MyShops/NewShop/', Shop_view, name='Shop_view'),
     path('ShopOwner/MyShops/NewShop/success/',SuccessShopRegistration, name='SuccessShopRegistration'),
+    path('ShopOwner/MyShops/QueueList/<str:ids>/', ShopQueueList, name='ShopQueueList'),
     path('ShopOwner/MyShops/DeleteShop/<str:ids>/', DeleteShop, name='DeleteShop'),
     path('ShopOwner/Product/', Product_view, name='Product_view'),
     path('ShopOwner/Product/success/', SuccessProductRegistration, name='SuccessProductRegistration'),
+    path('ShopOwner/Scan/', scan_qr, name='scan'),
     path('Customer/', Customer_view, name='Customer_view'),
     path('Customer/Selection/', Customer_CategorySelection_view, name='Customer_CategorySelection_view'),    
     path('Customer/Selection/(?P<selected_category>\s+)/', Booking_view, name='Booking_view'),
@@ -61,9 +65,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     #path('Customer/bakery/', booking, name='booking'),
     #path('booking-submit', bookingSubmit, name='bookingSubmit'),
-    path('ShopOwner/Scan/', scan_qr, name='scan'),
-    path('Customer/WriteReview/', write_review, name='Reservation_view'),
-
 ]
 
 #Io farei che dopo la registration, si riparte sempre dal login

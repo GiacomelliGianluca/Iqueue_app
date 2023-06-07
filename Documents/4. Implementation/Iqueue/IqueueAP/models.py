@@ -43,23 +43,20 @@ class Shop(models.Model):
         current_time = datetime.now().time()
         current_date = datetime.now().date()
 
-        forced_date = datetime(2023, 6, 22).date()
-        forced_time = datetime(2023, 6, 21, 8, 30).time()
+        forced_date = datetime(2023, 6, 29).date()
+        forced_time = datetime(2023, 6, 29, 11, 30).time()
 
         # forced_datetime = datetime.combine(forced_date, forced_time)
 
         timeslot = timeslots.filter(shop=self, date=forced_date, start__lte=forced_time, end__gt=forced_time).first()
 
         if timeslot:
-            # Conta il numero di slot disponibili per il timeslot attuale
-            num_available_slots = Slot.objects.filter(TimeSlot=timeslot, available=False).count()
+            # Conta il numero di prenotazioni svolte per il timeslot attuale
+            num_available_slots = QR.objects.filter(time_start=timeslot.start).count()
+            
 
-            # Ottieni gli idc dei timeslot attuali
-            idcs = Slot.objects.filter(TimeSlot=timeslot, available=False).values_list('idc', flat=True)
-
-
-            return num_available_slots, idcs
-        return 0, []
+            return num_available_slots
+        return 0
 
 
 
