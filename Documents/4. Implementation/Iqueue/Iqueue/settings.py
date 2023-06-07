@@ -72,7 +72,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "Iqueue.wsgi.application"
 
-MEDIA_ROOT = 'C:/Users/pc/Documents/GitHub/SW_project_2022-2023/Documents/4. Implementation/Iqueue/Media'
+MEDIA_ROOT = 'C:/Users/pc/Documents/GitHub/SW_project_2022-2023/Documents/4. Implementation/Iqueue/Media/'
 MEDIA_URL =''
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

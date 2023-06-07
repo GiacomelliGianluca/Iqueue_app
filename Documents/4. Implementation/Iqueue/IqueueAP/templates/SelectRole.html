@@ -29,6 +29,17 @@
   <p>Welcome back {{name}} !</p>
   <p>Your Customer ID: {{idc}} </p>
   <p>Your Shop Owner ID: {{idso}} </p>
+  <br>
+  <br>
+  <br>
+
+  {% if shop %}
+    <p>Advertisement: </p>
+    <p><i>{{ shop.name }}</i></p>
+    <img src="{{ shop.img.url}}" width=500>
+    <p>Location: {{ shop.address }}</p>
+  {% endif %}
+
 
 
 </body>

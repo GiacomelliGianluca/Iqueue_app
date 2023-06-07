@@ -1,18 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Form per il Voto</title>
+    <title>Reviews form</title>
+
+    <script type="text/javascript">
+        function Redirect(url) {
+           location.replace("http://127.0.0.1:8000/"+url);
+        }
+    
+        // function sub(a,b) {
+        //   var c
+        //   document.write(c);
+          
+        // }
+      </script>
+
+    <style>
+
+        .anybutton {
+          top:75%;
+          left:75%;
+          width:100px;
+          height:40px;
+          position: absolute;
+          z-index: 2;
+          background: rgb(0, 183, 255); 
+          }
+    
+        .GoingBackButton {
+          top:60%;
+          left:75%;
+          width:200px;
+          height:40px;
+          position: absolute;
+          z-index: 2;
+          background: rgb(0, 255, 0); 
+          }
+        
+      </style>
 </head>
 <body>
     <h1>Write your reviews</h1>
 {% if reviews %}
-    <form action="/Customer/WriteReview/" method="POST">
-        {% csrf_token %}
-        {% for review in reviews %}
+    {% for review in reviews %}
+        <form action="/Customer/WriteReview/" method="POST">
+            {% csrf_token %}
             <div>
                 <p>Shop: {{ review.name_of_the_shop }}</p>
                 <input type="hidden" name="review_id" value="{{ review.id }}">
-                <label for="rating_{{ review.id }}">Voto:</label>
+                <label for="rating_{{ review.id }}">Rate:</label>
                 <select id="rating_{{ review.id }}" name="rating_{{ review.id }}" required>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -21,13 +57,17 @@
                     <option value="5">5</option>
                 </select>
             </div>
+            <br>
+            <input type="submit" value="Invia">
+        </form>
         {% endfor %}
-        <br>
-        <input type="submit" value="Invia">
-    </form>
 {% else %}
  <p>No reviews to add</p>
     <a href="/Customer/">Go to the main view</a>
 {% endif %}
+
+<input type="button" class="GoingBackButton" onclick="Redirect('Customer/');" value="Going back to Customer view" />
+<input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
+
 </body>
 </html>

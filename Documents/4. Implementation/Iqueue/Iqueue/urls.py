@@ -35,6 +35,8 @@ from IqueueAP.views import MyShops_view
 from IqueueAP.views import Reservation_view
 from IqueueAP.views import ShopQueueList
 from IqueueAP.views import DeleteShop
+from IqueueAP.views import Advertisement_view
+from IqueueAP.views import SuccessAdvertisementRegistration
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -59,6 +61,8 @@ urlpatterns = [
     path('ShopOwner/MyShops/DeleteShop/<str:ids>/', DeleteShop, name='DeleteShop'),
     path('ShopOwner/Product/', Product_view, name='Product_view'),
     path('ShopOwner/Product/success/', SuccessProductRegistration, name='SuccessProductRegistration'),
+    path('ShopOwner/Advertisement/', Advertisement_view, name='Advertisement_view'),
+    path('ShopOwner/Advertisement/success/<str:ids>/', SuccessAdvertisementRegistration, name='SuccessAdvertisementRegistration'),
     path('ShopOwner/Scan/', scan_qr, name='scan'),
     path('Customer/', Customer_view, name='Customer_view'),
     path('Customer/Selection/', Customer_CategorySelection_view, name='Customer_CategorySelection_view'),    
@@ -69,9 +73,9 @@ urlpatterns = [
     #path('booking-submit', bookingSubmit, name='bookingSubmit'),
 ]
 
+#Da commentare e togliere da commento ogni volta che si aggiunge un URL!!
 urlpatterns+=static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 
-#Io farei che dopo la registration, si riparte sempre dal login
 
 
 

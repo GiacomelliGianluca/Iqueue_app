@@ -1,4 +1,6 @@
 from datetime import timedelta, datetime
+from dateutil.relativedelta import relativedelta
+import random
 
 from django.http import JsonResponse
 
@@ -10,8 +12,8 @@ import uuid
 import qrcode
 import base64
 from Iqueue.forms import RegistrationForm, LogIn, ShopForm, ProductForm, Shop_and_day_selectionForm, \
-    TimeSlot_selectionForm
-from IqueueAP.models import Account, Shop, Product, TimeSlot, Slot, QR, Review
+    TimeSlot_selectionForm, AdvertisementForm
+from IqueueAP.models import Account, Shop, Product, TimeSlot, Slot, QR, Review, Advertisement
 from django.contrib import messages
 from qrcode import QRCode
 import json
@@ -33,7 +35,19 @@ def selectRole(request):
     name = request.session.get('name', '')
     idc = request.session.get('idc', '')
     idso = request.session.get('idso', '')
-    return render(request, 'SelectRole.html', {'name': name, 'idc': idc, 'idso': idso})
+
+    #Advertisement
+    idss=[]
+    for adv in Advertisement.objects.all():
+        idss.append(adv.ids)
+        #Delating of due advertisements
+        if datetime.now().date()== adv.date_end:
+            adv.delete()
+    if idss:
+        random_ids = random.choice(idss)
+        shop_advertised=Shop.objects.filter(ids=random_ids).first()
+
+    return render(request, 'SelectRole.html', {'name': name, 'idc': idc, 'idso': idso, 'shop':shop_advertised})
 
 
 def registration_view(request):
@@ -221,6 +235,24 @@ def Reservation_view(request):
     return render(request, 'CustomerReservations.html',context=context)
 
 
+def write_review(request):
+    idc = request.session.get('idc', '')
+    reviews = Review.objects.filter(written=False, idc=idc)
+    if request.method == 'POST':
+        review_id = request.POST.get('review_id')
+        rating = int(request.POST.get(f'rating_{review_id}'))
+        review = Review.objects.get(id=review_id)
+        shop = review.ids
+        shop.rating = round(((shop.rating * shop.num_reviews) + rating) / (shop.num_reviews + 1), 1)
+        shop.num_reviews += 1
+        shop.save()
+        review.written = True
+        review.save()
+
+    return render(request, "Reviews.html", {'reviews': reviews})
+
+
+
 # SHOP OWNER
 def ShopOwner_view(request):
     return render(request, 'ShopOwner.html')
@@ -280,7 +312,7 @@ def Shop_view(request):
                         time_slot.save()
                         # Salva il TimeSlot nel database
 
-                        for i in range(1, shop.max_numb_clients):
+                        for i in range(1, shop.max_numb_clients+1):
                             slot = Slot(number=i, available=True, TimeSlot=time_slot)
                             slot.save()
 
@@ -419,6 +451,39 @@ def Product_view(request):
 def SuccessProductRegistration(request):
     return render(request, 'registrationProductSuccess.html')
 
+def Advertisement_view(request):
+    idso = request.session.get('idso', '')
+    if request.method == 'POST':
+        form = AdvertisementForm(request.POST)
+        if form.is_valid():
+            ids_selected_shop = request.POST.get('selected_shop')
+            starting_date = datetime.now().date()
+            period = int(request.POST.get('period'))
+            ending_date = starting_date + relativedelta(months=period)
+            ida = str(uuid.uuid4())
+            adv = Advertisement(date_start= starting_date, date_end= ending_date, ADVid=ida, ids=ids_selected_shop)
+            adv.save()
+            return redirect('SuccessAdvertisementRegistration', ids=ids_selected_shop)
+            #DA FARE CHE NON SI PU0' FARE ADVERTISEMENT DUE VOLTE NELLO STESSO SHOP SULLO STESSO PERIODO
+
+    context = {
+
+        'shops': Shop.objects.filter(idso=idso),
+    }
+    return render(request, 'Advertisement.html',  context=context)
+
+def SuccessAdvertisementRegistration(request, ids):
+    adv = get_object_or_404(Advertisement, ids=ids)
+
+    context = {
+
+        'date': adv.date_end
+
+    }
+    return render(request, 'registrationAdvertisementSuccess.html',context=context)
+
+
+
 
 # def booking(request):
 # if request.method == 'POST':
@@ -508,21 +573,3 @@ def scan_qr(request):
     return render(request, 'scan.html')
 
 
-# qr = QR(img=qr_code_img_str, idc=slot.idc, idso=shop.idso, ids=shop.ids, idQR=idQR, number=slot.number,
-#                   date=timeslot.date, time_start=timeslot.start, time_end=timeslot.end)
-
-def write_review(request):
-    idc = request.session.get('idc', '')
-    reviews = Review.objects.filter(written=False, idc=idc)
-    if request.method == 'POST':
-        review_id = request.POST.get('review_id')
-        rating = int(request.POST.get(f'rating_{review_id}'))
-        review = Review.objects.get(id=review_id)
-        shop = review.ids
-        shop.rating = round(((shop.rating * shop.num_reviews) + rating) / (shop.num_reviews + 1), 1)
-        shop.num_reviews += 1
-        shop.save()
-        review.written = True
-        review.save()
-
-    return render(request, "Reviews.html", {'reviews': reviews})

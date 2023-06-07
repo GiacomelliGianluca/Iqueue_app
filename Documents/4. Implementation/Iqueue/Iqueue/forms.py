@@ -50,3 +50,8 @@ class Shop_and_day_selectionForm(forms.Form):
 
 class TimeSlot_selectionForm(forms.Form):
     TimeSlot_selection = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+
+class AdvertisementForm(forms.Form):
+    period = forms.IntegerField(label='period')
+    
+

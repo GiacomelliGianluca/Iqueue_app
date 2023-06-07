@@ -5,7 +5,6 @@ from datetime import date, datetime
 from datetime import time
 
 
-# Realizziamo tutti gli ID di lunghezza 8
 
 
 class Account(models.Model):  # La classe account corrisponde a user di UML
@@ -47,8 +46,8 @@ class Shop(models.Model):
         current_time = datetime.now().time()
         current_date = datetime.now().date()
 
-        forced_date = datetime(2023, 6, 29).date()
-        forced_time = datetime(2023, 6, 29, 11, 30).time()
+        forced_date = datetime(2023, 6, 21).date()
+        forced_time = datetime(2023, 6, 8, 21, 30).time()
 
         # forced_datetime = datetime.combine(forced_date, forced_time)
 
@@ -102,11 +101,14 @@ class QR(models.Model):
     scanned = models.BooleanField(default=False)
 
 
-# class QR(models.Model):   #Vedere se mettere campi come gli altri
-#     QRid = models.CharField(max_length=50)
-#     ids = Shop.ids
-#     idso = Shop_owner.idso
-#     idc = Customer.idc
+class Advertisement(models.Model):
+    date_start = models.DateField(default=date.today)
+    date_end = models.DateField(default=date.today)
+    ADVid = models.CharField(default='AAAAAAAA', max_length=36, validators=[MinLengthValidator(8)])
+    ids = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
+
+
+
 
 class Review(models.Model):
     review = models.TextField(default="")
