@@ -13,7 +13,7 @@ import qrcode
 import base64
 from Iqueue.forms import RegistrationForm, LogIn, ShopForm, ProductForm, Shop_and_day_selectionForm, \
     TimeSlot_selectionForm, AdvertisementForm
-from IqueueAP.models import Account, Shop, Product, TimeSlot, Slot, QR, Review, Advertisement
+from IqueueAP.models import Account, Shop, Product, TimeSlot, Slot, QR, Review, Advertisement, WishList
 from django.contrib import messages
 from qrcode import QRCode
 import json
@@ -127,7 +127,9 @@ def account_view(request):
 
 # CUSTOMER
 def Customer_view(request):
-    return render(request, 'Customer.html')
+    idc  = request.session.get('idc', '')
+    account = Account.objects.filter(idc=idc).first()
+    return render(request, 'Customer.html', {'customer': account})
 
 
 # CUSTOMER Booking
@@ -261,6 +263,18 @@ def write_review(request):
         review.save()
 
     return render(request, "Reviews.html", {'reviews': reviews})
+
+#CUSTOMER WISHLISt
+
+def WishList_view(request):
+    idc = request.session.get('idc', '')
+
+    return render(request, 'WishList.html')
+
+def AddToWishList_view(request):
+    
+    return render(request, 'WishListAdd.html')
+
 
 
 

@@ -38,6 +38,8 @@ from IqueueAP.views import DeleteShop
 from IqueueAP.views import DeleteAdv
 from IqueueAP.views import Advertisement_view
 from IqueueAP.views import SuccessAdvertisementRegistration
+from IqueueAP.views import WishList_view
+from IqueueAP.views import AddToWishList_view
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -70,6 +72,8 @@ urlpatterns = [
     path('Customer/Selection/', Customer_CategorySelection_view, name='Customer_CategorySelection_view'),    
     path('Customer/Selection/(?P<selected_category>\s+)/', Booking_view, name='Booking_view'),
     path('Customer/Reservations/', Reservation_view, name='Reservation_view'),
+    path('Customer/WishList/', WishList_view, name='WishList_view'),
+    path('Customer/WishList/AddToWishList/', AddToWishList_view, name='AddToWishList_view'),
     path("admin/", admin.site.urls),
     #path('Customer/bakery/', booking, name='booking'),
     #path('booking-submit', bookingSubmit, name='bookingSubmit'),

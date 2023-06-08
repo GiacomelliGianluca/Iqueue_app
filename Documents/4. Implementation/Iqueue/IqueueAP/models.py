@@ -43,15 +43,18 @@ class Shop(models.Model):
     idso = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
 
     def checkQueue(self, timeslots):
-        current_time = datetime.now().time()
-        current_date = datetime.now().date()
+        # current_time = datetime.now().time()
+        # current_date = datetime.now().date()
+        # timeslot = timeslots.filter(shop=self, date=current_date, start__lte=current_time, end__gt=current_time).first()
 
-        forced_date = datetime(2023, 6, 21).date()
-        forced_time = datetime(2023, 6, 8, 21, 30).time()
+
+        forced_date = datetime(2023, 6, 20).date()
+        forced_time = datetime(2023, 6, 20, 21, 30).time()
+        timeslot = timeslots.filter(shop=self, date=forced_date, start__lte=forced_time, end__gt=forced_time).first()
 
         # forced_datetime = datetime.combine(forced_date, forced_time)
 
-        timeslot = timeslots.filter(shop=self, date=forced_date, start__lte=forced_time, end__gt=forced_time).first()
+        
 
         if timeslot:
             # Conta il numero di prenotazioni svolte per il timeslot attuale
@@ -108,8 +111,6 @@ class Advertisement(models.Model):
     ids = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
 
 
-
-
 class Review(models.Model):
     review = models.TextField(default="")
     date = models.DateField(default=date.today)
@@ -117,3 +118,7 @@ class Review(models.Model):
     ids = models.ForeignKey(Shop, on_delete=models.CASCADE, )
     name_of_the_shop = models.CharField(max_length=36, default='SSSSSSSSSSSSSSS', validators=[MinLengthValidator(8)])
     written = models.BooleanField(default=False)
+
+class WishList(models.Model):
+    idc = models.CharField(max_length=36, validators=[MinLengthValidator(8)])
+    products = models.ManyToManyField(Product)

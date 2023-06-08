@@ -2,7 +2,10 @@ PRIORITA':
 >Verificare che i booking vanno sempre a buon fine DA TESTARE TANTO, MI SEMBRA OK
 >Fare Rewards al customer dopo aver fatto la review 
 >Fare mappa che mostra negozi entro una certa distanza da noi, mettere rating sui pin dei negozi, ev sostituire pin con immagini negozi.
-
+>Mostrare il numero di persone attualmente in coda in un negozio dalla mappa
+>Fare tempo d'attesa, dove il tempo d'attesa per il singolo cliente è slotDuartion/N_max_client. Moltiplicare poi tale numero per la posizione in coda.
+>Indicare tempo d'attesa per la prenotazione di uno slot sotto la mappa
+>Mettere in coda quelli dello slot prima; Fare che lo shopOwner può cancellare la prenotazione se il cliente non si presenta.
 -----------------------------------------
 
 DA FARE:
