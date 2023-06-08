@@ -1,24 +1,33 @@
 PRIORITA':
->Da sistemare mappa negozi!!!
->Verificare che i booking vanno sempre a buon fine
->Fare Coda
->Fare Review
->Fare mappa che mostra negozi entro una certa distanza da noi
+>Verificare che i booking vanno sempre a buon fine DA TESTARE TANTO, MI SEMBRA OK
+>Fare Rewards al customer dopo aver fatto la review 
+>Fare mappa che mostra negozi entro una certa distanza da noi, mettere rating sui pin dei negozi, ev sostituire pin con immagini negozi.
 
 -----------------------------------------
 
->Mettere constraint quando si registra product: NO prezzo negativo, NO discount che è sopra il 100% o negativo. Se violati, dire che il form dà errore
+DA FARE:
 
->In myShops, fare tastino che mostra tutti i prodotti assegnati allo shop
+>Nel form di registrazione del negozio, far mettere in campi distinti nome paese, CAP ecc ai negozi. Concatenare poi le stringhe di tali campi per avere l'address che si salva nel negozio.
 
->Dare possibilità di delate prenotazione, prodotto
+>Dare possibilità di delate prenotazione, prodotto, account
 
->Fare che NOAPPINC e NOAPPDEC funzionano solo quando il negozio è aperto?? 
+>Dare possibilità di modifica negozio, prodotto, account
 
->Indicare orari negozio in MyShop?
+>Mettere constraint quando un utente si registra: la mail degli utenti deve essere unica per ogni utente. (altrimenti si hanno problemi quando ci si logga)
+
+>Mettere constraint quando si registra product: NO prezzo negativo, NO discount che è sopra il 100% o negativo. Se violati, dire che il form dà errore (NON FATTO MA BASTA METTERE UN VALIDATOR NEL CAMPO HTML)
+
+>In myShops, fare tastino che mostra tutti i prodotti assegnati allo shop  
 
 >Indicare via in MyShop
 
->Quando si visualizza il QR permettere di tornare indietro e dare più informazioni
+-----------------------------------------
 
->Vedere se mettere nome paese, CAP ecc ai negozi per fare compilare la latitudinde e longitudine in modo automatico.
+EVENTUALI:
+
+>Fare che NOAPPINC e NOAPPDEC funzionano solo quando il negozio è aperto??      (NON FATTO)
+
+>Indicare orari negozio in MyShop?     (NON FATTO)
+
+
+

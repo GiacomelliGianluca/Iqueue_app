@@ -39,8 +39,8 @@
 
 
 <body>
-  <p>Select which shop do you want to advertise</p>
-
+  <p>Select which shop do you want to advertise. You can only advertise shops that are not advertised yet.</p>
+  <p>To see which shops have you already advertised, go back to MyShops.</p>
   <form method="post">
     {% csrf_token %}
     <select name="selected_shop">

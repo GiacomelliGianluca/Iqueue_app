@@ -61,6 +61,7 @@ def registration_view(request):
             password = form.cleaned_data['password']
             email = form.cleaned_data['email']
             birthday = form.cleaned_data['birthday']
+            #C'è da mettere l'errore che non si può procedere se l'email è già presente
 
             idso = str(uuid.uuid4())
             idc = str(uuid.uuid4())
@@ -90,8 +91,18 @@ def login_view(request):
                 request.session['name'] = str(account.name)
                 request.session['idc'] = str(account.idc)
                 request.session['idso'] = str(account.idso)
+                    #Advertisement
+                idss=[]
+                for adv in Advertisement.objects.all():
+                    idss.append(adv.ids)
+                    #Delating of due advertisements
+                    if datetime.now().date()== adv.date_end:
+                        adv.delete()
+                if idss:
+                    random_ids = random.choice(idss)
+                    shop_advertised=Shop.objects.filter(ids=random_ids).first()
                 return render(request, 'SelectRole.html',
-                              {'name': account.name, 'idc': account.idc, 'idso': account.idso})
+                              {'name': account.name, 'idc': account.idc, 'idso': account.idso, 'shop':shop_advertised})
             except Account.DoesNotExist:
                 error = 'Inserted data are not valid'
                 form.add_error(None, error)
@@ -478,6 +489,21 @@ def SuccessProductRegistration(request):
 
 def Advertisement_view(request):
     idso = request.session.get('idso', '')
+    shops=Shop.objects.filter(idso=idso)
+
+    #Removing of the aldready advertised shops
+    shopadvlist=[]
+    for shop in shops:
+        Adv=Advertisement.objects.filter(ids=shop.ids)
+        if Adv:
+            shopadvlist.append(shop)
+    
+    # Rimozione degli shop pubblicizzati dalla lista degli shop
+    shops_not_adv_yet = [shop for shop in shops if shop not in shopadvlist]
+
+
+    
+
     if request.method == 'POST':
         form = AdvertisementForm(request.POST)
         if form.is_valid():
@@ -493,7 +519,7 @@ def Advertisement_view(request):
 
     context = {
 
-        'shops': Shop.objects.filter(idso=idso),
+        'shops': shops_not_adv_yet
     }
     return render(request, 'Advertisement.html',  context=context)
 
