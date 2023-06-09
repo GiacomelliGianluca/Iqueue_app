@@ -43,6 +43,8 @@ def selectRole(request):
         #Delating of due advertisements
         if datetime.now().date()== adv.date_end:
             adv.delete()
+
+    shop_advertised = None
     if idss:
         random_ids = random.choice(idss)
         shop_advertised=Shop.objects.filter(ids=random_ids).first()
@@ -98,6 +100,8 @@ def login_view(request):
                     #Delating of due advertisements
                     if datetime.now().date()== adv.date_end:
                         adv.delete()
+
+                shop_advertised = None
                 if idss:
                     random_ids = random.choice(idss)
                     shop_advertised=Shop.objects.filter(ids=random_ids).first()
@@ -143,42 +147,57 @@ def Customer_CategorySelection_view(request):
 
 
 def Booking_view(request, selected_category):
+    #Loading of the Django forms into variables
     Shop_and_day_form = forms.Shop_and_day_selectionForm()
     TimeSlot_form = forms.TimeSlot_selectionForm()
+
+    #Filtering of the shops based on the category that the customer has selected in the previous view
     shops = Shop.objects.filter(category=selected_category)
+
+    #Identification of the shop addresses and names to populate the map properly
     addresses = [shop.address for shop in shops]
     names = [shop.name for shop in shops]
+
+    #Condition that verifies if form is sent
     if request.method == 'POST':
+
+        #Condition that verifies if the first form is sent, thus the one of the shop selection to inspect its time slots
         if 'btnform1' in request.POST:
+            # Recover the information of the selected shop and date
             shop_ids = request.POST.get('shop_ids')
             date = request.POST.get('date')
+            #Finding out the associeted objects
             shop = Shop.objects.get(ids=shop_ids)
             timeslots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
-            names = [shop.name for shop in shops]
+
+            #Returning the webpage where now the available slots (if there are) are showed
             return render(request, 'booking.html',
                           {'shops': Shop.objects.filter(category=selected_category),
                            'timeslots': timeslots,
                            'Shop_and_day_form': Shop_and_day_form, 'TimeSlot_form': TimeSlot_form,
                            'addresses': addresses, 'names': names})
-
+        
+        #Condition that verifies if the second form is sent, thus the one of the time-slot selection to make the reservations if possible
         if 'btnform2' in request.POST and 'selected_slot' in request.POST:
+            #Recovering the information of the actual customer of its selected time slot
             idc = request.session.get('idc', '')
-            selected_slot_id = request.POST.get('selected_slot')
-            timeslot = get_object_or_404(TimeSlot, id=selected_slot_id)
-            print(timeslot)
-            slot = Slot.objects.filter(TimeSlot=timeslot, available=True).first()
-            print(slot)
+            selected_timeslot_id = request.POST.get('selected_slot')
+            #Identification of the associated timeslot object, its slots and its associeted shop
+            timeslot = get_object_or_404(TimeSlot, id=selected_timeslot_id)
+            
+            slot = Slot.objects.filter(TimeSlot=timeslot, available=True).first()            
             shop = timeslot.shop
-
+            #Making the reservation for the customer: association of the slot to him and the slot is now unavailable
             slot.available = False
             slot.idc = idc
             slot.save()
-            shop.save()
-
+            
+            #Checking if the availability of the time slot: if all of the slots are unavailable, the it is also their timeslot 
             if not Slot.objects.filter(available=True, TimeSlot=timeslot).exists():
                 timeslot.available = False
                 timeslot.save()
 
+            #Creation of the QR to keep track of the reservation and rendering of its html webpage
             qr_data = f"Negozio: {shop.ids}\nData: {timeslot.date}\nOrario: {timeslot.start} - {timeslot.end}\nNumero nella fscia oraria: {slot.number}\nIdc: {slot.idc}"
 
             qr_code_img = qrcode.QRCode()
@@ -452,6 +471,9 @@ def DeleteShop(request, ids):
     if (request.GET.get('Choice')):
         Choice = request.GET.get('Choice')
         if Choice == 'Yes':
+            #Delete of the QRs associeted to the shop
+            for qr in QR.objects.filter(ids=shop.ids):
+                qr.delete() 
             shop.delete()
 
         return redirect('MyShops_view')
