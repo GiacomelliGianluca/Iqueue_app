@@ -171,11 +171,12 @@ def Booking_view(request, selected_category):
             timeslots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
 
             #Returning the webpage where now the available slots (if there are) are showed
-            return render(request, 'booking.html',
-                          {'shops': Shop.objects.filter(category=selected_category),
+            context2={'shops': Shop.objects.filter(category=selected_category),
                            'timeslots': timeslots,
                            'Shop_and_day_form': Shop_and_day_form, 'TimeSlot_form': TimeSlot_form,
-                           'addresses': addresses, 'names': names})
+                           'addresses': addresses, 'names': names}
+
+            return render(request, 'booking.html',context=context2)
         
         #Condition that verifies if the second form is sent, thus the one of the time-slot selection to make the reservations if possible
         if 'btnform2' in request.POST and 'selected_slot' in request.POST:
@@ -216,14 +217,16 @@ def Booking_view(request, selected_category):
                     date=timeslot.date, time_start=timeslot.start, time_end=timeslot.end)
             qr.save()
 
-            return render(request, 'qr.html',
-                          {'qr_code_img': qr_code_img_str,
-                           'shop': Shop.objects.filter(category=selected_category).values(),
-                           'QR': qr, 'addresses': addresses,
-                           'Shop_and_day_form': Shop_and_day_form,
-                           'TimeSlot_form': TimeSlot_form})
+            context3={'qr_code_img': qr_code_img_str,
+                      'shop': Shop.objects.filter(category=selected_category).values(),
+                      'QR': qr, 'addresses': addresses,
+                      'Shop_and_day_form': Shop_and_day_form,
+                       'TimeSlot_form': TimeSlot_form}
 
-    context = {
+            return render(request, 'qr.html',context=context3)
+
+
+    context1 = {
         'shops': Shop.objects.filter(category=selected_category),
         'Shop_and_day_form': Shop_and_day_form,
         'TimeSlot_form': TimeSlot_form,
@@ -231,7 +234,8 @@ def Booking_view(request, selected_category):
         'names': names,
     }
 
-    return render(request, 'booking.html', context=context)
+
+    return render(request, 'booking.html', context=context1)
 
 
 # CUSTOMER reservations
