@@ -307,23 +307,25 @@ def ShopOwner_view(request):
 
 
 def Shop_view(request):
-    # To make online update... (future step)
-    # j=0
-    # progress=0 
+    
+    #Condition on the form reception with the data of the shop
     if request.method == 'POST':
+        #Creation of the object related with the shop
         form = ShopForm(request.POST, request.FILES)
+        #Condition on the form validity
         if form.is_valid():
+            #Saving the different fields provided by the form
             name = form.cleaned_data['name']
             lat = form.cleaned_data['lat']
             lon = form.cleaned_data['lon']
             max_numb_clients = form.cleaned_data['max_numb_clients']
-            # ids = form.cleaned_data['ids']
             address = form.cleaned_data['address']
             category = form.cleaned_data['category']
             opening_time = form.cleaned_data['opening_time']
             closing_time = form.cleaned_data['closing_time']
             slot_duration = form.cleaned_data['slot_duration']
 
+            #Identification of the shop owner 
             idso = request.session.get('idso', '')
 
             ids = str(uuid.uuid4())
@@ -477,7 +479,10 @@ def DeleteShop(request, ids):
         if Choice == 'Yes':
             #Delete of the QRs associeted to the shop
             for qr in QR.objects.filter(ids=shop.ids):
-                qr.delete() 
+                qr.delete()
+            #Delete of the advertisement associeted to the shop
+            for adv in Advertisement.objects.filter(ids=shop.ids):
+                adv.delete()  
             shop.delete()
 
         return redirect('MyShops_view')

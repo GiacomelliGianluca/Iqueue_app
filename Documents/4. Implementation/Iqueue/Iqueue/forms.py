@@ -33,7 +33,7 @@ class ShopForm(forms.Form):
     opening_time = forms.TimeField(label='opening_time')
     closing_time = forms.TimeField(label='closing_time')
     slot_duration = forms.IntegerField(label='slot_duration')
-    img = forms.ImageField(label='img')
+    img = forms.ImageField(label='img', required=False)
 
 
 class ProductForm(forms.Form):
