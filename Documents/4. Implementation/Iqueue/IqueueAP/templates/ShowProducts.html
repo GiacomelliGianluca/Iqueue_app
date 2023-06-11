@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Products in the shop</title>
+
+    <script type="text/javascript">
+    function Redirect(url) {
+       location.replace("http://127.0.0.1:8000/"+url);
+    }
+
+    // function sub(a,b) {
+    //   var c
+    //   document.write(c);
+
+    // }
+  </script>
+
+  <style>
+
+    .anybutton {
+      top:75%;
+      left:75%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 183, 255);
+      }
+
+    .delete-button {
+      background-color: red;
+      color: white;
+      }
+
+    .GoingBackButton {
+      top:60%;
+      left:75%;
+      width:200px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 255, 0);
+      }
+
+     </style>
+</head>
+<body>
+  <h1>Products in the shop</h1>
+
+  {% if products %}
+    <ul>
+      {% for product in products %}
+        <li>{{ product.name }} - Price: {{ product.price }} - Quantity: {{ product.quantity }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No available</p>
+  {% endif %}
+
+<input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" />
+<input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" /><!-- DA SISTEMARE POSIZIONE--->
+
+</body>
+</html>

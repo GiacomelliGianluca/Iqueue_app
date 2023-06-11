@@ -51,8 +51,8 @@
     <label for="name">Name:</label>
     <input type="text" name="name" id="name">
     <br>
-    <label for="price">price:</label>
-    <input type="number" name="price" id="price">
+    <label for="price">Price:</label>
+    <input type="number" name="price" id="price" min="0">
     <br>
     <label for="quantity">quantity:</label>
     <input type="number" name="quantity" id="quantity">
@@ -67,6 +67,8 @@
 
   <p>Do you want to print the QR for all the products?</p>
   <input type="button" class="Print_QR" onclick="Redirect('ShopOwner/QR_print/');" value="Print_QR" />
+  <p>Do you want to modify any product from your shops?</p>
+  <input type="button" class="Print_QR" onclick="Redirect('ShopOwner/Product/Edit');" value="Modify Products" />
   <input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" />
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
 </body>

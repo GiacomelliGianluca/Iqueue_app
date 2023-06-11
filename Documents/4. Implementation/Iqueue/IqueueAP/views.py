@@ -38,20 +38,20 @@ def selectRole(request):
     idc = request.session.get('idc', '')
     idso = request.session.get('idso', '')
 
-    #Advertisement
-    idss=[]
+    # Advertisement
+    idss = []
     for adv in Advertisement.objects.all():
         idss.append(adv.ids)
-        #Delating of due advertisements
-        if datetime.now().date()== adv.date_end:
+        # Delating of due advertisements
+        if datetime.now().date() == adv.date_end:
             adv.delete()
 
     shop_advertised = None
     if idss:
         random_ids = random.choice(idss)
-        shop_advertised=Shop.objects.filter(ids=random_ids).first()
+        shop_advertised = Shop.objects.filter(ids=random_ids).first()
 
-    return render(request, 'SelectRole.html', {'name': name, 'idc': idc, 'idso': idso, 'shop':shop_advertised})
+    return render(request, 'SelectRole.html', {'name': name, 'idc': idc, 'idso': idso, 'shop': shop_advertised})
 
 
 def registration_view(request):
@@ -68,10 +68,9 @@ def registration_view(request):
 
             if birthday > date.today():
                 return render(request, 'ErrorBirthdayAccount.html')
-                
+
             if Account.objects.filter(email=form.cleaned_data['email']).exists():
                 return render(request, 'ErrorEmailAccount.html')
-              
 
             idso = str(uuid.uuid4())
             idc = str(uuid.uuid4())
@@ -108,20 +107,20 @@ def login_view(request):
                 request.session['name'] = str(account.name)
                 request.session['idc'] = str(account.idc)
                 request.session['idso'] = str(account.idso)
-                    #Advertisement
-                idss=[]
+                # Advertisement
+                idss = []
                 for adv in Advertisement.objects.all():
                     idss.append(adv.ids)
-                    #Delating of due advertisements
-                    if datetime.now().date()== adv.date_end:
+                    # Delating of due advertisements
+                    if datetime.now().date() == adv.date_end:
                         adv.delete()
 
                 shop_advertised = None
                 if idss:
                     random_ids = random.choice(idss)
-                    shop_advertised=Shop.objects.filter(ids=random_ids).first()
+                    shop_advertised = Shop.objects.filter(ids=random_ids).first()
                 return render(request, 'SelectRole.html',
-                              {'name': account.name, 'idc': account.idc, 'idso': account.idso, 'shop':shop_advertised})
+                              {'name': account.name, 'idc': account.idc, 'idso': account.idso, 'shop': shop_advertised})
             except Account.DoesNotExist:
                 error = 'Inserted data are not valid'
                 form.add_error(None, error)
@@ -146,7 +145,7 @@ def account_view(request):
 
 # CUSTOMER
 def Customer_view(request):
-    idc  = request.session.get('idc', '')
+    idc = request.session.get('idc', '')
     account = Account.objects.filter(idc=idc).first()
     return render(request, 'Customer.html', {'customer': account})
 
@@ -162,11 +161,11 @@ def Customer_CategorySelection_view(request):
 
 
 def Booking_view(request, selected_category):
-    #Loading of the Django forms into variables
+    # Loading of the Django forms into variables
     Shop_and_day_form = forms.Shop_and_day_selectionForm()
     TimeSlot_form = forms.TimeSlot_selectionForm()
 
-    #Filtering of the shops based on the category that the customer has selected in the previous view
+    # Filtering of the shops based on the category that the customer has selected in the previous view
     shops = Shop.objects.filter(category=selected_category)
 
     queues = []
@@ -180,9 +179,6 @@ def Booking_view(request, selected_category):
         queues.append(shop.queue)
         reviews.append(shop.rating)
 
-
-
-
     addresses = [shop.address for shop in shops]
     names = [shop.name for shop in shops]
 
@@ -191,15 +187,15 @@ def Booking_view(request, selected_category):
     print(queues)
     print(reviews)
 
-    #Condition that verifies if form is sent
+    # Condition that verifies if form is sent
     if request.method == 'POST':
 
-        #Condition that verifies if the first form is sent, thus the one of the shop selection to inspect its time slots
+        # Condition that verifies if the first form is sent, thus the one of the shop selection to inspect its time slots
         if 'btnform1' in request.POST:
             # Recover the information of the selected shop and date
             shop_ids = request.POST.get('shop_ids')
             date = request.POST.get('date')
-            #Finding out the associeted objects
+            # Finding out the associeted objects
             shop = Shop.objects.get(ids=shop_ids)
             timeslots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
             names = [shop.name for shop in shops]
@@ -208,28 +204,28 @@ def Booking_view(request, selected_category):
                            'timeslots': timeslots,
                            'Shop_and_day_form': Shop_and_day_form, 'TimeSlot_form': TimeSlot_form,
                            'addresses': addresses, 'names': names, 'queues': queues,
-                            'reviews': reviews})
+                           'reviews': reviews})
 
         if 'btnform2' in request.POST and 'selected_slot' in request.POST:
-            #Recovering the information of the actual customer of its selected time slot
+            # Recovering the information of the actual customer of its selected time slot
             idc = request.session.get('idc', '')
             selected_timeslot_id = request.POST.get('selected_slot')
-            #Identification of the associated timeslot object, its slots and its associeted shop
+            # Identification of the associated timeslot object, its slots and its associeted shop
             timeslot = get_object_or_404(TimeSlot, id=selected_timeslot_id)
-            
-            slot = Slot.objects.filter(TimeSlot=timeslot, available=True).first()            
+
+            slot = Slot.objects.filter(TimeSlot=timeslot, available=True).first()
             shop = timeslot.shop
-            #Making the reservation for the customer: association of the slot to him and the slot is now unavailable
+            # Making the reservation for the customer: association of the slot to him and the slot is now unavailable
             slot.available = False
             slot.idc = idc
             slot.save()
-            
-            #Checking if the availability of the time slot: if all of the slots are unavailable, the it is also their timeslot 
+
+            # Checking if the availability of the time slot: if all of the slots are unavailable, the it is also their timeslot
             if not Slot.objects.filter(available=True, TimeSlot=timeslot).exists():
                 timeslot.available = False
                 timeslot.save()
 
-            #Creation of the QR to keep track of the reservation and rendering of its html webpage
+            # Creation of the QR to keep track of the reservation and rendering of its html webpage
             qr_data = f"Negozio: {shop.ids}\nData: {timeslot.date}\nOrario: {timeslot.start} - {timeslot.end}\nNumero nella fscia oraria: {slot.number}\nIdc: {slot.idc}"
 
             qr_code_img = qrcode.QRCode()
@@ -248,14 +244,13 @@ def Booking_view(request, selected_category):
                     date=timeslot.date, time_start=timeslot.start, time_end=timeslot.end)
             qr.save()
 
-            context3={'qr_code_img': qr_code_img_str,
-                      'shop': Shop.objects.filter(category=selected_category).values(),
-                      'QR': qr, 'addresses': addresses,
-                      'Shop_and_day_form': Shop_and_day_form,
-                       'TimeSlot_form': TimeSlot_form}
+            context3 = {'qr_code_img': qr_code_img_str,
+                        'shop': Shop.objects.filter(category=selected_category).values(),
+                        'QR': qr, 'addresses': addresses,
+                        'Shop_and_day_form': Shop_and_day_form,
+                        'TimeSlot_form': TimeSlot_form}
 
-            return render(request, 'qr.html',context=context3)
-
+            return render(request, 'qr.html', context=context3)
 
     context1 = {
         'shops': shops,
@@ -266,7 +261,6 @@ def Booking_view(request, selected_category):
         'queues': queues,
         'reviews': reviews,
     }
-
 
     return render(request, 'booking.html', context=context1)
 
@@ -286,27 +280,27 @@ def Reservation_view(request):
         shop_names.append(shop.name)
         shop_address.append(shop.address)
 
-
     if (request.GET.get('Guide')):
         ids_for_address = request.GET.get('ids')
         shop_for_address = Shop.objects.get(ids=ids_for_address)
-        address=shop_for_address.address
+        address = shop_for_address.address
         maps_url = f"https://www.google.com/maps/search/?api=1&query={address}"
 
         return redirect(maps_url)
-    
+
     if (request.GET.get('Delete_QR')):
         QR_to_delete = get_object_or_404(QR, idQR=request.GET.get('idQR'))
 
         return redirect('DeleteQR', idQR=QR_to_delete.idQR)
 
-    list = zip(qrs , shop_names, shop_address)
+    list = zip(qrs, shop_names, shop_address)
 
     context = {
-        'list':list
+        'list': list
     }
 
-    return render(request, 'CustomerReservations.html',context=context)
+    return render(request, 'CustomerReservations.html', context=context)
+
 
 def DeleteQR(request, idQR):
     qr = get_object_or_404(QR, idQR=idQR)
@@ -316,8 +310,10 @@ def DeleteQR(request, idQR):
             start = qr.time_start
             end = qr.time_end
             date = qr.date
-            shop=get_object_or_404(Shop, ids=qr.ids)
-            slot = Slot.objects.filter(number=qr.number, available=False, TimeSlot__start=start, TimeSlot__end=end, TimeSlot__date=date, TimeSlot__shop=shop, idc=request.session.get('idc', ))[:1].get()
+            shop = get_object_or_404(Shop, ids=qr.ids)
+            slot = Slot.objects.filter(number=qr.number, available=False, TimeSlot__start=start, TimeSlot__end=end,
+                                       TimeSlot__date=date, TimeSlot__shop=shop, idc=request.session.get('idc', ))[
+                   :1].get()
             slot.available = True
             slot.save()
             qr.delete()
@@ -325,7 +321,6 @@ def DeleteQR(request, idQR):
         return redirect('Reservation_view')
 
     return render(request, 'DeleteQR.html')
-
 
 
 def write_review(request):
@@ -351,19 +346,18 @@ def ShopOwner_view(request):
 
 
 def Shop_view(request):
-    
-    #Condition on the form reception with the data of the shop
+    # Condition on the form reception with the data of the shop
     if request.method == 'POST':
-        #Creation of the object related with the shop
+        # Creation of the object related with the shop
         form = ShopForm(request.POST, request.FILES)
-        #Condition on the form validity
+        # Condition on the form validity
         if form.is_valid():
-            #Saving the different fields provided by the form
-            
+            # Saving the different fields provided by the form
+
             name = form.cleaned_data['name']
             max_numb_clients = form.cleaned_data['max_numb_clients']
             address_form = form.cleaned_data['address']
-            number  = form.cleaned_data['number']
+            number = form.cleaned_data['number']
             cap = form.cleaned_data['CAP']
             city = form.cleaned_data['City']
             category = form.cleaned_data['category']
@@ -371,45 +365,44 @@ def Shop_view(request):
             closing_time = form.cleaned_data['closing_time']
             if opening_time > closing_time:
                 return render(request, 'ErrorTimeShop.html')
-                
+
             slot_duration = form.cleaned_data['slot_duration']
 
-            address= address_form + " " + number + " "+ cap + " " + city
-            #Identification of the shop owner 
+            address = address_form + " " + number + " " + cap + " " + city
+            # Identification of the shop owner
             idso = request.session.get('idso', '')
 
             ids = str(uuid.uuid4())
 
-            #Creation of the object shop
+            # Creation of the object shop
             shop = Shop(name=name, max_numb_clients=max_numb_clients, ids=ids, idso=idso,
                         address=address, rating=0, num_reviews=0, category=category)
 
             # assegnare il campo immagine dell'istanza di Shop al file caricato dall'utente
-            
-             #Condition to check if the shop owner has loaded an image for his shop
+
+            # Condition to check if the shop owner has loaded an image for his shop
             if 'img' in request.FILES:
                 shop.img = request.FILES['img']
 
-            #Saving of the object shop in the database
+            # Saving of the object shop in the database
             shop.save()
 
-            #Creation of the timslots: they will be defined from a year starting from now
+            # Creation of the timslots: they will be defined from a year starting from now
             slot_duration = timedelta(minutes=slot_duration)
 
             current_date = datetime.now().date()
             end_date = current_date + timedelta(weeks=52)  # time slots definiti per un anno
 
-
             # SE ABBIAMO tempo creare per giorni diversi ls possibilità di inserire time slots diversi
-            #Loop while on the date: it continues if the actual date is not exceeding the ending date
+            # Loop while on the date: it continues if the actual date is not exceeding the ending date
             while current_date <= end_date:
-                #Checking if the week day is not in the week-end (Actually the time slots can be defined only during the week days and not during the weekend)
+                # Checking if the week day is not in the week-end (Actually the time slots can be defined only during the week days and not during the weekend)
                 if current_date.weekday() < 5:
                     current_datetime = datetime.combine(current_date, opening_time)
 
-                    #Loop while on the time of the actual date: it continues if the actual time is not exceeding the closing time
+                    # Loop while on the time of the actual date: it continues if the actual time is not exceeding the closing time
                     while current_datetime.time() < closing_time:
-                        #Creation of the time slot
+                        # Creation of the time slot
                         date = current_datetime.date()
                         start_time = current_datetime.time()
                         end_time = min(current_datetime + slot_duration,
@@ -417,18 +410,17 @@ def Shop_view(request):
 
                         time_slot = TimeSlot(start=start_time, end=end_time, date=date, available=True, shop=shop)
                         time_slot.save()
-                        
-                        #Creation of the slots in the TimeSlot
-                        for i in range(1, shop.max_numb_clients+1):
+
+                        # Creation of the slots in the TimeSlot
+                        for i in range(1, shop.max_numb_clients + 1):
                             slot = Slot(number=i, available=True, TimeSlot=time_slot)
                             slot.save()
-                        
-                        #Updating of the time in the date
+
+                        # Updating of the time in the date
                         current_datetime += slot_duration
 
-                #Updating of the date
+                # Updating of the date
                 current_date += timedelta(days=1)
- 
 
             return redirect('SuccessShopRegistration')
 
@@ -450,15 +442,15 @@ def MyShops_view(request, ):
 
     # Queue update
     for shop in shops:
-        #Prendo tutti i timeslot associati allo shop
+        # Prendo tutti i timeslot associati allo shop
         timeslot = TimeSlot.objects.filter(shop=shop)
-        #Individuo il numero di persone in coda attualmente
+        # Individuo il numero di persone in coda attualmente
         num_av_slots, _, _ = shop.checkQueue(timeslot)
         shop.queue = num_av_slots + shop.queue_no_app
         shop.save()
 
-    #Advertisement
-    adv=[]
+    # Advertisement
+    adv = []
     for shop in shops:
         advert = Advertisement.objects.filter(ids=shop.ids).first()
         if advert:
@@ -484,12 +476,19 @@ def MyShops_view(request, ):
             shop.save()
         return redirect('MyShops_view')
 
+    if (request.GET.get('SHOWpds')):
+        shop = get_object_or_404(Shop, ids=request.GET.get('ShopIDs'))
+        products = Product.objects.filter(ids=shop.ids)
+        return render(request, "ShowProducts.html", {"products": products})
+
     if (request.GET.get('SCANbtn')):
         shop = get_object_or_404(Shop, ids=request.GET.get('ShopIDs'))
         timeslot = TimeSlot.objects.filter(shop=shop)
         _, accounts, _ = shop.checkQueue(timeslot)
         context['accounts'] = accounts
-        #Da sistemare: mostra gli account su tutti gli shops
+        actual_shop = shop
+        context['actual_shop'] = actual_shop
+        # Da sistemare: mostra gli account su tutti gli shops
         return render(request, 'MyShops.html', context=context)
 
     if (request.GET.get('Delete_shop')):
@@ -511,26 +510,28 @@ def MyShops_view(request, ):
 
     return render(request, 'MyShops.html', context=context)
 
+
 def ShopQueueList(request, ids):
     shop = get_object_or_404(Shop, ids=ids)
-    #Trovo tutti i timeslot associati allo shop
+    # Trovo tutti i timeslot associati allo shop
     timeslot = TimeSlot.objects.filter(shop=shop)
-    #customers sono gli idc dei clienti attualmente in coda; actual_timeslot è il timeslot attuale
+    # customers sono gli idc dei clienti attualmente in coda; actual_timeslot è il timeslot attuale
     _, customers, actual_timeslot = shop.checkQueue(timeslot)
 
-    qrs=[]
-    names=[]
+    qrs = []
+    names = []
 
     if customers:
         # ottengo una lista di customers univoca (quando si fa filter per idc_cust, vengono ridate tutte le prenotazioni di un customer)
-        unique_customers = set(customers)  
+        unique_customers = set(customers)
 
         for cust in unique_customers:
-            idc_cust=cust.idc
+            idc_cust = cust.idc
 
-            qr  =  QR.objects.filter(ids=ids, idso=request.session.get('idso', ), idc=idc_cust,time_start=actual_timeslot.start, time_end=actual_timeslot.end, scanned=False)
+            qr = QR.objects.filter(ids=ids, idso=request.session.get('idso', ), idc=idc_cust,
+                                   time_start=actual_timeslot.start, time_end=actual_timeslot.end, scanned=False)
             qrs.extend(qr)
-        
+
         # ordinamento della lista qrs in base all'attributo 'number'
         qrs = sorted(qrs, key=lambda x: x.number)
 
@@ -538,27 +539,26 @@ def ShopQueueList(request, ids):
         for qr in qrs:
             name = Account.objects.filter(idc=qr.idc).first()
             if name:
-                names.append(name.name)  
+                names.append(name.name)
 
-    #print(qrs)
-    #print(names)
-        
+                # print(qrs)
+    # print(names)
 
-    numberNOAPP=[]
-    if shop.queue_no_app>=0:
+    numberNOAPP = []
+    if shop.queue_no_app >= 0:
         for i in range(shop.queue_no_app):
-            numberNOAPP.append(shop.max_numb_clients+i+1)
+            numberNOAPP.append(shop.max_numb_clients + i + 1)
     # if (request.GET.get('Choice')):
     #     Choice = request.GET.get('Choice')
     #     if Choice == 'Yes':
     #         shop.delete()
 
-        # return redirect('MyShops_view')
+    # return redirect('MyShops_view')
 
-    list = zip(qrs ,names)
+    list = zip(qrs, names)
 
     context = {
-        'list':list,
+        'list': list,
         'NumberNOAPP': numberNOAPP,
         'shop': shop
     }
@@ -571,17 +571,18 @@ def DeleteShop(request, ids):
     if (request.GET.get('Choice')):
         Choice = request.GET.get('Choice')
         if Choice == 'Yes':
-            #Delete of the QRs associeted to the shop
+            # Delete of the QRs associeted to the shop
             for qr in QR.objects.filter(ids=shop.ids):
                 qr.delete()
-            #Delete of the advertisement associeted to the shop
+            # Delete of the advertisement associeted to the shop
             for adv in Advertisement.objects.filter(ids=shop.ids):
-                adv.delete()  
+                adv.delete()
             shop.delete()
 
         return redirect('MyShops_view')
 
     return render(request, 'DeleteShop.html')
+
 
 def DeleteAdv(request, ids):
     adv = get_object_or_404(Advertisement, ids=ids)
@@ -642,13 +643,12 @@ def Product_view(request):
 def SuccessProductRegistration(request):
     return render(request, 'registrationProductSuccess.html')
 
+
 def QR_print(request):
     idso = request.session.get('idso', '')
     products = Product.objects.filter(idso=idso)
 
-    
-
-    shop_associated_name=[]
+    shop_associated_name = []
     for product in products:
         shop = Shop.objects.filter(ids=product.ids).first()
         if shop:
@@ -657,27 +657,23 @@ def QR_print(request):
             shop_associated_name.append('The shop has been deleted!')
 
     list = zip(products, shop_associated_name)
-    
-    return render(request, "QR_print.html", {'list': list})
 
+    return render(request, "QR_print.html", {'list': list})
 
 
 def Advertisement_view(request):
     idso = request.session.get('idso', '')
-    shops=Shop.objects.filter(idso=idso)
+    shops = Shop.objects.filter(idso=idso)
 
-    #Removing of the aldready advertised shops
-    shopadvlist=[]
+    # Removing of the aldready advertised shops
+    shopadvlist = []
     for shop in shops:
-        Adv=Advertisement.objects.filter(ids=shop.ids)
+        Adv = Advertisement.objects.filter(ids=shop.ids)
         if Adv:
             shopadvlist.append(shop)
-    
+
     # Rimozione degli shop pubblicizzati dalla lista degli shop
     shops_not_adv_yet = [shop for shop in shops if shop not in shopadvlist]
-
-
-    
 
     if request.method == 'POST':
         form = AdvertisementForm(request.POST)
@@ -687,7 +683,7 @@ def Advertisement_view(request):
             period = int(request.POST.get('period'))
             ending_date = starting_date + relativedelta(months=period)
             ida = str(uuid.uuid4())
-            adv = Advertisement(date_start= starting_date, date_end= ending_date, ADVid=ida, ids=ids_selected_shop)
+            adv = Advertisement(date_start=starting_date, date_end=ending_date, ADVid=ida, ids=ids_selected_shop)
             adv.save()
             return redirect('SuccessAdvertisementRegistration', ids=ids_selected_shop)
 
@@ -695,7 +691,8 @@ def Advertisement_view(request):
 
         'shops': shops_not_adv_yet
     }
-    return render(request, 'Advertisement.html',  context=context)
+    return render(request, 'Advertisement.html', context=context)
+
 
 def SuccessAdvertisementRegistration(request, ids):
     adv = get_object_or_404(Advertisement, ids=ids)
@@ -705,9 +702,7 @@ def SuccessAdvertisementRegistration(request, ids):
         'date': adv.date_end
 
     }
-    return render(request, 'registrationAdvertisementSuccess.html',context=context)
-
-
+    return render(request, 'registrationAdvertisementSuccess.html', context=context)
 
 
 # def booking(request):
@@ -863,8 +858,6 @@ def Purchase_list(request):
     return render(request, "Purchase_list.html", context={'list': list})
 
 
-
-
 def Wish_list(request):
     idc = request.session.get('idc', '')
     idc = Account.objects.get(idc=idc)
@@ -934,3 +927,43 @@ def Wish_list(request):
 
     return render(request, "WishList.html", {'list': list, 'show_search_bar': show_search_bar,
                                              'similar_products': similar_products, 'data': data})
+
+
+def Edit_product(request):
+    idso = request.session.get('idso', '')
+    shops = Shop.objects.filter(idso=idso)
+    editing = 0
+    re = 0
+    if request.method == 'POST':
+        if 'btn1' in request.POST:
+            ids = request.POST.get('shop')
+            products = Product.objects.filter(ids=ids)
+            re = 1
+            return render(request, "EditProducts.html",
+                          {'products': products, 'shops': shops, 'editing': editing, 're': re})
+
+        if 'btn2' in request.POST:
+            editing = 1
+            idp = request.POST.get('product')
+            re = 1
+            return render(request, "EditProducts.html", {'editing': editing, 'idp': idp, 're': re})
+
+        if 'btn4' in request.POST:
+            name = request.POST.get('name')
+            price = request.POST.get('price')
+            quantity = request.POST.get('quantity')
+            discount = request.POST.get('discount')
+            idp = request.POST.get('idp')
+            product = Product.objects.get(idp=idp)
+            product.name = name
+            product.price = price
+            product.quantity = quantity
+            product.shop_discount = discount
+            product.save()
+            return redirect('Product_view')
+
+    return render(request, "EditProducts.html", {'shops': shops, 'editing': editing, 're': re})
+
+
+def ProductShow(request):
+    return render(request, 'ShowProducts.html')

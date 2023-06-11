@@ -17,7 +17,8 @@ Including another URLconf
 
 import django.contrib
 from django.urls import path
-from IqueueAP.views import InitialLoading, scan_qr, write_review, Scan_product, Purchase_list, QR_print
+from IqueueAP.views import InitialLoading, scan_qr, write_review, Scan_product, Purchase_list, QR_print, Edit_product, \
+    ProductShow
 from IqueueAP.views import registration_view, login_view
 from IqueueAP.views import success
 from IqueueAP.views import selectRole
@@ -79,6 +80,8 @@ urlpatterns = [
     path("admin/", django.contrib.admin.site.urls),
     path('ShopOwner/QR_print/', QR_print, name='QR_print'),
     path('Customer/WishList/', Wish_list, name='WishList'),
+    path('ShopOwner/Product/Edit', Edit_product, name='Edit_Product'),
+    path('ShopOwner/Product/Show/', ProductShow, name='ProductShow'),
     #path('Customer/bakery/', booking, name='booking'),
     #path('booking-submit', bookingSubmit, name='bookingSubmit'),
 ]
