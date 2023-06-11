@@ -5,8 +5,6 @@ from datetime import date, datetime
 from datetime import time
 
 
-
-
 class Account(models.Model):  # La classe account corrisponde a user di UML
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
@@ -48,8 +46,8 @@ class Shop(models.Model):
         # timeslot = timeslots.filter(shop=self, date=current_date, start__lte=current_time, end__gt=current_time).first()
 
 
-        forced_date = datetime(2023, 6, 20).date()
-        forced_time = datetime(2023, 6, 20, 21, 30).time()
+        forced_date = datetime(2023, 6, 27).date()
+        forced_time = datetime(2023, 6, 27, 11, 0).time()
         timeslot = timeslots.filter(shop=self, date=forced_date, start__lte=forced_time, end__gt=forced_time).first()
 
         # forced_datetime = datetime.combine(forced_date, forced_time)
@@ -59,10 +57,18 @@ class Shop(models.Model):
         if timeslot:
             # Conta il numero di prenotazioni svolte per il timeslot attuale
             num_available_slots = QR.objects.filter(time_start=timeslot.start).count()
-            
+            slots_in_time_slot = timeslot.slots.all()
+            idc_list = [slot.idc for slot in slots_in_time_slot if slot.idc != ""]
+            accounts = []
+            for idc in idc_list:
+                account = Account.objects.filter(idc=idc)
+                accounts.append(account)
 
-            return num_available_slots
-        return 0
+            print(len(accounts))
+
+            return num_available_slots, accounts, timeslot
+        
+        return 0,None,[]
 
 
 
@@ -74,6 +80,9 @@ class Product(models.Model):
     ids = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
     idp = models.CharField(default='PPPPPPPP', max_length=36, validators=[MinLengthValidator(8)])
     # shop = models.ForeignKey(Shop, on_delete=models.CASCADE, default='0')
+    quantity = models.IntegerField(default=None)
+    Available = models.BooleanField(default=True)
+    qr = models.TextField(default='')
 
 
 class TimeSlot(models.Model):
@@ -87,7 +96,7 @@ class TimeSlot(models.Model):
 class Slot(models.Model):
     number = models.IntegerField(default=1)
     available = models.BooleanField(default=True)
-    TimeSlot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE, blank=True, null=True)
+    TimeSlot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE, blank=True, null=True, related_name='slots')
     idc = models.CharField(max_length=36, validators=[MinLengthValidator(8)])
 
 
@@ -119,6 +128,23 @@ class Review(models.Model):
     name_of_the_shop = models.CharField(max_length=36, default='SSSSSSSSSSSSSSS', validators=[MinLengthValidator(8)])
     written = models.BooleanField(default=False)
 
+
+class PurchaseList(models.Model):
+    idc = models.ForeignKey(Account, on_delete=models.CASCADE, )
+
+
+class PurchasedItem(models.Model):
+    purchase_list = models.ForeignKey(PurchaseList, on_delete=models.CASCADE, )
+    date_of_purchase = models.DateField(default=date.today())
+    idp = models.CharField(default="SSSSSSSSSS", max_length=100)
+    name = models.CharField(default="SSSSSSSSSS", max_length=100)
+
+
 class WishList(models.Model):
-    idc = models.CharField(max_length=36, validators=[MinLengthValidator(8)])
-    products = models.ManyToManyField(Product)
+    idc = models.ForeignKey(Account, on_delete=models.CASCADE, )
+
+
+class WishListItem(models.Model):
+    wish_list = models.ForeignKey(WishList, on_delete=models.CASCADE, )
+    idp = models.CharField(default="SSSSSSSSSS", max_length=100)
+    name = models.CharField(default="SSSSSSSSSS", max_length=100)

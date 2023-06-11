@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>List of the purchased items</title>
+
+    <title>Wishlist</title>
+    <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+
+    .anybutton {
+      top: 75%;
+      left: 75%;
+      width: 100px;
+      height: 40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 183, 255);
+    }
+
+    .GoingBackButton {
+      top: 69%;
+      left: 75%;
+      width: 200px;
+      height: 40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 255, 0);
+    }
+
+    .popup {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    {% for item, name, address, price in list %}
+      <li>Item: "{{ item.name }}" || Purchased date: {{ item.date_of_purchase }} || Shop: "{{ name.name }}" || Location: {{ address }} || Price: {{ price }} Euro</li>
+    {% endfor %}
+  </ul>
+
+<input type="button" class="GoingBackButton" onclick="Redirect('Customer/');" value="Going back to Customer view" />
+<input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
+
+<script>
+  function Redirect(url) {
+      location.replace("http://127.0.0.1:8000/" + url);
+    }
+</script>
+</body>
+</html>

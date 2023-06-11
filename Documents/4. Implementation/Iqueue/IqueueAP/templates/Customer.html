@@ -37,6 +37,8 @@
 
 <body>
   <h1>Customer View</h1>
+  <p>Your points: <b>{{ customer.reward }}</b></p>
+  <p>In the future, the Iqueue team will allow you to buy special offers with your points.</p>
   <h2>Select an option</h2>
   <button onclick="window.location.href='Selection/'">See shops </button>
   <br>
@@ -44,12 +46,12 @@
   <br>
   <button onclick="window.location.href='WriteReview/'">Write a review</button>
   <br>
-  <button onclick="window.location.href='PurchaseList/'">Your Purchase list</button>
+  <button onclick="window.location.href='Purchase_list/'">Purchase List</button>
   <br>
-  <button onclick="window.location.href='WishList/'">Your Wish List</button>
+  <button onclick="window.location.href='WishList/'">Wishlist</button>
   <br>
-  <p>Your points: <b>{{ customer.reward }}</b></p>
-  <p>In the future, the Iqueue team will allow you to buy special offers with your points.</p>
+  
+
   
   <input type="button" class="ChangeRolebutton" onclick="Redirect('login/SelectRole/');" value="Change Role" />
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />

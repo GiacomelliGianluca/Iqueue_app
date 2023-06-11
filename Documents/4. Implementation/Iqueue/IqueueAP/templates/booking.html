@@ -43,51 +43,61 @@
   <form method="POST">
     {{ Shop_and_day_selectionForm }}
     {% csrf_token %}
-    <label for="shop">Select a shop:</label>
-    <select name="shop_ids">
-      {% for shop in shops %}
-        <option value="{{ shop.ids }}">{{ shop.name }}</option>
-      {% endfor %}
-    </select>
-
-    <div id="map"></div>
-
-    <label for="date">Select a day:</label>
-    <input type="date" name="date" id="date" required>
-
-    <button type="submit" name="btnform1">View the available slots</button>
-  </form>
-
-  {% if timeslots %}
-    <h2>Available slots:</h2>
-    <ul>
-      {% for timeslot in timeslots %}
-        <li>{{ timeslot.start }} - {{ timeslot.end }}</li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <h1>No slots available</h1>
-  {% endif %}
-  
-  {% if timeslots %}
-    <h1>Select a slot</h1>
-    <form method="POST">
-      {{ TimeSlot_selectionForm }}
-      {% csrf_token %}
-      <label for="selected_slot">Select a slot:</label>
-      <select name="selected_slot">
-        {% for timeslot in timeslots %}
-          <option value="{{ timeslot.id }}">{{ timeslot.start }} - {{ timeslot.end }}</option>
+    {% if shops %}
+      <label for="shop">Select a shop:</label>
+      <select name="shop_ids">
+        {% for shop in shops %}
+          <option value="{{ shop.ids }}">{{ shop.name }}</option>
         {% endfor %}
       </select>
-      <button type="submit" name="btnform2">Submit</button>
+
+      <div id="map"></div>
+
+      <label for="date">Select a day:</label>
+      <input type="date" name="date" id="date" required>
+
+      <button type="submit" name="btnform1">View the available slots</button>
     </form>
+
+
+
+    {% if timeslots %}
+      <h2>Available slots:</h2>
+      <ul>
+        {% for timeslot in timeslots %}
+          <li>{{ timeslot.start }} - {{ timeslot.end }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <h1>No slots available</h1>
+    {% endif %}
+    
+    {% if timeslots %}
+      <h1>Select a slot</h1>
+      <form method="POST">
+        {{ TimeSlot_selectionForm }}
+        {% csrf_token %}
+        <label for="selected_slot">Select a slot:</label>
+        <select name="selected_slot">
+          {% for timeslot in timeslots %}
+            <option value="{{ timeslot.id }}">{{ timeslot.start }} - {{ timeslot.end }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit" name="btnform2">Submit</button>
+      </form>
+    {% endif %}
+  
+  {% else %}
+    <h1>No shops registered yet</h1>
   {% endif %}
+ 
+    
+
+    <input type="button" class="GoingBackButton" onclick="Redirect('Customer/');" value="Going back to Customer view" />
+    <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
   
 
-  <input type="button" class="GoingBackButton" onclick="Redirect('Customer/');" value="Going back to Customer view" />
-  <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
-
+  
   <script type="text/javascript">
     function Redirect(url) {
       location.replace("http://127.0.0.1:8000/" + url);
@@ -95,6 +105,8 @@
 
     var shopAddresses = {{ addresses|safe }};
     var shopNames = {{ names|safe }};
+    var Queue = {{ queues|safe }}
+    var review = {{ reviews|safe }}
 
     var map = L.map('map').setView([0, 0], 13);
 
@@ -129,25 +141,29 @@
       console.log('Geolocation is not supported by this browser.');
     }
 
-    for (var i = 0; i < shopAddresses.length; i++) {
+    for (var i = 0; i < review.length; i++) {
           var address = shopAddresses[i];
           var name = shopNames[i];
+      var queue = Queue[i];
+      var review = review[i]
           console.log('Address:', address);
           console.log('Name:', name);
+      console.log('Queue:', queue);
+      console.log('Review:', review);
 
-          (function(address, name) {
+      (function(address, name, queue, review) {
             let geocode = L.Control.Geocoder.nominatim().geocode(address, function(results) {
               if (results && results.length > 0) {
                 var latlng = results[0].center;
                 console.log('Coordinates:', latlng);
                 var marker = L.marker(latlng);
                 markersLayer.addLayer(marker);
-                marker.bindPopup('<div class="popup">' + name + '</div>').openPopup();
+                marker.bindPopup('<div class="popup">' + name + '<br>Queue: ' + queue + '<br>Rating: ' + review +'</div>').openPopup();
               } else {
                 console.log('No geocoding results found for address:', address);
               }
             });
-          })(address, name);
+      })(address, name, queue, review);
         }
   </script>
 </body>

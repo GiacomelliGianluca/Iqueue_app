@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 
 
 class RegistrationForm(forms.Form):
@@ -29,6 +30,9 @@ class ShopForm(forms.Form):
     lon = forms.FloatField(label='lon')
     max_numb_clients = forms.IntegerField(label='max_numb_clients')
     address = forms.CharField(label='address')
+    number  = forms.CharField(label='number')
+    CAP = forms.CharField(label='CAP')
+    City = forms.CharField(label='City')
     category = forms.ChoiceField(choices=CATEGORY_CHOICES, label='category')
     opening_time = forms.TimeField(label='opening_time')
     closing_time = forms.TimeField(label='closing_time')

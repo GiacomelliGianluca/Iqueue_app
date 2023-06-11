@@ -14,9 +14,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+
+import django.contrib
 from django.urls import path
-from IqueueAP.views import InitialLoading, scan_qr, write_review
+from IqueueAP.views import InitialLoading, scan_qr, write_review, Scan_product, Purchase_list, QR_print
 from IqueueAP.views import registration_view, login_view
 from IqueueAP.views import success
 from IqueueAP.views import selectRole
@@ -34,12 +35,12 @@ from IqueueAP.views import Booking_view
 from IqueueAP.views import MyShops_view
 from IqueueAP.views import Reservation_view
 from IqueueAP.views import ShopQueueList
+from IqueueAP.views import Wish_list
 from IqueueAP.views import DeleteShop
+from IqueueAP.views import DeleteQR
 from IqueueAP.views import DeleteAdv
 from IqueueAP.views import Advertisement_view
 from IqueueAP.views import SuccessAdvertisementRegistration
-from IqueueAP.views import WishList_view
-from IqueueAP.views import AddToWishList_view
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -58,6 +59,8 @@ urlpatterns = [
     path('account/', account_view, name='account_view'), #Serve??
     path('ShopOwner/', ShopOwner_view, name='ShopOwner_view'),
     path('ShopOwner/MyShops/', MyShops_view, name='MyShops_view'),
+    path('ShopOwner/Scan_product/<str:idc>/', Scan_product, name='Scan_product'),
+    path('Customer/Purchase_list/', Purchase_list, name='Purchase_list'),
     path('ShopOwner/MyShops/NewShop/', Shop_view, name='Shop_view'),
     path('ShopOwner/MyShops/NewShop/success/',SuccessShopRegistration, name='SuccessShopRegistration'),
     path('ShopOwner/MyShops/QueueList/<str:ids>/', ShopQueueList, name='ShopQueueList'),
@@ -72,15 +75,17 @@ urlpatterns = [
     path('Customer/Selection/', Customer_CategorySelection_view, name='Customer_CategorySelection_view'),    
     path('Customer/Selection/(?P<selected_category>\s+)/', Booking_view, name='Booking_view'),
     path('Customer/Reservations/', Reservation_view, name='Reservation_view'),
-    path('Customer/WishList/', WishList_view, name='WishList_view'),
-    path('Customer/WishList/AddToWishList/', AddToWishList_view, name='AddToWishList_view'),
-    path("admin/", admin.site.urls),
+    path('Customer/Reservations/<str:idQR>/', DeleteQR, name='DeleteQR'),
+    path("admin/", django.contrib.admin.site.urls),
+    path('ShopOwner/QR_print/', QR_print, name='QR_print'),
+    path('Customer/WishList/', Wish_list, name='WishList'),
     #path('Customer/bakery/', booking, name='booking'),
     #path('booking-submit', bookingSubmit, name='bookingSubmit'),
 ]
 
 #Da commentare e togliere da commento ogni volta che si aggiunge un URL!!
 urlpatterns+=static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
+
 
 
 

@@ -54,6 +54,9 @@
     <label for="price">price:</label>
     <input type="number" name="price" id="price">
     <br>
+    <label for="quantity">quantity:</label>
+    <input type="number" name="quantity" id="quantity">
+    <br>
     <label for="shop_discount">shop_discount </label>
     <input type="number" name="shop_discount" id="shop_discount">
     <br>
@@ -62,6 +65,7 @@
 
   </form>
 
+ <input type="button" class="Print_QR" onclick="Redirect('ShopOwner/QR_print/');" value="Print_QR" />
   <input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" />
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
 </body>

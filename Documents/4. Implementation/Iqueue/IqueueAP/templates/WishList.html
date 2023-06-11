@@ -1,20 +1,13 @@
+<!DOCTYPE html>
 <html>
 <head>
-  <title>Wish List</title>
-
-  <script type="text/javascript">
-    function Redirect(url) {
-       location.replace("http://127.0.0.1:8000/"+url);
-    }
-
-    // function sub(a,b) {
-    //   var c
-    //   document.write(c);
-      
-    // }
-  </script>
-
+  <title>Wishlist</title>
   <style>
+
+    #map {
+      height: 400px;
+      width: 100%;
+    }
 
     .anybutton {
       top:75%;
@@ -27,15 +20,18 @@
       }
 
     .GoingBackButton {
-      top:60%;
-      left:75%;
-      width:200px;
-      height:40px;
+      top: 69%;
+      left: 75%;
+      width: 200px;
+      height: 40px;
       position: absolute;
       z-index: 2;
       background: rgb(0, 255, 0); 
       }
     
+    .popup {
+      font-weight: bold;
+    }
   </style>
     
      
@@ -43,41 +39,54 @@
 </head>
 
 <body>
-<h1>WishList</h1>
+  <ul>
+    {% for prod, address, shop, price, item in list %}
 
-<p>
-    Your current product in the wish list are:
-</p>
-  {% for item1, item2, item3 in list %}
-    <h1>{{ item2 }}</h1>
-    <a href="data:image/png;base64,{{ item1.img }}" download>
-      <img src="data:image/png;base64,{{ item1.img }}" alt="QR Code">
-    </a>
-    <br>
-    <p>{{ item3 }}<form action=" " method="get">  {% csrf_token %} <input type="hidden" value= {{item1.ids}} name="ids"/>   <input type="submit" name="Guide" value="Guide me to the shop!"> </form>
-    </p>
-    <p>You have make a reservation for the {{item1.date}} between {{item1.time_start}} and {{item1.time_end}} </p>
-    <p>Your position in the queue is: {{item1.number}}</p>
-    <br>
-    <!-- DA FARE CANCELLAZIONE
-    <form action=" " method="get" onsubmit="location.reload()">
-      <input type="hidden" value={{shop.ids}} name="ShopIDs"/>
-      <input type="submit" name="ADDbtn" value="ADD customer without Iqueue">
-      <input type="submit" name="DECbtn" value="DEC customer without Iqueue">
-    </form> -->
-    {% empty %}
-    <h1>No product in the wish list</h1>
-    <a href="/Customer/">Go back to the main view</a>
+      <li>
+          Item: "{{ prod }}", Price: {{ price }}€, Shop: {{ shop.name }}, Address: {{ address }}
+          <form action="/Customer/WishList/" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="product_idp" value="{{ item.idp }}">
+            <input type="submit" name="Remove" value="Remove">
+          </form>
+      </li>
+
   {% endfor %}
+  </ul>
 
-  <br>
-  <p>Do you want to add a product to the wish list?</p>
-  <button onclick="window.location.href='AddToWishList'"> Add a product to the wish list </button>
+  <form action="/Customer/WishList/" method="POST">
+    {% csrf_token %}
+    <input type="submit" name="add_products" value="Add products">
+  </form>
 
+  {% if show_search_bar %}
+    <form action="/Customer/WishList/" method="POST">
+      {% csrf_token %}
+      <input type="text" name="query" placeholder="Inserisci il nome del prodotto">
+      <input type="submit" value="Cerca">
+    </form>
+  {% endif %}
+
+  {% if similar_products|length > 0 %}
+    <form action="/Customer/WishList/" method="POST">
+      {% csrf_token %}
+      <select name="selected_product">
+        {% for prod, name, address in data %}
+        <option value="{{ prod.idp }}">Product: {{ prod.name }}, Price: {{ prod.price }} Euro, Shop: {{ name }}, Address: {{ address }} </option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="Aggiungi alla Wishlist">
+    </form>
+  {% endif %}
 
 
   <input type="button" class="GoingBackButton" onclick="Redirect('Customer/');" value="Going back to Customer view" />
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
 
+<script>
+  function Redirect(url) {
+      location.replace("http://127.0.0.1:8000/" + url);
+    }
+</script>
 </body>
 </html>

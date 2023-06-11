@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shops Page</title>
+</head>
+<body>
+    <h1>QRs to print</h1>
+
+    {% if products %}
+        <ul>
+            {% for product in products %}
+                <h1>{{ product.name }}</h1>
+                <a href="data:image/png;base64,{{ product.qr }}" download>
+                <img src="data:image/png;base64,{{ product.qr }}" alt="QR Code">
+                </a>
+                <br>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No QRs to print.</p>
+    {% endif %}
+</body>
+</html>

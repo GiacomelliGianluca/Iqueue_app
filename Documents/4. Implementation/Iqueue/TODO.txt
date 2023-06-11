@@ -1,22 +1,12 @@
 PRIORITA':
 >Verificare che i booking vanno sempre a buon fine DA TESTARE TANTO, MI SEMBRA OK
->Fare Rewards al customer dopo aver fatto la review 
->Fare mappa che mostra negozi entro una certa distanza da noi, mettere rating sui pin dei negozi, ev sostituire pin con immagini negozi.
->Mostrare il numero di persone attualmente in coda in un negozio dalla mappa
->Fare tempo d'attesa, dove il tempo d'attesa per il singolo cliente è slotDuartion/N_max_client. Moltiplicare poi tale numero per la posizione in coda.
+>Fare tempo d'attesa, dove il tempo d'attesa per il singolo cliente è t_client=slotDuartion/(N_max_client*numero persone servibili). Moltiplicare poi tale numero per la posizione in coda.
 >Indicare tempo d'attesa per la prenotazione di uno slot sotto la mappa
->Mettere in coda quelli dello slot prima; Fare che lo shopOwner può cancellare la prenotazione se il cliente non si presenta.
------------------------------------------
 
-DA FARE:
+>Mettere -1 in number nei QR passatti e dire che non sono più validi in MyReservation con un if.
 
->Nel form di registrazione del negozio, far mettere in campi distinti nome paese, CAP ecc ai negozi. Concatenare poi le stringhe di tali campi per avere l'address che si salva nel negozio.
 
->Dare possibilità di delate prenotazione, prodotto, account
-
->Dare possibilità di modifica negozio, prodotto, account
-
->Mettere constraint quando un utente si registra: la mail degli utenti deve essere unica per ogni utente. (altrimenti si hanno problemi quando ci si logga)
+>Dare possibilità di delate prodotto, account
 
 >Mettere constraint quando si registra product: NO prezzo negativo, NO discount che è sopra il 100% o negativo. Se violati, dire che il form dà errore (NON FATTO MA BASTA METTERE UN VALIDATOR NEL CAMPO HTML)
 
@@ -24,13 +14,6 @@ DA FARE:
 
 >Indicare via in MyShop
 
------------------------------------------
-
-EVENTUALI:
-
->Fare che NOAPPINC e NOAPPDEC funzionano solo quando il negozio è aperto??      (NON FATTO)
-
->Indicare orari negozio in MyShop?     (NON FATTO)
 
 
 

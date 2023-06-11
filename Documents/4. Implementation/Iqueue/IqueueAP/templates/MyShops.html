@@ -60,8 +60,21 @@
     <p>Number of ratings: {{ shop.num_reviews }}</p>
     <input type="submit" name="ADDbtn" value="ADD customer without Iqueue">
     <input type="submit" name="DECbtn" value="DEC customer without Iqueue">
-    <br>
     <input type="submit" name="Delete_shop" value="Delete this shop" class="delete-button">
+    <br>
+    <input type="submit" name="SCANbtn" value="SCAN customer with Iqueue">
+    {% if accounts|length > 0 %}
+        <br>
+        <br>
+         <label for="customer">Select the customer:</label>
+         <select name="customer">
+            {% for account in accounts %}
+                <option value="{{ account.idc }}">{{ account.surname }}, {{ account.name }} </option>
+            {% endfor %}
+         </select>
+         <input type="hidden" value="{{ account.idc }}" name="account_id">
+         <input type="submit" name="Obtained" value="Submit" class="Obtained">
+    {% endif %}
     {% if adv %}
       <p><b>This shop has been advertised</b>: from {{ adv.date_start }} to {{ adv.date_end }}</p>
       <input type="submit" name="Delete_adv" value="Delete the advertisement" class="delete-button">

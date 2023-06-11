@@ -26,6 +26,11 @@
       background: rgb(0, 183, 255); 
       }
 
+    .delete-button {
+      background-color: red;
+      color: white;
+      }
+
     .GoingBackButton {
       top:60%;
       left:75%;
@@ -54,10 +59,17 @@
       <img src="data:image/png;base64,{{ item1.img }}" alt="QR Code">
     </a>
     <br>
-    <p>{{ item3 }}<form action=" " method="get">  {% csrf_token %} <input type="hidden" value= {{item1.ids}} name="ids"/>   <input type="submit" name="Guide" value="Guide me to the shop!"> </form>
+    <p>{{ item3 }}
+    <form action=" " method="get">  
+      {% csrf_token %}  
+      <input type="hidden" value= {{item1.ids}} name="ids"/>
+      <input type="submit" name="Guide" value="Guide me to the shop!"> 
     </p>
     <p>You have make a reservation for the {{item1.date}} between {{item1.time_start}} and {{item1.time_end}} </p>
     <p>Your position in the queue is: {{item1.number}}</p>
+    <input type="hidden" value="{{ item1.idQR }}" name="idQR"/>
+    <input type="submit" name="Delete_QR" value="Delete the reservation" class="delete-button">
+    </form>
     <br>
     <!-- DA FARE CANCELLAZIONE
     <form action=" " method="get" onsubmit="location.reload()">
