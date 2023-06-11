@@ -56,7 +56,7 @@ class Shop(models.Model):
 
         if timeslot:
             # Conta il numero di prenotazioni svolte per il timeslot attuale
-            QRs_reserved =  QR.objects.filter(time_start=timeslot.start, ids=self.ids)
+            QRs_reserved =  QR.objects.filter(time_start=timeslot.start, date=timeslot.date, ids=self.ids)
             num_available_slots = QRs_reserved .count()
             slots_in_time_slot = timeslot.slots.all()
             idc_list = [slot.idc for slot in slots_in_time_slot if slot.idc != ""]
