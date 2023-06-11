@@ -642,6 +642,21 @@ def Product_view(request):
 def SuccessProductRegistration(request):
     return render(request, 'registrationProductSuccess.html')
 
+def QR_print(request):
+    idso = request.session.get('idso', '')
+    products = Product.objects.filter(idso=idso)
+
+    
+
+    shop_associated=[]
+    for product in products:
+        shop_associated.extend(Shop.objects.filter(ids=product.ids))
+
+    list = zip(products, shop_associated)
+    
+    return render(request, "QR_print.html", {'list': list})
+
+
 
 def Advertisement_view(request):
     idso = request.session.get('idso', '')
@@ -844,10 +859,6 @@ def Purchase_list(request):
     return render(request, "Purchase_list.html", context={'list': list})
 
 
-def QR_print(request):
-    idso = request.session.get('idso', '')
-    products = Product.objects.filter(idso=idso)
-    return render(request, "QR_print.html", {'products': products})
 
 
 def Wish_list(request):
