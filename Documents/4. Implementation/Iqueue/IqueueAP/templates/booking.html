@@ -156,6 +156,7 @@
 
     var shopElement = document.getElementById('shopAddress');
     var address_not_show = '<br>The addresses of the shops not reported in the map due to geocoding issues are: <br>';
+    var flag=0;
 
     for (var i = 0; i < (shops.length+1); i++) {
       var shop = shops[i];
@@ -180,10 +181,15 @@
             console.log('No geocoding results found for address:', address);
             address_not_show += '>'+ address + ' for the shop '+ '<b>'+ name +'</b>' + ' with queue ' + queue + ' and rating '+review+'<br>';
             shopElement.innerHTML = address_not_show;
+            flag=1;
           }
           if (i == shops.length) {
+            if (flag==0){
+              address_not_show += '<h3>None</h3>';
+            }
             address_not_show += '<br>';
             shopElement.innerHTML = address_not_show;
+
           }
         });
       })(address, name, queue, review);
