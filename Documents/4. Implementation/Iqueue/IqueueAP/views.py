@@ -180,11 +180,16 @@ def Booking_view(request, selected_category):
         queues.append(shop.queue)
         reviews.append(shop.rating)
 
-    print(shops)
+
 
 
     addresses = [shop.address for shop in shops]
     names = [shop.name for shop in shops]
+
+    print(addresses)
+    print(names)
+    print(queues)
+    print(reviews)
 
     #Condition that verifies if form is sent
     if request.method == 'POST':

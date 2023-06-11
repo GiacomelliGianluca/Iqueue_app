@@ -1,4 +1,5 @@
 <html>
+  {% load custom_tags %}
 <head>
   <title>Booking</title>
 
@@ -52,6 +53,8 @@
       </select>
 
       <div id="map"></div>
+
+      <div id="shopAddress"></div>
 
       <label for="date">Select a day:</label>
       <input type="date" name="date" id="date" required>
@@ -141,30 +144,50 @@
       console.log('Geolocation is not supported by this browser.');
     }
 
+    var shops = [];
     for (var i = 0; i < review.length; i++) {
-          var address = shopAddresses[i];
-          var name = shopNames[i];
-      var queue = Queue[i];
-      var review = review[i]
-          console.log('Address:', address);
-          console.log('Name:', name);
+      shops.push({
+        address: shopAddresses[i],
+        name: shopNames[i],
+        queue: Queue[i],
+        review: review[i]
+      });
+    }
+
+    var shopElement = document.getElementById('shopAddress');
+    var address_not_show = '<br>The addresses of the shops not reported in the map due to geocoding issues are: <br>';
+
+    for (var i = 0; i < (shops.length+1); i++) {
+      var shop = shops[i];
+      var address = shop.address;
+      var name = shop.name;
+      var queue = shop.queue;
+      var review = shop.review;
+      console.log('Address:', address);
+      console.log('Name:', name);
       console.log('Queue:', queue);
       console.log('Review:', review);
 
       (function(address, name, queue, review) {
-            let geocode = L.Control.Geocoder.nominatim().geocode(address, function(results) {
-              if (results && results.length > 0) {
-                var latlng = results[0].center;
-                console.log('Coordinates:', latlng);
-                var marker = L.marker(latlng);
-                markersLayer.addLayer(marker);
-                marker.bindPopup('<div class="popup">' + name + '<br>Queue: ' + queue + '<br>Rating: ' + review +'</div>').openPopup();
-              } else {
-                console.log('No geocoding results found for address:', address);
-              }
-            });
+        let geocode = L.Control.Geocoder.nominatim().geocode(address, function(results) {
+          if (results && results.length > 0) {
+            var latlng = results[0].center;
+            console.log('Coordinates:', latlng);
+            var marker = L.marker(latlng);
+            markersLayer.addLayer(marker);
+            marker.bindPopup('<div class="popup">' + name + '<br>Queue: ' + queue + '<br>Rating: ' + review +'</div>').openPopup();
+          } else {
+            console.log('No geocoding results found for address:', address);
+            address_not_show += '>'+ address + ' for the shop '+ '<b>'+ name +'</b>' + ' with queue ' + queue + ' and rating '+review+'<br>';
+            shopElement.innerHTML = address_not_show;
+          }
+          if (i == shops.length) {
+            address_not_show += '<br>';
+            shopElement.innerHTML = address_not_show;
+          }
+        });
       })(address, name, queue, review);
-        }
+    }
   </script>
 </body>
 </html>
