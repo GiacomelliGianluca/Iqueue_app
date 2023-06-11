@@ -648,11 +648,15 @@ def QR_print(request):
 
     
 
-    shop_associated=[]
+    shop_associated_name=[]
     for product in products:
-        shop_associated.extend(Shop.objects.filter(ids=product.ids))
+        shop = Shop.objects.filter(ids=product.ids).first()
+        if shop:
+            shop_associated_name.append(shop.name)
+        else:
+            shop_associated_name.append('The shop has been deleted!')
 
-    list = zip(products, shop_associated)
+    list = zip(products, shop_associated_name)
     
     return render(request, "QR_print.html", {'list': list})
 

@@ -8,12 +8,12 @@
 
     {% if list %}
         <ul>
-            {% for product, shop in list %}
+            {% for product, shop_name in list %}
                 <h1>{{ product.name }}</h1>
                 <a href="data:image/png;base64,{{ product.qr }}" download>
                 <img src="data:image/png;base64,{{ product.qr }}" alt="QR Code">
                 </a>
-                <p>The product is in the shop: {{shop.name}}</p>
+                <p>The product is in the shop: {{ shop_name}}</p>
                 <br>
             {% endfor %}
         </ul>
