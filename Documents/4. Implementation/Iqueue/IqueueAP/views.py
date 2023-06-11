@@ -361,8 +361,6 @@ def Shop_view(request):
             #Saving the different fields provided by the form
             
             name = form.cleaned_data['name']
-            lat = form.cleaned_data['lat']
-            lon = form.cleaned_data['lon']
             max_numb_clients = form.cleaned_data['max_numb_clients']
             address_form = form.cleaned_data['address']
             number  = form.cleaned_data['number']
@@ -383,7 +381,7 @@ def Shop_view(request):
             ids = str(uuid.uuid4())
 
             #Creation of the object shop
-            shop = Shop(name=name, lat=lat, lon=lon, max_numb_clients=max_numb_clients, ids=ids, idso=idso,
+            shop = Shop(name=name, max_numb_clients=max_numb_clients, ids=ids, idso=idso,
                         address=address, rating=0, num_reviews=0, category=category)
 
             # assegnare il campo immagine dell'istanza di Shop al file caricato dall'utente
@@ -491,6 +489,7 @@ def MyShops_view(request, ):
         timeslot = TimeSlot.objects.filter(shop=shop)
         _, accounts, _ = shop.checkQueue(timeslot)
         context['accounts'] = accounts
+        #Da sistemare: mostra gli account su tutti gli shops
         return render(request, 'MyShops.html', context=context)
 
     if (request.GET.get('Delete_shop')):

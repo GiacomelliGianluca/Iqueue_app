@@ -26,8 +26,6 @@ CATEGORY_CHOICES = (
 
 class ShopForm(forms.Form):
     name = forms.CharField(label='name')
-    lat = forms.FloatField(label='lat')
-    lon = forms.FloatField(label='lon')
     max_numb_clients = forms.IntegerField(label='max_numb_clients')
     address = forms.CharField(label='address')
     number  = forms.CharField(label='number')

@@ -28,8 +28,6 @@ def get_default_image():
 class Shop(models.Model):
     img = models.ImageField(upload_to='images/', height_field=None, width_field=None, max_length=10000,  default=get_default_image)
     name = models.CharField(max_length=100)
-    lat = models.FloatField(default=0)  # latitude
-    lon = models.FloatField(default=0)  # longitude
     max_numb_clients = models.IntegerField()
     queue = models.IntegerField(default=0)
     queue_no_app = models.IntegerField(default=0)
