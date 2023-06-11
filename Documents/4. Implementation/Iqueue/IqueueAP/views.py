@@ -489,7 +489,7 @@ def MyShops_view(request, ):
     if (request.GET.get('SCANbtn')):
         shop = get_object_or_404(Shop, ids=request.GET.get('ShopIDs'))
         timeslot = TimeSlot.objects.filter(shop=shop)
-        _, accounts = shop.checkQueue(timeslot)
+        _, accounts, _ = shop.checkQueue(timeslot)
         context['accounts'] = accounts
         return render(request, 'MyShops.html', context=context)
 
