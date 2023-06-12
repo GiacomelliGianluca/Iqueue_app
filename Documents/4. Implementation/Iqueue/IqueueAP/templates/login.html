@@ -1,4 +1,14 @@
-<html>
+{% load i18n %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8">
+  
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+
    <head>
       <script type="text/javascript">
          function Redirect() {
@@ -8,13 +18,13 @@
    </head>
   <body>
     <form method="post" action="/login/">
-      <p>--- Welcome to Iqueue ---</p>
+      <p> Welcome to Iqueue </p>
 
       {% csrf_token %}
-      <label for="email">e-mail</label>
+      <label for="email">E-mail</label>
       <input type="text" name="email" id="email">
       <br>
-      <label for="password">Password:</label>
+      <label for="password">Password</label>
       <input type="password" name="password" id="password">
       <br>
       <input type="submit"  value="Sign In">

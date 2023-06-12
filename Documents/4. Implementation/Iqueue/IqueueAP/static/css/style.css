@@ -1,0 +1,40 @@
+body {
+    background: linear-gradient(to left top, rgba(80, 80, 190, 0.479), rgb(47, 57, 244));
+    background-attachment: fixed;
+    /* Additional styling starts below. */
+    text-align: center;
+    font-family: 'Lexend Deca', sans-serif;
+    width: 800px; 
+    margin: auto;
+    color: #070436;
+    padding: 3px 0;
+  }
+
+  label{
+    margin-top: 20px;
+    border-radius: 25px;
+    width: 200px;
+    display:inline-block;
+    }
+  
+  input{
+       margin-top: 20px;
+      border-radius: 25px;
+      width: 200px;
+      display:inline-block;
+      }
+
+  button{
+    margin-top: 20px; 
+        border-radius: 25px;
+        width: 200px;
+        display:inline-block;
+        }
+       
+  select{
+    margin-top: 20px;
+          border-radius: 25px;
+          width: 200px;
+          display:inline-block;
+          }
+

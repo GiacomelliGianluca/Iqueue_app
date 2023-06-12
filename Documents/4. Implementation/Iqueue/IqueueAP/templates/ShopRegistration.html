@@ -1,4 +1,13 @@
 <head>
+  {% load static %}
+
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8">
+  
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="{% static "css/style.css" %}">
   <title>Shop Owner</title>
 
   <script type="text/javascript">
@@ -35,19 +44,32 @@
     <input type="text" name="name" id="name">
     <br>
     <label for="address">Address:</label>
-    <input type="text" name="address" id="address"> <label for="number">number:</label>  <input type="text" name="number" id="number"><label for="CAP">CAP:</label><input type="text" name="CAP" id="CAP"><label for="City">City:</label><input type="text" name="City" id="City"> 
+    <input type="text" name="address" id="address"> 
+    <br>
+    <label for="number">number:</label>  
+    <input type="text" name="number" id="number">
+    <br>
+    <label for="CAP">CAP:</label>
+    <input type="text" name="CAP" id="CAP">
+    <br>
+    <label for="City">City:</label>
+    <input type="text" name="City" id="City"> 
     <br>
     <label for="max_numb_clients">max_numb_clients:</label>
     <input type="number" name="max_numb_clients" id="max_numb_clients" min=1 oninput="validity.valid||(value='');">
     <br>
     <label for="bakery"> Bakery</label>
     <input type="radio" id="category" name="category" value="bakery">
+    <br>
     <label for="clothes"> Clothes</label>
     <input type="radio" id="category" name="category" value="clothes">
+    <br>
     <label for="perfumery"> Perfumery</label>
     <input type="radio" id="category" name="category" value="perfumery">
+    <br>
     <label for="hair_saloon"> Hair Saloon</label>
     <input type="radio" id="category" name="category" value="hair_saloon">
+    <br>
     <label for="others"> Other</label>
     <input type="radio" id="category" name="category" value="others">
     <br>
