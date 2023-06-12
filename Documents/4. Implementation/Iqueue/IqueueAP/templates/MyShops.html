@@ -68,11 +68,14 @@
     {% endif %}
     <p>Rating: {{ shop.rating }}</p>
     <p>Number of ratings: {{ shop.num_reviews }}</p>
-    <input type="submit" name="ADDbtn" value="ADD customer without Iqueue">
-    <input type="submit" name="DECbtn" value="DEC customer without Iqueue">
+    <input type="submit" name="ADDbtn" value="ADD customer without Iqueue" style="font-size: smaller;">
+    <input type="submit" name="DECbtn" value="DEC customer without Iqueue" style="font-size: smaller;">
     <input type="submit" name="Delete_shop" value="Delete this shop" class="delete-button">
     <br>
-    <input type="submit" name="SCANbtn" value="SCAN products">
+    {% if shop.queue > 0 %}
+      <p>Scan the products of the people you are serving (The customer must be registered in Iqueue!): 
+      <input type="submit" name="SCANbtn" value="SCAN products"></p>
+    {% endif %}
     {% if accounts|length > 0 and shop == actual_shop%}
         <br>
         <br>
@@ -105,7 +108,7 @@
 MOSTRARE CODA
 INCREMENTARE/DECREMENTARE PERSONE IN CODA -->
 
-<input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" />
+<input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" style="font-size: smaller;"/>
 <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" /><!-- DA SISTEMARE POSIZIONE--->
 
 </body>

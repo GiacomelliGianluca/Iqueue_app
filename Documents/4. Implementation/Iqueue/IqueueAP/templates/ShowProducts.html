@@ -59,14 +59,14 @@
   {% if products %}
     <ul>
       {% for product in products %}
-        <li>{{ product.name }} - Price: {{ product.price }} - Quantity: {{ product.quantity }}</li>
+        <li>{{ product.name }} - Price: {{ product.price }} - Quantity: {{ product.quantity }} - You are applying a discount of: {{ product.shop_discount}} %</li>
       {% endfor %}
     </ul>
   {% else %}
     <p>No available</p>
   {% endif %}
 
-<input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" />
+<input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view"style="font-size: smaller;" />
 <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" /><!-- DA SISTEMARE POSIZIONE--->
 
 </body>

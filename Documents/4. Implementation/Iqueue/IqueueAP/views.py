@@ -155,7 +155,7 @@ def Customer_CategorySelection_view(request):
     Category_form = forms.ShopCategorySelectionForm()
     if request.method == 'POST':
         selected_category = request.POST.get('category')
-        return redirect('Booking_view', selected_category)
+        return redirect('Booking_view', selected_category=selected_category)
 
     return render(request, 'CustomerCategorySelection.html')
 
@@ -317,6 +317,14 @@ def DeleteQR(request, idQR):
             slot.available = True
             slot.save()
             qr.delete()
+            try:
+                timeslot = TimeSlot.objects.filter(available=False, start=start, end=end,
+                                                date=date, shop=shop )[:1].get()
+                if timeslot:
+                    timeslot.available = True
+                    timeslot.save()
+            except TimeSlot.DoesNotExist:
+                pass                
 
         return redirect('Reservation_view')
 
@@ -583,6 +591,9 @@ def DeleteShop(request, ids):
                 items.delete()
                 product.delete()
 
+            for rev in Review.objects.filter(ids=shop.ids):
+                rev.delete()
+
             shop.delete()
 
         return redirect('MyShops_view')
@@ -816,7 +827,7 @@ def Scan_product(request, idc):
         name = qr_code_lines[1].split(': ')[1]
         name = name.strip()
         price = qr_code_lines[2].split(': ')[1]
-        price = price.strip()
+        price = float(price.strip())
         shop_discount = qr_code_lines[3].split(': ')[1]
         shop_discount = shop_discount.strip()
         quantity = qr_code_lines[4].split(': ')[1]
@@ -851,7 +862,7 @@ def Purchase_list(request):
     name_shops = []
     address_shops = []
     prices = []
-
+    
     for item in items:
         product = get_object_or_404(Product, idp=item.idp)
         shop = get_object_or_404(Shop, ids=product.ids)

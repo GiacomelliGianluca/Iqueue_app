@@ -50,28 +50,32 @@
 <body>
   <p>Select which shop do you want to advertise. You can only advertise shops that are not advertised yet.</p>
   <p>To see which shops have you already advertised, go back to MyShops.</p>
-  <form method="post">
-    {% csrf_token %}
-    <select name="selected_shop">
-        {% for shop in shops %}
-          <option value="{{ shop.ids }}">{{ shop.name }}</option>
-        {% endfor %}
-    </select>
-    <p>How long do you want to advertise your shop?</p>
-    <select name="period" required>
-      <option value=1>1 month</option>
-      <option value=3>3 months</option>
-      <option value=6>6 months</option>
-    </select>
-    <p>The advertisement period starts from now.</p>
-    <br>
-    <input type="submit" value="Record">
-</form>
+  {% if shops %}
+    <form method="post">
+      {% csrf_token %}
+      <select name="selected_shop">
+          {% for shop in shops %}
+            <option value="{{ shop.ids }}">{{ shop.name }}</option>
+          {% endfor %}
+      </select>
+      <p>How long do you want to advertise your shop?</p>
+      <select name="period" required>
+        <option value=1>1 month</option>
+        <option value=3>3 months</option>
+        <option value=6>6 months</option>
+      </select>
+      <p>The advertisement period starts from now.</p>
+      <br>
+      <input type="submit" value="Record">
+    </form>
+  {% else %}
+    <h2>No shops to advertise!</h2>
+  {% endif %}
 
 <p><u>This is a free trial. Iqueue team plans to make a charge upon advertising your shop in the future.</u></p>
 
 
 
-  <input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" />
+  <input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view"style="font-size: smaller;" />
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
 </body>

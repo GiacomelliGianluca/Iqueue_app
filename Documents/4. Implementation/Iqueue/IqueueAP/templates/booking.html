@@ -106,7 +106,7 @@
  
     
 
-    <input type="button" class="GoingBackButton" onclick="Redirect('Customer/');" value="Going back to Customer view" />
+    <input type="button" class="GoingBackButton" onclick="Redirect('Customer/');" value="Going back to Customer view" style="font-size: smaller;" />
     <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
   
 
@@ -196,6 +196,7 @@
           if (i == shops.length) {
             if (flag==0){
               address_not_show += '<h3>None</h3>';
+              flag=1;
             }
             address_not_show += '<br>';
             shopElement.innerHTML = address_not_show;

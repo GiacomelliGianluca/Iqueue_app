@@ -87,7 +87,7 @@ urlpatterns = [
 ]
 
 #Da commentare e togliere da commento ogni volta che si aggiunge un URL!!
-urlpatterns+=static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
+#urlpatterns+=static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 
 
 

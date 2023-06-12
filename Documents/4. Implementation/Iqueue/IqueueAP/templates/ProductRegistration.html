@@ -66,8 +66,8 @@
     <label for="quantity">quantity:</label>
     <input type="number" name="quantity" id="quantity">
     <br>
-    <label for="shop_discount">shop_discount </label>
-    <input type="number" name="shop_discount" id="shop_discount">
+    <label for="shop_discount">Shop_discount (in %) </label>
+    <input type="number" name="shop_discount" id="shop_discount" min="0" max="100">
     <br>
     
     <button type="submit" name="btnform2">Confirm</button>
@@ -78,6 +78,6 @@
   <input type="button" class="Print_QR" onclick="Redirect('ShopOwner/QR_print/');" value="Print_QR" />
   <p>Do you want to modify any product from your shops?</p>
   <input type="button" class="Print_QR" onclick="Redirect('ShopOwner/Product/Edit');" value="Modify Products" />
-  <input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" />
+  <input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" style="font-size: smaller;"/>
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
 </body>

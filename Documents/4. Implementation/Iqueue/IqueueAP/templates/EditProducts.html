@@ -92,12 +92,12 @@
       <br><br>
 
       <label for="quantity">Quantity:</label>
-      <input type="number" id="quantity" name="quantity">
+      <input type="number" id="quantity" name="quantity"min="0">
 
-      <br><br>
+      <br>
 
-      <label for="discount">Shop Discount:</label>
-      <input type="number" id="discount" name="discount">
+      <label for="discount">Shop_discount (in %) :</label>
+      <input type="number" id="discount" name="discount" min="0" max="100">
 
       <input type="hidden" value="{{ idp }}" id="idp" name="idp">
 
@@ -109,7 +109,7 @@
   {%  endif %}
   </form>
 
-<input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" />
+<input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" style="font-size: smaller;"/>
 <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" /><!-- DA SISTEMARE POSIZIONE--->
 </body>
 </html>

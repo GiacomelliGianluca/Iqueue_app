@@ -28,20 +28,20 @@
 
     .anybutton {
       top:75%;
-      left:75%;
+      left:50%;
       width:100px;
       height:40px;
-      position: absolute;
+      position: relative;
       z-index: 2;
       background: rgb(0, 183, 255); 
       }
 
     .GoingBackButton {
       top:60%;
-      left:75%;
+      left:50%;
       width:200px;
       height:40px;
-      position: absolute;
+      position: relative;
       z-index: 2;
       background: rgb(0, 255, 0); 
       }
@@ -93,7 +93,7 @@
 
 <input type="button" onclick="Redirect('ShopOwner/Scan/');" value="SCAN QR" />
 
-<input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" />
+<input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view"style="font-size: smaller;" />
 <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" /><!-- DA SISTEMARE POSIZIONE--->
 
 </body>

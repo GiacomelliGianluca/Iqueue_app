@@ -48,10 +48,12 @@
   <ul>
     {% for item, name, address, price in list %}
       <li>Item: "{{ item.name }}" || Purchased date: {{ item.date_of_purchase }} || Shop: "{{ name.name }}" || Location: {{ address }} || Price: {{ price }} Euro</li>
+      {% empty %}
+       <h1>No product in the purchase list</h1>
     {% endfor %}
   </ul>
 
-<input type="button" class="GoingBackButton" onclick="Redirect('Customer/');" value="Going back to Customer view" />
+<input type="button" class="GoingBackButton" onclick="Redirect('Customer/');" value="Going back to Customer view"  style="font-size: smaller;"/>
 <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
 
 <script>

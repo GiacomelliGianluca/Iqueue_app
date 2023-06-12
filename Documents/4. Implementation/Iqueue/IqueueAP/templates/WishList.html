@@ -71,8 +71,8 @@
   {% if show_search_bar %}
     <form action="/Customer/WishList/" method="POST">
       {% csrf_token %}
-      <input type="text" name="query" placeholder="Inserisci il nome del prodotto">
-      <input type="submit" value="Cerca">
+      <input type="text" name="query" placeholder="Insert product name">
+      <input type="submit" value="Search">
     </form>
   {% endif %}
 
@@ -84,12 +84,12 @@
         <option value="{{ prod.idp }}">Product: {{ prod.name }}, Price: {{ prod.price }} Euro, Shop: {{ name }}, Address: {{ address }} </option>
         {% endfor %}
       </select>
-      <input type="submit" value="Aggiungi alla Wishlist">
+      <input type="submit" value="Add to Wishlist">
     </form>
   {% endif %}
 
 
-  <input type="button" class="GoingBackButton" onclick="Redirect('Customer/');" value="Going back to Customer view" />
+  <input type="button" class="GoingBackButton" onclick="Redirect('Customer/');" value="Going back to Customer view" style="font-size: smaller;"/>
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
 
 <script>
