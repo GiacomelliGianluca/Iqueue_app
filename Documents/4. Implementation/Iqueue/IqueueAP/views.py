@@ -577,6 +577,12 @@ def DeleteShop(request, ids):
             # Delete of the advertisement associeted to the shop
             for adv in Advertisement.objects.filter(ids=shop.ids):
                 adv.delete()
+
+            for product in Product.objects.filter(ids=shop.ids):
+                items = WishListItem.objects.filter(idp=product.idp)
+                items.delete()
+                product.delete()
+
             shop.delete()
 
         return redirect('MyShops_view')
@@ -903,14 +909,15 @@ def Wish_list(request):
             for term in terms:
                 term = term.strip()
                 try:
-                    item = Product.objects.get(name=term)
-                    similar_products.append(item)
-                    shop_id = item.ids
-                    shop_obj = Shop.objects.get(ids=shop_id)
-                    name = shop_obj.name
-                    names.append(name)
-                    address = shop_obj.address
-                    addresses.append(address)
+                    items = Product.objects.filter(name__icontains=term)
+                    for item in items:
+                        similar_products.append(item)
+                        shop_id = item.ids
+                        shop_obj = Shop.objects.get(ids=shop_id)
+                        name = shop_obj.name
+                        names.append(name)
+                        address = shop_obj.address
+                        addresses.append(address)
                 except Product.DoesNotExist:
                     continue
 
