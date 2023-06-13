@@ -123,7 +123,7 @@ class Review(models.Model):
     review = models.TextField(default="")
     date = models.DateField(default=date.today)
     idc = models.CharField(max_length=36, validators=[MinLengthValidator(8)])
-    shop = models.ForeignKey(Shop, on_delete=models.CASCADE, )
+    ids = models.ForeignKey(Shop, on_delete=models.CASCADE, ) #In realtà è lo shop
     name_of_the_shop = models.CharField(max_length=36, default='SSSSSSSSSSSSSSS', validators=[MinLengthValidator(8)])
     written = models.BooleanField(default=False)
 
