@@ -168,6 +168,10 @@ def Booking_view(request, selected_category):
     # Filtering of the shops based on the category that the customer has selected in the previous view
     shops = Shop.objects.filter(category=selected_category)
 
+    #debug for testing
+    print(shops)
+
+
     #Identification of the actual queue and the rating of every shop of the selected category
     queues = []
     reviews = []
@@ -183,10 +187,10 @@ def Booking_view(request, selected_category):
     addresses = [shop.address for shop in shops]
     names = [shop.name for shop in shops]
 
-    print(addresses)
-    print(names)
-    print(queues)
-    print(reviews)
+    # print(addresses)
+    # print(names)
+    # print(queues)
+    # print(reviews)
 
     # Condition that verifies if form is sent
     if request.method == 'POST':
