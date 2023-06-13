@@ -591,7 +591,7 @@ def DeleteShop(request, ids):
                 items.delete()
                 product.delete()
 
-            for rev in Review.objects.filter(ids=shop.ids):
+            for rev in Review.objects.filter(shop=shop):
                 rev.delete()
 
             shop.delete()

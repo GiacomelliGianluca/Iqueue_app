@@ -1,2 +1,4 @@
 -Vedere se aggiungere slots a UML requirements
 -Comparare con modelli python
+
+-Vedere dove mettere wireframes, presentazione
