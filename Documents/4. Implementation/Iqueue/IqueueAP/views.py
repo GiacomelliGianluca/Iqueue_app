@@ -1,7 +1,7 @@
 from datetime import timedelta, datetime, date
 from dateutil.relativedelta import relativedelta
 import random
-
+from django.utils.dateparse import parse_date
 from django.http import JsonResponse
 from django.core.exceptions import ValidationError
 from Iqueue import forms
@@ -194,7 +194,10 @@ def Booking_view(request, selected_category):
         if 'btnform1' in request.POST:
             # Recover the information of the selected shop and date
             shop_ids = request.POST.get('shop_ids')
-            date = request.POST.get('date')
+            date_str = request.POST.get('date')
+            date = parse_date(date_str)
+            if  date < date.today():
+                return render(request, 'ErrorPastBooking.html')
             # Finding out the associeted objects
             shop = Shop.objects.get(ids=shop_ids)
             timeslots = TimeSlot.objects.filter(shop=shop, date=date, available=True)
@@ -722,48 +725,11 @@ def SuccessAdvertisementRegistration(request, ids):
     return render(request, 'registrationAdvertisementSuccess.html', context=context)
 
 
-# def booking(request):
-# if request.method == 'POST':
-#   shop_name = request.POST.get('shop_name')
-#  date = request.POST.get('date')
-# Store shop name and date in django session:
-# request.session['shop_name'] = shop_name
-# request.session['date'] = date
-
-# return redirect('bookingSubmit')
-
-# return render(request, 'booking.html', {'shops': Shop.objects.filter(category='booking').values()})
-
-
-# def bookingSubmit(request):
-# Get stored data from django session:
-# shop_name = request.session.get('shop_name')
-# date = request.session.get('date')
-# times = [
-# "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM", "6 PM", "6:30 PM", "7 PM", "7:30 PM"
-# ]
-# if request.method == 'POST':
-# time = request.POST.get("time")
-# BookingForm = Booking.objects.get_or_create(
-#                       name = shop_name,
-#                      date = date,
-#                     time = time,
-#                )
-# messages.success(request, "Booking Saved!")
-# return render(request, 'bookingSubmit.html', {'times': times})
-
-
-# Da implementare
-# def Customer_category_view(request):
-# Category_form = forms.ShopCategorySelectionForm()
-# if request.method == 'POST':
-#   selected_category = request.POST.get('category')
-#   shop = Shop.objects.filter(category=selected_category).values()
-# return render(request, 'category_selection.html', {'shop': shop})
-
-
 def scan_qr(request):
+    
+
     if request.method == 'POST':
+
         qr_code_value = request.POST.get('qrCodeValue')
 
         qr_code_lines = qr_code_value.split('\n')
@@ -777,7 +743,6 @@ def scan_qr(request):
         number_within_slot = number_within_slot.strip()
         idc = qr_code_lines[4].split(': ')[1]
         idc = idc.strip()
-
         date = datetime.strptime(date_str, '%Y-%m-%d').date()
 
         start_time_str, end_time_str = time_range_str.split(' - ')
@@ -789,7 +754,8 @@ def scan_qr(request):
 
         if end_datetime < datetime.now():
             return render(request, 'Expired_qr_code.html')
-
+        
+        
         # da fare il get con l'ids!!!
         try:
             shop = Shop.objects.get(ids=ids)
