@@ -731,12 +731,8 @@ def SuccessAdvertisementRegistration(request, ids):
 
 
 def scan_qr(request):
-    
-
     if request.method == 'POST':
-
         qr_code_value = request.POST.get('qrCodeValue')
-
         qr_code_lines = qr_code_value.split('\n')
         ids = qr_code_lines[0].split(': ')[1]
         ids = ids.strip()
@@ -756,12 +752,9 @@ def scan_qr(request):
 
         start_datetime = datetime.combine(date, start_time)
         end_datetime = datetime.combine(date, end_time)
-
         if end_datetime < datetime.now():
             return render(request, 'Expired_qr_code.html')
         
-        
-        # da fare il get con l'ids!!!
         try:
             shop = Shop.objects.get(ids=ids)
         except Shop.DoesNotExist:
@@ -771,16 +764,20 @@ def scan_qr(request):
             time_slot = TimeSlot.objects.get(shop=shop, start=start_datetime, end=end_datetime, date=date)
             slot = Slot.objects.get(TimeSlot=time_slot, number=number_within_slot)
             if not slot.available:
-                qr = QR.objects.get(ids=ids, date=date, time_start=start_datetime, time_end=end_datetime,
+                try:
+                    qr = QR.objects.get(ids=ids, date=date, time_start=start_datetime, time_end=end_datetime,
                                     number=number_within_slot)
-                qr.scanned = True
-                qr.delete()
-                review = Review(ids=shop, idc=idc, name_of_the_shop=shop.name)
-                review.save()
-                return render(request, "scan_successful.html", {'review': review})
-        except TimeSlot.DoesNotExist:
-            return render(request, 'error.html')
-
+                    qr.scanned = True
+                    qr.delete()
+                    review = Review(ids=shop, idc=idc, name_of_the_shop=shop.name)
+                    review.save()
+                    return render(request, "scan_successful.html", {'review': review})
+                except qr.DoesNotExist:
+                    return render(request, 'error.html')   
+        except time_slot.DoesNotExist:
+                return render(request, 'error.html')
+            
+            
     return render(request, 'scan.html')
 
 
