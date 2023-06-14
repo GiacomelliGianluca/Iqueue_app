@@ -772,8 +772,8 @@ def scan_qr(request):
                     review = Review(ids=shop, idc=idc, name_of_the_shop=shop.name)
                     review.save()
                     return render(request, "scan_successful.html", {'review': review})
-                except qr.DoesNotExist:
-                    return render(request, 'error.html')   
+                except QR.DoesNotExist:
+                    return render(request, 'Expired_qr_code.html')   
         except time_slot.DoesNotExist:
                 return render(request, 'error.html')
             
