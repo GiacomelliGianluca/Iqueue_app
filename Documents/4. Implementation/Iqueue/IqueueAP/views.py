@@ -805,6 +805,8 @@ def Scan_product(request, idc):
         account = Account.objects.get(idc=idc)
         purchase_list = PurchaseList.objects.get(idc=account)
 
+        shop = Shop.objects.get(ids=product.ids)
+
         product.quantity -= 1
         customer.reward += price
         customer.save()
@@ -815,7 +817,9 @@ def Scan_product(request, idc):
 
         product.save()
 
-        purchased_item = PurchasedItem(purchase_list=purchase_list, idp=idp, name=product.name)
+        purchased_item = PurchasedItem(purchase_list=purchase_list, idp=idp, name=product.name, shop=shop.name,
+                                       address=shop.address, price=product.price)
+
         purchased_item.save()
 
         return render(request, "scan_successful_purchase.html", )
@@ -827,20 +831,8 @@ def Purchase_list(request):
     purchase_list = PurchaseList.objects.get(idc=account)
 
     items = PurchasedItem.objects.filter(purchase_list=purchase_list)
-    name_shops = []
-    address_shops = []
-    prices = []
-    
-    for item in items:
-        product = get_object_or_404(Product, idp=item.idp)
-        shop = get_object_or_404(Shop, ids=product.ids)
-        name_shops.append(shop)
-        address_shops.append(shop.address)
-        prices.append(product.price)
 
-    list = zip(items, name_shops, address_shops, prices)
-
-    return render(request, "Purchase_list.html", context={'list': list})
+    return render(request, "Purchase_list.html", context={'items': items})
 
 
 def Wish_list(request):

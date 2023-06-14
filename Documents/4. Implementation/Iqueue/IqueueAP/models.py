@@ -45,7 +45,7 @@ class Shop(models.Model):
 
 
         forced_date = datetime(2023, 6, 15).date()
-        forced_time = datetime(2023, 6, 15, 12, 15).time()
+        forced_time = datetime(2023, 6, 15, 8, 30).time()
         timeslot = timeslots.filter(shop=self, date=forced_date, start__lte=forced_time, end__gt=forced_time).first()
 
         # forced_datetime = datetime.combine(forced_date, forced_time)
@@ -137,6 +137,9 @@ class PurchasedItem(models.Model):
     date_of_purchase = models.DateField(default=date.today())
     idp = models.CharField(default="SSSSSSSSSS", max_length=100)
     name = models.CharField(default="SSSSSSSSSS", max_length=100)
+    shop = models.CharField(default="SSSSSSSSSS", max_length=100)
+    address = models.CharField(default="SSSSSSSSSS", max_length=100)
+    price = models.FloatField(default=0.0)
 
 
 class WishList(models.Model):

@@ -46,8 +46,8 @@
 </head>
 <body>
   <ul>
-    {% for item, name, address, price in list %}
-      <li>Item: "{{ item.name }}" || Purchased date: {{ item.date_of_purchase }} || Shop: "{{ name.name }}" || Location: {{ address }} || Price: {{ price }} Euro</li>
+    {% for item in items %}
+      <li>Item: "{{ item.name }}" || Purchased date: {{ item.date_of_purchase }} || Shop: "{{ item.shop }}" || Location: {{ item.address }} || Price: {{ item.price }} Euro</li>
       {% empty %}
        <h1>No product in the purchase list</h1>
     {% endfor %}
