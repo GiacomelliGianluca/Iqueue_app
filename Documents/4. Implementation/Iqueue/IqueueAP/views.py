@@ -545,7 +545,7 @@ def ShopQueueList(request, ids):
             idc_cust = cust.idc
 
             qr = QR.objects.filter(ids=ids, idso=request.session.get('idso', ), idc=idc_cust,
-                                   time_start=actual_timeslot.start, time_end=actual_timeslot.end, scanned=False)
+                                   time_start=actual_timeslot.start, time_end=actual_timeslot.end, date=actual_timeslot.date, scanned=False)
             qrs.extend(qr)
 
         # ordinamento della lista qrs in base all'attributo 'number'
