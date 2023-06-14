@@ -221,6 +221,9 @@ def Booking_view(request, selected_category):
             # Identification of the associated timeslot object, its slots and its associeted shop
             timeslot = get_object_or_404(TimeSlot, id=selected_timeslot_id)
 
+            #debugging for testing
+            print(selected_timeslot_id)
+            # Identification of the associated timeslot object, its slots and its associeted shop (id is a field autodefined by Django)
             slot = Slot.objects.filter(TimeSlot=timeslot, available=True).first()
             shop = timeslot.shop
             # Making the reservation for the customer: association of the slot to him and the slot is now unavailable
