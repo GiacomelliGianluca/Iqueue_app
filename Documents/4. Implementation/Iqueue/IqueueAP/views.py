@@ -918,6 +918,7 @@ def Edit_product(request):
     if request.method == 'POST':
         if 'btn1' in request.POST:
             ids = request.POST.get('shop')
+            editing = -1
             products = Product.objects.filter(ids=ids)
             re = 1
             return render(request, "EditProducts.html",

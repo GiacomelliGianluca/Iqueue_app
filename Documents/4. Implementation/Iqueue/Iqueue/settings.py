@@ -73,13 +73,13 @@ TEMPLATES = [
 WSGI_APPLICATION = "Iqueue.wsgi.application"
 
 #gianlu
-#MEDIA_ROOT = 'C:/Users/pc/Documents/GitHub/SW_project_2022-2023/Documents/4. Implementation/Iqueue/Media/'
+MEDIA_ROOT = 'C:/Users/pc/Documents/GitHub/SW_project_2022-2023/Documents/4. Implementation/Iqueue/Media/'
 
 #andre
 #MEDIA_ROOT = "/Users/andreagottardini/Desktop/SW_project_2022-2023/SW_project_2022-2023/Documents/4.%20Implementation/Iqueue/Media/"
 
 #nico
-MEDIA_ROOT = 'C:/Users/nicco/Documents/GitHub/SW_project_2022-2023/Documents/4. Implementation/Iqueue/Media/'
+#MEDIA_ROOT = 'C:/Users/nicco/Documents/GitHub/SW_project_2022-2023/Documents/4. Implementation/Iqueue/Media/'
 MEDIA_URL =''
 
 # Database

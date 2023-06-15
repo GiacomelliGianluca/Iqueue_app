@@ -71,6 +71,7 @@
     <br><br>
 
     {% if products|length > 0 %}
+      <h2>Select which product you want modify:</h2>
       <label for="product">Product:</label>
       <select id="product" name="product">
         {% for product in products %}
@@ -78,6 +79,9 @@
         {% endfor %}
       </select>
         <button type="submit" name="btn2">Submit</button>
+      {% if products|length == 0 %}
+        <h1>No product in the shop yet</h1>
+      {%  endif %}
     {%  endif %}
 
     {% if editing == 1 %}
