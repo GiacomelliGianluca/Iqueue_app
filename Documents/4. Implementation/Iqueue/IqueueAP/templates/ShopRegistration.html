@@ -86,7 +86,7 @@
     <label for="img">Image:</label>
     <input type="file" name="img" id="img">
     <br>
-    <input type="submit" value="Record">
+    <input type="submit" value="Record" id="submit-btn">
 </form>
 
   <!-- ONLINE UPDATE (future step) -->
@@ -99,4 +99,14 @@
 
 
   <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
+
+  <script>
+    document.querySelector('#submit-btn').addEventListener('click', function() {
+      this.value = 'Submitting...';
+      setTimeout(() => {
+        this.setAttribute('disabled', true);
+      }, 20);
+    });
+  </script>
 </body>
+
