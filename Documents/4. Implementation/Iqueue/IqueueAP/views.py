@@ -500,6 +500,13 @@ def MyShops_view(request, ):
         products = Product.objects.filter(ids=shop.ids)
         return render(request, "ShowProducts.html", {"products": products})
 
+    if request.method == 'POST':
+        if 'product_idp' in request.POST:
+            product_idp = request.POST['product_idp']
+            Product.objects.filter(idp=product_idp).delete()
+            return redirect('MyShops_view')
+
+
     if (request.GET.get('SCANbtn')):
         shop = get_object_or_404(Shop, ids=request.GET.get('ShopIDs'))
         timeslot = TimeSlot.objects.filter(shop=shop)

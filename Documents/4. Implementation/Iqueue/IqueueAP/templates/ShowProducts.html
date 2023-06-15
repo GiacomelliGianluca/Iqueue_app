@@ -55,11 +55,15 @@
 </head>
 <body>
   <h1>Products in the shop</h1>
-
   {% if products %}
     <ul>
       {% for product in products %}
         <li>{{ product.name }} - Price: {{ product.price }} - Quantity: {{ product.quantity }} - You are applying a discount of: {{ product.shop_discount}} %</li>
+          <form action="/ShopOwner/MyShops/" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="product_idp" value="{{ product.idp }}">
+            <input type="submit" name="Remove" value="Remove">
+          </form>
       {% endfor %}
     </ul>
   {% else %}
