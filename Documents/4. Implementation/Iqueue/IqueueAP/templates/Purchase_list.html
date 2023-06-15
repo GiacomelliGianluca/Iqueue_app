@@ -45,6 +45,7 @@
   </style>
 </head>
 <body>
+  <h1>Your purchase list:</h1>
   <ul>
     {% for item in items %}
       <li>Item: "{{ item.name }}" || Purchased date: {{ item.date_of_purchase }} || Shop: "{{ item.shop }}" || Location: {{ item.address }} || Price: {{ item.price }} Euro</li>
