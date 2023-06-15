@@ -44,8 +44,8 @@ class Shop(models.Model):
         # timeslot = timeslots.filter(shop=self, date=current_date, start__lte=current_time, end__gt=current_time).first()
 
 
-        forced_date = datetime(2023, 6, 15).date()
-        forced_time = datetime(2023, 6, 15, 8, 30).time()
+        forced_date = datetime(2023, 9, 22).date()
+        forced_time = datetime(2023, 9, 22, 7, 30).time()
         timeslot = timeslots.filter(shop=self, date=forced_date, start__lte=forced_time, end__gt=forced_time).first()
 
         # forced_datetime = datetime.combine(forced_date, forced_time)
