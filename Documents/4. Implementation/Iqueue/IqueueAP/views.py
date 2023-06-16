@@ -386,7 +386,13 @@ def Shop_view(request):
                 return render(request, 'ErrorTimeShop.html')
 
             slot_duration = form.cleaned_data['slot_duration']
+            total_opening_time_h = (closing_time.hour - opening_time.hour)*60
+            total_opening_time_m = closing_time.minute - opening_time.minute
+            
+            total_opening_time = total_opening_time_m + total_opening_time_h
 
+            if slot_duration > total_opening_time:
+                return render(request, 'ErrorTimeSlotShop.html')
             address = address_form + " " + number + " " + cap + " " + city
             # Identification of the shop owner
             idso = request.session.get('idso', '')
@@ -810,10 +816,13 @@ def Scan_product(request, idc):
         shop_discount = shop_discount.strip()
         quantity = qr_code_lines[4].split(': ')[1]
         quantity = quantity.strip()
-
-        product = Product.objects.get(idp=idp)
-        account = Account.objects.get(idc=idc)
-        purchase_list = PurchaseList.objects.get(idc=account)
+        try:
+            product = Product.objects.get(idp=idp)
+            account = Account.objects.get(idc=idc)
+            purchase_list = PurchaseList.objects.get(idc=account)
+        except Product.DoesNotExist:
+            return render(request, 'ErrorDeleteProduct.html')
+        
 
         shop = Shop.objects.get(ids=product.ids)
 
