@@ -673,6 +673,7 @@ def Product_view(request):
     selected_shop = 0
     idso = request.session.get('idso', '')
     if request.method == 'POST':
+        product_or_service = request.POST.get('product_or_service')
         shops = Shop.objects.filter(idso=idso).values()
         ids_selected_shop = request.POST.get('selected_shop')
         shop_id = Shop.objects.get(ids=ids_selected_shop)
@@ -699,7 +700,13 @@ def Product_view(request):
 
         product = Product(name=product_name, price=price, shop_discount=shop_discount, idso=idso, ids=ids, idp=idp,
                           quantity=quantity, qr=qr_code_img_str)
+
+        if product_or_service == "Service":
+            product.quantity = 99999999999999
+
         product.save()
+
+
 
         return redirect('SuccessProductRegistration')
 
