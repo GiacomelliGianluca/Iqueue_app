@@ -80,6 +80,7 @@ MEDIA_ROOT = 'C:/Users/pc/Documents/GitHub/SW_project_2022-2023/Documents/4. Imp
 
 #nico
 #MEDIA_ROOT = 'C:/Users/nicco/Documents/GitHub/SW_project_2022-2023/Documents/4. Implementation/Iqueue/Media/'
+
 MEDIA_URL =''
 
 # Database
