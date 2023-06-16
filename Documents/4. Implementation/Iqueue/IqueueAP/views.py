@@ -509,6 +509,10 @@ def MyShops_view(request, ):
     if request.method == 'POST':
         if 'product_idp' in request.POST:
             product_idp = request.POST['product_idp']
+            #Removing from wihlist
+            items = WishListItem.objects.filter(idp=product_idp)
+            items.delete()
+            
             Product.objects.filter(idp=product_idp).delete()
             return redirect('MyShops_view')
 
@@ -516,7 +520,34 @@ def MyShops_view(request, ):
     if (request.GET.get('SCANbtn')):
         shop = get_object_or_404(Shop, ids=request.GET.get('ShopIDs'))
         timeslot = TimeSlot.objects.filter(shop=shop)
-        _, accounts, _ = shop.checkQueue(timeslot)
+        #preso da Gianlu shopqueue
+        # customers sono gli idc dei clienti attualmente in coda; actual_timeslot è il timeslot attuale
+        _, customers, actual_timeslot = shop.checkQueue(timeslot)
+
+        qrs = []
+        accounts = []
+
+        if customers:
+            # ottengo una lista di customers univoca (quando si fa filter per idc_cust, vengono ridate tutte le prenotazioni di un customer)
+            unique_customers = set(customers)
+
+            for cust in unique_customers:
+                idc_cust = cust.idc
+
+                qr = QR.objects.filter(ids=shop.ids, idso=request.session.get('idso', ), idc=idc_cust,
+                                    time_start=actual_timeslot.start, time_end=actual_timeslot.end, date=actual_timeslot.date, scanned=False)
+                qrs.extend(qr)
+
+            # ordinamento della lista qrs in base all'attributo 'number'
+            qrs = sorted(qrs, key=lambda x: x.number)
+
+            # ottengo una lista di nomi (quando si fa filter per cust.idc, il nome ridato è univoco)
+            for qr in qrs:
+                account = Account.objects.filter(idc=qr.idc).first()
+                if account:
+                    accounts.append(account)
+        
+        print(accounts)
         context['accounts'] = accounts
         actual_shop = shop
         context['actual_shop'] = actual_shop
@@ -798,11 +829,13 @@ def scan_qr(request):
 
 
 def Scan_product(request, idc):
+
+    print(idc)
+
     if request.method == 'GET':
         return render(request, 'Scan_product.html', {'idc': idc})
 
     if request.method == 'POST':
-        idc = request.session.get('idc', '')
         customer = Account.objects.get(idc=idc)
         qr_code_value = request.POST.get('qrCodeValue')
         qr_code_lines = qr_code_value.split('\n')
@@ -826,20 +859,25 @@ def Scan_product(request, idc):
 
         shop = Shop.objects.get(ids=product.ids)
 
-        product.quantity -= 1
-        customer.reward += price
-        customer.save()
+        if(product.quantity>0):
+            product.quantity -= 1
+            
+            customer.reward += price
+            customer.save()
 
-        if product.quantity == 0:
-            product.delete()
-            return render(request, "Products are over.html")
+            purchased_item = PurchasedItem(purchase_list=purchase_list, idp=idp, name=product.name, shop=shop.name,
+                                        address=shop.address, price=product.price)
 
-        product.save()
+            purchased_item.save()
+            product.save()
 
-        purchased_item = PurchasedItem(purchase_list=purchase_list, idp=idp, name=product.name, shop=shop.name,
-                                       address=shop.address, price=product.price)
+            if product.quantity == 0:
+                return render(request, "Products are over.html")
+        
+        else:
+            return render(request, "Product terminated.html")
 
-        purchased_item.save()
+
 
         return render(request, "scan_successful_purchase.html", )
 
