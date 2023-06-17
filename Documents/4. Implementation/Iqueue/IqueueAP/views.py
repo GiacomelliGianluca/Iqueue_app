@@ -992,6 +992,7 @@ def Edit_product(request):
             return render(request, "EditProducts.html", {'editing': editing, 'idp': idp, 're': re})
 
         if 'btn4' in request.POST:
+            product_or_service = request.POST.get('product_or_service')
             name = request.POST.get('name')
             price = request.POST.get('price')
             quantity = request.POST.get('quantity')
@@ -1002,6 +1003,9 @@ def Edit_product(request):
             product.price = price
             product.quantity = quantity
             product.shop_discount = discount
+            if product_or_service == "Service":
+                product.quantity = 99999999999999
+
             product.save()
             return redirect('Product_view')
 
