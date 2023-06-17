@@ -19537,7 +19537,7 @@
 											"top": 678,
 											"width": 268.39794921875,
 											"height": 13,
-											"text": "WhishListRequestI"
+											"text": "WishListRequestI"
 										},
 										{
 											"_type": "LabelView",
@@ -34084,7 +34084,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "WhishListRequestI",
+					"name": "WishListRequestI",
 					"operations": [
 						{
 							"_type": "UMLOperation",
@@ -34365,9 +34365,9 @@
 																"$ref": "AAAAAAGIWb9eXE19SH8="
 															},
 															"font": "Arial;13;0",
-															"left": 22.55908203125,
+															"left": 24.72998046875,
 															"top": 5,
-															"width": 162.77001953125,
+															"width": 181.6162109375,
 															"height": 13,
 															"text": "Use Case: Book                        "
 														},
@@ -34380,7 +34380,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 5,
-															"width": 12.55908203125,
+															"width": 14.72998046875,
 															"height": 13,
 															"text": "sd"
 														}
@@ -38512,9 +38512,9 @@
 																"$ref": "AAAAAAGIWb9eXU3qczA="
 															},
 															"font": "Arial;13;0",
-															"left": 22.55908203125,
+															"left": 24.72998046875,
 															"top": 5,
-															"width": 267.46826171875,
+															"width": 299.38427734375,
 															"height": 13,
 															"text": "Use Case name: Count clients                                  "
 														},
@@ -38527,7 +38527,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 5,
-															"width": 12.55908203125,
+															"width": 14.72998046875,
 															"height": 13,
 															"text": "sd"
 														}
@@ -39791,9 +39791,9 @@
 																"$ref": "AAAAAAGIWb9eXU4PSAY="
 															},
 															"font": "Arial;13;0",
-															"left": 62.55908203125,
+															"left": 64.72998046875,
 															"top": 13,
-															"width": 302.15185546875,
+															"width": 339.10791015625,
 															"height": 13,
 															"text": "Use Case: Register Shop                                                     "
 														},
@@ -39806,7 +39806,7 @@
 															"font": "Arial;13;1",
 															"left": 45,
 															"top": 13,
-															"width": 12.55908203125,
+															"width": 14.72998046875,
 															"height": 13,
 															"text": "sd"
 														}
@@ -39814,8 +39814,8 @@
 													"font": "Arial;13;0",
 													"left": 40,
 													"top": 8,
-													"width": 2201,
-													"height": 1073,
+													"width": 1897,
+													"height": 897,
 													"nameLabel": {
 														"$ref": "AAAAAAGIWb9eXU4QNhw="
 													},
@@ -41971,9 +41971,9 @@
 																"$ref": "AAAAAAGIWb9eX06Zon0="
 															},
 															"font": "Arial;13;0",
-															"left": 22.55908203125,
+															"left": 24.72998046875,
 															"top": 5,
-															"width": 91.96826171875,
+															"width": 106.49169921875,
 															"height": 13,
 															"text": "Use Case: Search"
 														},
@@ -41986,7 +41986,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 5,
-															"width": 12.55908203125,
+															"width": 14.72998046875,
 															"height": 13,
 															"text": "sd"
 														}
