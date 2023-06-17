@@ -28691,7 +28691,7 @@
 											"font": "Arial;13;1",
 											"left": 2853,
 											"top": 1215,
-											"width": 118.88525390625,
+											"width": 120.30712890625,
 											"height": 13,
 											"text": "Review"
 										},
@@ -28724,7 +28724,7 @@
 									"font": "Arial;13;0",
 									"left": 2848,
 									"top": 1208,
-									"width": 128.88525390625,
+									"width": 130.30712890625,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGIyTAvd8C7fzw="
@@ -28761,9 +28761,26 @@
 											"font": "Arial;13;0",
 											"left": 2853,
 											"top": 1238,
-											"width": 118.88525390625,
+											"width": 120.30712890625,
 											"height": 13,
 											"text": "+Date: Date",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGIycCwDi2JxSQ=",
+											"_parent": {
+												"$ref": "AAAAAAGIyTAvd8C/i4s="
+											},
+											"model": {
+												"$ref": "AAAAAAGIycCv0S047iM="
+											},
+											"font": "Arial;13;0",
+											"left": 2853,
+											"top": 1253,
+											"width": 120.30712890625,
+											"height": 13,
+											"text": "+Id_customer: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -28777,27 +28794,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 2853,
-											"top": 1253,
-											"width": 118.88525390625,
-											"height": 13,
-											"text": "+Shop_name: String",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGIyTGAuxz/Bt4=",
-											"_parent": {
-												"$ref": "AAAAAAGIyTAvd8C/i4s="
-											},
-											"model": {
-												"$ref": "AAAAAAGIyTGAmxyrkdE="
-											},
-											"font": "Arial;13;0",
-											"left": 2853,
 											"top": 1268,
-											"width": 118.88525390625,
+											"width": 120.30712890625,
 											"height": 13,
-											"text": "+Written: Boolean",
+											"text": "+Id_Shop: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -28812,17 +28812,34 @@
 											"font": "Arial;13;0",
 											"left": 2853,
 											"top": 1283,
-											"width": 118.88525390625,
+											"width": 120.30712890625,
 											"height": 13,
 											"text": "+Value: Integer",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGIyTGAuxz/Bt4=",
+											"_parent": {
+												"$ref": "AAAAAAGIyTAvd8C/i4s="
+											},
+											"model": {
+												"$ref": "AAAAAAGIyTGAmxyrkdE="
+											},
+											"font": "Arial;13;0",
+											"left": 2853,
+											"top": 1298,
+											"width": 120.30712890625,
+											"height": 13,
+											"text": "+Written: Boolean",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 2848,
 									"top": 1233,
-									"width": 128.88525390625,
-									"height": 68
+									"width": 130.30712890625,
+									"height": 83
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -28835,8 +28852,8 @@
 									},
 									"font": "Arial;13;0",
 									"left": 2848,
-									"top": 1301,
-									"width": 128.88525390625,
+									"top": 1316,
+									"width": 130.30712890625,
 									"height": 10
 								},
 								{
@@ -28874,8 +28891,8 @@
 							"containerChangeable": true,
 							"left": 2848,
 							"top": 1208,
-							"width": 128.88525390625,
-							"height": 103,
+							"width": 130.30712890625,
+							"height": 118,
 							"nameCompartment": {
 								"$ref": "AAAAAAGIyTAvd8C6ExI="
 							},
@@ -29019,9 +29036,9 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 2782,
+									"left": 2781,
 									"top": 1261,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -29081,9 +29098,9 @@
 										"$ref": "AAAAAAGIyTBSTculoic="
 									},
 									"font": "Arial;13;0",
-									"left": 2824,
+									"left": 2823,
 									"top": 1261,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -34348,9 +34365,9 @@
 																"$ref": "AAAAAAGIWb9eXE19SH8="
 															},
 															"font": "Arial;13;0",
-															"left": 24.72998046875,
+															"left": 22.55908203125,
 															"top": 5,
-															"width": 181.6162109375,
+															"width": 162.77001953125,
 															"height": 13,
 															"text": "Use Case: Book                        "
 														},
@@ -34363,7 +34380,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 5,
-															"width": 14.72998046875,
+															"width": 12.55908203125,
 															"height": 13,
 															"text": "sd"
 														}
@@ -38495,9 +38512,9 @@
 																"$ref": "AAAAAAGIWb9eXU3qczA="
 															},
 															"font": "Arial;13;0",
-															"left": 24.72998046875,
+															"left": 22.55908203125,
 															"top": 5,
-															"width": 299.38427734375,
+															"width": 267.46826171875,
 															"height": 13,
 															"text": "Use Case name: Count clients                                  "
 														},
@@ -38510,7 +38527,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 5,
-															"width": 14.72998046875,
+															"width": 12.55908203125,
 															"height": 13,
 															"text": "sd"
 														}
@@ -39774,9 +39791,9 @@
 																"$ref": "AAAAAAGIWb9eXU4PSAY="
 															},
 															"font": "Arial;13;0",
-															"left": 64.72998046875,
+															"left": 62.55908203125,
 															"top": 13,
-															"width": 339.10791015625,
+															"width": 302.15185546875,
 															"height": 13,
 															"text": "Use Case: Register Shop                                                     "
 														},
@@ -39789,7 +39806,7 @@
 															"font": "Arial;13;1",
 															"left": 45,
 															"top": 13,
-															"width": 14.72998046875,
+															"width": 12.55908203125,
 															"height": 13,
 															"text": "sd"
 														}
@@ -41954,9 +41971,9 @@
 																"$ref": "AAAAAAGIWb9eX06Zon0="
 															},
 															"font": "Arial;13;0",
-															"left": 24.72998046875,
+															"left": 22.55908203125,
 															"top": 5,
-															"width": 106.49169921875,
+															"width": 91.96826171875,
 															"height": 13,
 															"text": "Use Case: Search"
 														},
@@ -41969,7 +41986,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 5,
-															"width": 14.72998046875,
+															"width": 12.55908203125,
 															"height": 13,
 															"text": "sd"
 														}
@@ -44323,21 +44340,21 @@
 						},
 						{
 							"_type": "UMLAttribute",
-							"_id": "AAAAAAGIyTE3gwRbgrw=",
+							"_id": "AAAAAAGIycCv0S047iM=",
 							"_parent": {
 								"$ref": "AAAAAAGIyTAvd8C3PgU="
 							},
-							"name": "Shop_name",
+							"name": "Id_customer",
 							"type": "String"
 						},
 						{
 							"_type": "UMLAttribute",
-							"_id": "AAAAAAGIyTGAmxyrkdE=",
+							"_id": "AAAAAAGIyTE3gwRbgrw=",
 							"_parent": {
 								"$ref": "AAAAAAGIyTAvd8C3PgU="
 							},
-							"name": "Written",
-							"type": "Boolean"
+							"name": "Id_Shop",
+							"type": "String"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -44347,6 +44364,15 @@
 							},
 							"name": "Value",
 							"type": "Integer"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGIyTGAmxyrkdE=",
+							"_parent": {
+								"$ref": "AAAAAAGIyTAvd8C3PgU="
+							},
+							"name": "Written",
+							"type": "Boolean"
 						}
 					]
 				},
