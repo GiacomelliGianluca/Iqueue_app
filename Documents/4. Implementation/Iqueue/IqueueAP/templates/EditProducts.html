@@ -105,13 +105,24 @@
 
       <input type="hidden" value="{{ idp }}" id="idp" name="idp">
 
+      <label for="product_or_service">Product or Service?</label>
+        <select name="product_or_service" id="product_or_service">
+            <option value="Service">Service</option>
+            <option value="Product">Product</option>
+        </select>
+
       <button type="submit" name="btn4">Submit</button>
+        <br>
+
     {% endif %}
 
   {%  if editing == 0 and re == 0 %}
     <button type="submit" name="btn1">Submit</button>
   {%  endif %}
   </form>
+
+
+
 
 <input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" style="font-size: smaller;"/>
 <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" /><!-- DA SISTEMARE POSIZIONE--->
