@@ -1,5 +1,5 @@
--Vedere se aggiungere slots a UML requirements
--Comparare con modelli python
+Sistemare immagini
+
 
 -vedere se togliere cose dal modello non implementate in Python. 
 
