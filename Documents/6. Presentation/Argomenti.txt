@@ -1,0 +1,24 @@
+1 Feasibility Study
+
+2 RASD
+  2.1 Intro
+2.2 Elicitation of req
+2.3 Mock-ups
+2.4 req
+
+3. UML Req
+3.1 Class Diagram
+3.2 Sequence Diagram
+
+4. UML architectural
+4.1 Class Diagram
+4.2 Sequence Diagram
+
+5. Implementation
+5.1 Framework
+5.2 Code Structure
+5.3 Req
+
+6. Testing
+6.1 White-box
+6.2 Black-box
