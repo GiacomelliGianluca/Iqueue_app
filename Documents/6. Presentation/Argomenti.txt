@@ -26,3 +26,11 @@
 
 
 Andre:demo
+
+
+Architectural:
+in SelectionI, si ha che UserGUI è client, mentre ShopOwnerGUI e ClientGUI sono server.
+
+La connessione da CustomerGUI a Review (direct association) non è stata svolta per mantenere la pulizia del diagramma
+ 
+(manca la cardinalità della direct association fra UserGUI e UserSubscription)
