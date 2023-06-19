@@ -1,6 +1,0 @@
-Sistemare immagini
-
-
--vedere se togliere cose dal modello non implementate in Python. 
-
-!!!!!!!AGGIORNARE POI LA PRESENTAZIONE!!!!!!!
