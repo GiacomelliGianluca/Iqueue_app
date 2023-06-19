@@ -807,7 +807,7 @@ def scan_qr(request):
 
         start_datetime = datetime.combine(date, start_time)
         end_datetime = datetime.combine(date, end_time)
-        if end_datetime < datetime.now():
+        if end_datetime.date() < datetime.now().date():
             return render(request, 'Expired_qr_code.html')
         
         try:
