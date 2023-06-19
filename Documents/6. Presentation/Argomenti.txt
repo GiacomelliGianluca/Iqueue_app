@@ -1,24 +1,28 @@
-1 Feasibility Study
+1 Feasibility Study Nik
 
-2 RASD
+2 RASD Andre
   2.1 Intro
-2.2 Elicitation of req
+2.2 Elicitation of req: Scenario 1 e basta
 2.3 Mock-ups
-2.4 req
+2.4 req: leggere 1,2 requisement per slide
 
-3. UML Req
-3.1 Class Diagram
-3.2 Sequence Diagram
+3. UML Req Nik
+3.1 Class Diagram: metodi solo quelli significativi
+3.2 Sequence Diagram solo scenario 1
 
-4. UML architectural
+4. UML architectural GG
 4.1 Class Diagram
-4.2 Sequence Diagram
+4.2 Sequence Diagram:  solo il primo pt1, pt2
 
-5. Implementation
+5. Implementation Andre
 5.1 Framework
 5.2 Code Structure
-5.3 Req
+5.3 Req: solo primo GG
 
 6. Testing
-6.1 White-box
-6.2 Black-box
+6.1 White-box: solo 84 GG
+6.2 Black-box: 2 più significativi Nik
+
+
+
+Andre:demo
