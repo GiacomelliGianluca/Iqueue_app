@@ -39,14 +39,14 @@ class Shop(models.Model):
     idso = models.CharField(default='SSSSSSSS', max_length=36, validators=[MinLengthValidator(8)])
 
     def checkQueue(self, timeslots):
-        # current_time = datetime.now().time()
-        # current_date = datetime.now().date()
-        # timeslot = timeslots.filter(shop=self, date=current_date, start__lte=current_time, end__gt=current_time).first()
+        current_time = datetime.now().time()
+        current_date = datetime.now().date()
+        timeslot = timeslots.filter(shop=self, date=current_date, start__lte=current_time, end__gt=current_time).first()
 
 
-        forced_date = datetime(2024, 2, 12).date()
-        forced_time = datetime(2024, 2, 12, 6, 30).time()
-        timeslot = timeslots.filter(shop=self, date=forced_date, start__lte=forced_time, end__gt=forced_time).first()
+        #forced_date = datetime(2024, 2, 12).date()
+        #forced_time = datetime(2024, 2, 12, 6, 30).time()
+        #timeslot = timeslots.filter(shop=self, date=forced_date, start__lte=forced_time, end__gt=forced_time).first()
 
         # forced_datetime = datetime.combine(forced_date, forced_time)
 

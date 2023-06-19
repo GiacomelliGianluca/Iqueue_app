@@ -220,7 +220,8 @@ def Booking_view(request, selected_category):
             selected_timeslot_id = request.POST.get('selected_slot')
             # Identification of the associated timeslot object, its slots and its associeted shop
             timeslot = get_object_or_404(TimeSlot, id=selected_timeslot_id)
-
+            if timeslot.end < datetime.now().time():
+                return render(request, 'ErrorPastBooking.html')
             #debugging for testing
             print(selected_timeslot_id)
             # Identification of the associated timeslot object, its slots and its associeted shop (id is a field autodefined by Django)
