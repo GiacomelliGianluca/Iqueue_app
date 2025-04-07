@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8">
+  
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+<html>
+<head>
+  <title>Lista degli acquisti</title>
+</head>
+<body>
+  <h1>Lista degli acquisti</h1>
+
+  <ul>
+    {% for item in purchase_list %}
+      <li>{{ item. }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

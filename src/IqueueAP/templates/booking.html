@@ -1,0 +1,210 @@
+<html>
+  {% load custom_tags %}
+  {% load static %}
+
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8">
+  
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+<head>
+<head>
+  <title>Booking</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+
+    .anybutton {
+      top: 75%;
+      left: 75%;
+      width: 100px;
+      height: 40px;
+      position: relative;
+      z-index: 2;
+      background: rgb(0, 183, 255);
+    }
+
+    .GoingBackButton {
+      top: 69%;
+      left: 75%;
+      width: 200px;
+      height: 40px;
+      position: relative;
+      z-index: 2;
+      background: rgb(0, 255, 0);
+    }
+
+    .popup {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Slot Booking</h1>
+  <form method="POST">
+    {{ Shop_and_day_selectionForm }}
+    {% csrf_token %}
+    {% if shops %}
+      <label for="shop">Select a shop:</label>
+      <select name="shop_ids">
+        {% for shop in shops %}
+          <option value="{{ shop.ids }}">{{ shop.name }}</option>
+        {% endfor %}
+      </select>
+
+      <div id="map"></div>
+
+      <div id="shopAddress"></div>
+
+      <label for="date">Select a day:</label>
+      <input type="date" name="date" id="date" required>
+
+      <button type="submit" name="btnform1">View the available slots</button>
+    </form>
+
+
+
+    {% if timeslots %}
+      <h2>Available slots:</h2>
+      <ul>
+        {% for timeslot in timeslots %}
+          <li>{{ timeslot.start }} - {{ timeslot.end }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <h1>No slots available</h1>
+    {% endif %}
+    
+    {% if timeslots %}
+      <h1>Select a slot</h1>
+      <form method="POST">
+        {{ TimeSlot_selectionForm }}
+        {% csrf_token %}
+        <label for="selected_slot">Select a slot:</label>
+        <select name="selected_slot">
+          {% for timeslot in timeslots %}
+            <option value="{{ timeslot.id }}">{{ timeslot.start }} - {{ timeslot.end }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit" name="btnform2">Submit</button>
+      </form>
+    {% endif %}
+  
+  {% else %}
+    <h1>No shops registered yet</h1>
+  {% endif %}
+ 
+    
+
+    <input type="button" class="GoingBackButton" onclick="Redirect('Customer/');" value="Going back to Customer view" style="font-size: smaller;" />
+    <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
+  
+
+  
+  <script type="text/javascript">
+    function Redirect(url) {
+      location.replace("http://127.0.0.1:8000/" + url);
+    }
+
+    var shopAddresses = {{ addresses|safe }};
+    var shopNames = {{ names|safe }};
+    var Queue = {{ queues|safe }}
+    var review = {{ reviews|safe }}
+
+    var map = L.map('map').setView([0, 0], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      maxZoom: 18,
+    }).addTo(map);
+
+    var markersLayer = L.layerGroup().addTo(map);
+
+    var redIcon = L.icon({
+      iconUrl: 'https://www.vhv.rs/dpng/d/437-4377070_porsche-taycan-wallpaper-4k-hd-png-download.png',
+      iconSize: [40, 40],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          var latlng = L.latLng(position.coords.latitude, position.coords.longitude);
+          map.setView(latlng, 13);
+          var marker = L.marker(latlng, { icon: redIcon });
+          markersLayer.addLayer(marker);
+        },
+        function(error) {
+          console.log('Error getting current position:', error.message);
+        }
+      );
+    } else {
+      console.log('Geolocation is not supported by this browser.');
+    }
+
+    var shops = [];
+    for (var i = 0; i < review.length; i++) {
+      shops.push({
+        address: shopAddresses[i],
+        name: shopNames[i],
+        queue: Queue[i],
+        review: review[i]
+      });
+    }
+
+    var shopElement = document.getElementById('shopAddress');
+    var address_not_show = '<br>The addresses of the shops not reported in the map due to geocoding issues are: <br>';
+    var flag=0;
+
+    for (var i = 0; i < (shops.length+1); i++) {
+      var shop = shops[i];
+      var address = shop.address;
+      var name = shop.name;
+      var queue = shop.queue;
+      var review = shop.review;
+      console.log('Address:', address);
+      console.log('Name:', name);
+      console.log('Queue:', queue);
+      console.log('Review:', review);
+
+      (function(address, name, queue, review) {
+        let geocode = L.Control.Geocoder.nominatim().geocode(address, function(results) {
+          if (results && results.length > 0) {
+            var latlng = results[0].center;
+            console.log('Coordinates:', latlng);
+            var marker = L.marker(latlng);
+            markersLayer.addLayer(marker);
+            marker.bindPopup('<div class="popup">' + name + '<br>Queue: ' + queue + '<br>Rating: ' + review +'</div>').openPopup();
+          } else {
+            console.log('No geocoding results found for address:', address);
+            address_not_show += '>'+ address + ' for the shop '+ '<b>'+ name +'</b>' + ' with queue ' + queue + ' and rating '+review+'<br>';
+            shopElement.innerHTML = address_not_show;
+            flag=1;
+          }
+          if (i == (shops.length+1)) {
+            if (flag==0){
+              address_not_show += '<h3>None</h3>';
+              flag=1;
+            }
+            address_not_show += '<br>';
+            shopElement.innerHTML = address_not_show;
+
+          }
+        });
+      })(address, name, queue, review);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8">
+  
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+<html>
+<head>
+    <title>Shops Page</title>
+</head>
+<body>
+    <h1>QRs to print</h1>
+
+    {% if list %}
+        <ul>
+            {% for product, shop_name in list %}
+                <h1>{{ product.name }}</h1>
+                <a href="data:image/png;base64,{{ product.qr }}" download>
+                <img src="data:image/png;base64,{{ product.qr }}" alt="QR Code">
+                </a>
+                <p>The product is in the shop: {{ shop_name}}</p>
+                <br>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No products in your shops. No QRs to print.</p>
+    {% endif %}
+    <br>
+    <p> Please go back.</p>
+</body>
+</html>

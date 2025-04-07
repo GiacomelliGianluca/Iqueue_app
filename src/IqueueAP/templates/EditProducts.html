@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8">
+  
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+<html>
+<head>
+  <title>Edit a product</title>
+
+  <script type="text/javascript">
+    function Redirect(url) {
+       location.replace("http://127.0.0.1:8000/"+url);
+    }
+
+    // function sub(a,b) {
+    //   var c
+    //   document.write(c);
+
+    // }
+  </script>
+
+  <style>
+
+    .anybutton {
+      top:75%;
+      left:75%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 183, 255);
+      }
+
+    .delete-button {
+      background-color: red;
+      color: white;
+      }
+
+    .GoingBackButton {
+      top:60%;
+      left:75%;
+      width:200px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 255, 0);
+      }
+
+     </style>
+
+</head>
+<body>
+  <h1>Edit a product</h1>
+  <form action="/ShopOwner/Product/Edit" method="post">
+    {% csrf_token %}
+  {% if editing == 0 %}
+    <label for="shop">Shop:</label>
+    <select id="shop" value="btn1" name="shop">
+      {% for shop in shops %}
+        <option value="{{ shop.ids }}">{{ shop.name }}</option>
+      {% endfor %}
+    </select>
+
+  {% endif %}
+
+    <br><br>
+
+    {% if products|length > 0 %}
+      <h2>Select which product you want modify:</h2>
+      <label for="product">Product:</label>
+      <select id="product" name="product">
+        {% for product in products %}
+            <option value="{{ product.idp }}">{{ product.name }}</option>
+        {% endfor %}
+      </select>
+        <button type="submit" name="btn2">Submit</button>
+      {% if products|length == 0 %}
+        <h1>No product in the shop yet</h1>
+      {%  endif %}
+    {%  endif %}
+
+    {% if editing == 1 %}
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name">
+
+      <br><br>
+
+      <label for="price">Price:</label>
+      <input type="number" id="price" name="price" min="0"step="0.01">
+
+      <br><br>
+
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" name="quantity"min="0">
+
+      <br>
+
+      <label for="discount">Shop_discount (in %) :</label>
+      <input type="number" id="discount" name="discount" min="0" max="100">
+
+      <input type="hidden" value="{{ idp }}" id="idp" name="idp">
+
+      <label for="product_or_service">Product or Service?</label>
+        <select name="product_or_service" id="product_or_service">
+            <option value="Service">Service</option>
+            <option value="Product">Product</option>
+        </select>
+
+      <button type="submit" name="btn4">Submit</button>
+        <br>
+
+    {% endif %}
+
+  {%  if editing == 0 and re == 0 %}
+    <button type="submit" name="btn1">Submit</button>
+  {%  endif %}
+  </form>
+
+
+
+
+<input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" style="font-size: smaller;"/>
+<input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" /><!-- DA SISTEMARE POSIZIONE--->
+</body>
+</html>

@@ -1,0 +1,92 @@
+<html>
+  {% load static %}
+
+  <!doctype html>
+  <html lang="en">
+    <meta charset="utf-8">
+    
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="{% static "css/style.css" %}">
+<head>
+  <title>Shop Owner</title>
+
+  <script type="text/javascript">
+    function Redirect(url) {
+       location.replace("http://127.0.0.1:8000/"+url);
+    }
+ </script>
+
+  <style>
+
+    .anybutton {
+      top:75%;
+      left:75%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 183, 255); 
+      }
+    
+    .GoingBackButton {
+      top:60%;
+      left:75%;
+      width:200px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: rgb(0, 255, 0); 
+      }
+    
+     </style>
+
+</head>
+
+
+<body>
+  <form method="post">
+    {{ ProductForm }}
+      {% csrf_token %}
+      <p>
+        Select the shop for which you want to add the product:
+      </p>
+  {% if shops %}
+    <select name="selected_shop">
+        {% for shop in shops %}
+          <option value="{{ shop.ids }}">{{ shop.name }}</option>
+        {% endfor %}
+        </select>
+        <br>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required>
+        <br>
+        <label for="price">Price:</label>
+        <input type="number" name="price" id="price" min="0"step="0.01" required>
+        <br>
+        <label for="quantity">quantity:</label>
+        <input type="number" name="quantity" id="quantity" min="1">
+        <br>
+        <label for="shop_discount">Shop_discount (in %) </label>
+        <input type="number" name="shop_discount" id="shop_discount" min="0" max="100">
+        <br>
+        <label for="product_or_service">Product or Service?</label>
+        <select name="product_or_service" id="product_or_service">
+            <option value="Service">Service</option>
+            <option value="Product">Product</option>
+        </select>
+      
+        <button type="submit" name="btnform2">Confirm</button>
+ 
+    </form>
+
+    <p>Do you want to print the QR for all the products?</p>
+    <input type="button" class="Print_QR" onclick="Redirect('ShopOwner/QR_print/');" value="Print_QR" />
+    <p>Do you want to modify any product from your shops?</p>
+    <input type="button" class="Print_QR" onclick="Redirect('ShopOwner/Product/Edit');" value="Modify Products" />
+  {% else %}
+    <h1>First register a shop!</h1>
+  {% endif %}
+  <input type="button" class="GoingBackButton" onclick="Redirect('ShopOwner/');" value="Going back to ShopOwner view" style="font-size: smaller;"/>
+  <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
+</body>

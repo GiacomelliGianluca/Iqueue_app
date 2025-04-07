@@ -1,0 +1,57 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8">
+  
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+
+
+<html>
+  <head>
+    <script type="text/javascript">
+       function Redirect(url) {
+          location.replace("http://127.0.0.1:8000/"+url);
+       }
+    </script>
+
+<style>
+
+.anybutton {
+  top:75%;
+  left:75%;
+  width:100px;
+  height:40px;
+  position: absolute;
+  z-index: 2;
+  background: rgb(0, 183, 255); 
+  }
+
+ </style>
+ </head>
+<body>
+  <h1>Select Your Role</h1>
+  <button onclick="Redirect('ShopOwner');">Shop Owner</button>
+  <button onclick="Redirect('Customer');">Customer</button>
+  <input type="button" class="anybutton" onclick="Redirect('');" value="LogOut" />
+  <br>
+  <p>Welcome back {{name}} !</p>
+  <p>Your Customer ID: {{idc}} </p>
+  <p>Your Shop Owner ID: {{idso}} </p>
+  <br>
+  <br>
+  <br>
+
+  {% if shop %}
+    <p>Advertisement: </p>
+    <p><i>{{ shop.name }}</i></p>
+    <img src="{{ shop.img.url}}" width=500>
+    <p>Location: {{ shop.address }}</p>
+  {% endif %}
+
+
+
+</body>
+</html>
